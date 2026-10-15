@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import api from './lib/api';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -3299,10 +3300,40 @@ const EventsPage = ({ theme }) => {
 const AuthPage = ({ theme }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({ name: '', email: '', password: '', roleCode: '' });
+  const [statusMsg, setStatusMsg] = useState({ text: '', isError: false });
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(isLogin ? "Authenticating Soluper..." : "Registering new Soluper request...");
+    setLoading(true);
+    setStatusMsg({ text: '', isError: false });
+
+    try {
+      if (isLogin) {
+        const res = await api.login(formData.email, formData.password);
+        setStatusMsg({ text: res.message || 'Access granted to Soluper Portal!', isError: false });
+        if (res.data?.token) {
+          localStorage.setItem('soluper_token', res.data.token);
+          localStorage.setItem('soluper_user', JSON.stringify(res.data));
+        }
+      } else {
+        const res = await api.register({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          roleCode: formData.roleCode
+        });
+        setStatusMsg({ text: res.message || 'Membership registry submitted successfully!', isError: false });
+        if (res.data?.token) {
+          localStorage.setItem('soluper_token', res.data.token);
+          localStorage.setItem('soluper_user', JSON.stringify(res.data));
+        }
+      }
+    } catch (err) {
+      setStatusMsg({ text: err.message || 'Transmission failed. Verify credentials.', isError: true });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -3325,6 +3356,16 @@ const AuthPage = ({ theme }) => {
             {isLogin ? "Authenticate to access terminal core" : "Submit registry for new membership protocol"}
           </p>
         </div>
+
+        {statusMsg.text && (
+          <div className={`mb-5 p-3 rounded-xl text-xs font-mono border ${
+            statusMsg.isError
+              ? 'bg-rose-500/10 border-rose-500/30 text-rose-400'
+              : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
+          }`}>
+            {statusMsg.text}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {!isLogin && (
