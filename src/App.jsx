@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-import {
-  Github, Linkedin, Twitter, Search, Code2, Terminal, Cpu, Globe,
-  Palette, Database, ExternalLink, Menu, X, ChevronLeft, ChevronRight, Mail,
+import { 
+  Github, Linkedin, Twitter, Search, Code2, Terminal, Cpu, Globe, 
+  Palette, Database, ExternalLink, Menu, X, ChevronLeft, ChevronRight, Mail, 
   Trophy, Star, Zap, Layers, Rocket, Monitor, Server, Shield,
   Bot, User, ArrowRight, Activity, ToggleLeft, ToggleRight, Sun, Moon,
   ArrowLeft, MapPin, Calendar, GitCommit, Briefcase, Loader, RotateCw,
@@ -17,24 +17,48 @@ import {
 } from 'lucide-react';
 
 // --- CUSTOM LOGO COMPONENT ---
-const SolutionDevelopersLogo = ({ className }) => {
-  const [logoSrc, setLogoSrc] = useState('/images/soluperslogo.png');
-
-  const handleError = () => {
-    if (logoSrc === '/images/soluperslogo.png') {
-      setLogoSrc('/soluperslogo.png');
-    }
-  };
-
-  return (
-    <img
-      src={logoSrc}
-      alt="Solution Developers Logo"
-      className={className}
-      onError={handleError}
+const SolutionDevelopersLogo = ({ className }) => (
+  <svg 
+    viewBox="0 0 100 100" 
+    fill="none" 
+    className={className}
+    role="img"
+    aria-label="Golden Soluper's Logo"
+  >
+    <defs>
+      <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#FCD34D" />
+        <stop offset="50%" stopColor="#F59E0B" />
+        <stop offset="100%" stopColor="#B45309" />
+      </linearGradient>
+      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2" result="blur" />
+        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
+    </defs>
+    
+    {/* Stylized 'S' Monogram for Solution Developers */}
+    {/* Top Curve */}
+    <path 
+      fill="url(#goldGradient)" 
+      d="M70 20 H30 C18 20 8 30 8 42 C8 54 18 60 25 60 H60 V50 H30 C25 50 20 46 20 42 C20 36 25 30 30 30 H70 C76 30 80 34 80 40 V50 H92 V40 C92 28 82 20 70 20 Z" 
+      filter="url(#glow)"
     />
-  );
-};
+    {/* Bottom Curve */}
+    <path 
+      fill="url(#goldGradient)" 
+      d="M30 80 H70 C82 80 92 70 92 58 C92 46 82 40 75 40 H40 V50 H70 C75 50 80 54 80 58 C80 64 75 70 70 70 H30 C24 70 20 66 20 60 V50 H8 V60 C8 72 18 80 30 80 Z" 
+      filter="url(#glow)"
+    />
+    
+    {/* Central Hexagon Accent */}
+    <path 
+        fill="url(#goldGradient)" 
+        d="M50 42 L57 46 V54 L50 58 L43 54 V46 Z"
+        opacity="0.9"
+    />
+  </svg>
+);
 
 // --- GLOBAL STYLES (Custom Scrollbar & Animations) ---
 const GlobalStyles = ({ theme }) => {
@@ -145,16 +169,16 @@ const SOLUPERS_DATA = [
     commits: 500,
     projects: 10,
     skills: [
-      { name: "Strategy", level: 90 },
-      { name: "Management", level: 85 },
-      { name: "Operations", level: 88 },
-      { name: "Growth", level: 92 }
+        { name: "Strategy", level: 90 },
+        { name: "Management", level: 85 },
+        { name: "Operations", level: 88 },
+        { name: "Growth", level: 92 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-amber-500 to-orange-600",
     featured: true,
     personalAchievements: [
-      { title: "Startup of the Year", image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=400&auto=format&fit=crop", desc: "Recognized by Pune Innovation Hub." }
+        { title: "Startup of the Year", image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=400&auto=format&fit=crop", desc: "Recognized by Pune Innovation Hub." }
     ]
   },
   {
@@ -171,16 +195,16 @@ const SOLUPERS_DATA = [
     commits: 3400,
     projects: 18,
     skills: [
-      { name: "Go", level: 92 },
-      { name: "PostgreSQL", level: 95 },
-      { name: "Redis", level: 85 },
-      { name: "Kafka", level: 80 }
+        { name: "Go", level: 92 },
+        { name: "PostgreSQL", level: 95 },
+        { name: "Redis", level: 85 },
+        { name: "Kafka", level: 80 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-indigo-500 to-purple-600",
     featured: true,
     personalAchievements: [
-      { title: "Cloud Architect Cert", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=400&auto=format&fit=crop", desc: "Certified Solutions Architect Professional." }
+        { title: "Cloud Architect Cert", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=400&auto=format&fit=crop", desc: "Certified Solutions Architect Professional." }
     ]
   },
   // Lead Solupers
@@ -198,10 +222,10 @@ const SOLUPERS_DATA = [
     commits: 650,
     projects: 9,
     skills: [
-      { name: "Flutter", level: 95 },
-      { name: "React Native", level: 85 },
-      { name: "Swift", level: 70 },
-      { name: "Firebase", level: 90 }
+        { name: "Flutter", level: 95 },
+        { name: "React Native", level: 85 },
+        { name: "Swift", level: 70 },
+        { name: "Firebase", level: 90 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-pink-500 to-rose-500",
@@ -222,9 +246,9 @@ const SOLUPERS_DATA = [
     commits: 450,
     projects: 12,
     skills: [
-      { name: "Leadership", level: 95 },
-      { name: "Management", level: 90 },
-      { name: "Operations", level: 85 }
+        { name: "Leadership", level: 95 },
+        { name: "Management", level: 90 },
+        { name: "Operations", level: 85 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-amber-400 to-yellow-500",
@@ -245,9 +269,9 @@ const SOLUPERS_DATA = [
     commits: 380,
     projects: 8,
     skills: [
-      { name: "Operations", level: 92 },
-      { name: "Agile", level: 88 },
-      { name: "Communication", level: 90 }
+        { name: "Operations", level: 92 },
+        { name: "Agile", level: 88 },
+        { name: "Communication", level: 90 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-yellow-500 to-amber-600",
@@ -268,9 +292,9 @@ const SOLUPERS_DATA = [
     commits: 950,
     projects: 14,
     skills: [
-      { name: "React", level: 90 },
-      { name: "Node.js", level: 88 },
-      { name: "System Design", level: 85 }
+        { name: "React", level: 90 },
+        { name: "Node.js", level: 88 },
+        { name: "System Design", level: 85 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-amber-500 to-yellow-500",
@@ -291,10 +315,10 @@ const SOLUPERS_DATA = [
     commits: 320,
     projects: 50,
     skills: [
-      { name: "Pen Testing", level: 95 },
-      { name: "OAuth", level: 90 },
-      { name: "Cryptography", level: 85 },
-      { name: "Auditing", level: 88 }
+        { name: "Pen Testing", level: 95 },
+        { name: "OAuth", level: 90 },
+        { name: "Cryptography", level: 85 },
+        { name: "Auditing", level: 88 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-yellow-400 to-orange-500",
@@ -315,10 +339,10 @@ const SOLUPERS_DATA = [
     commits: 780,
     projects: 12,
     skills: [
-      { name: "Vue.js", level: 90 },
-      { name: "React", level: 85 },
-      { name: "WebGL", level: 75 },
-      { name: "GSAP", level: 80 }
+        { name: "Vue.js", level: 90 },
+        { name: "React", level: 85 },
+        { name: "WebGL", level: 75 },
+        { name: "GSAP", level: 80 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-cyan-400 to-blue-600",
@@ -339,9 +363,9 @@ const SOLUPERS_DATA = [
     commits: 150,
     projects: 4,
     skills: [
-      { name: "Governance", level: 95 },
-      { name: "Compliance", level: 90 },
-      { name: "Drafting", level: 88 }
+        { name: "Governance", level: 95 },
+        { name: "Compliance", level: 90 },
+        { name: "Drafting", level: 88 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-yellow-500 to-amber-500",
@@ -362,9 +386,9 @@ const SOLUPERS_DATA = [
     commits: 410,
     projects: 6,
     skills: [
-      { name: "Quality Control", level: 90 },
-      { name: "Management", level: 85 },
-      { name: "Tracking", level: 88 }
+        { name: "Quality Control", level: 90 },
+        { name: "Management", level: 85 },
+        { name: "Tracking", level: 88 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-amber-600 to-yellow-500",
@@ -385,9 +409,9 @@ const SOLUPERS_DATA = [
     commits: 320,
     projects: 15,
     skills: [
-      { name: "Content Creation", level: 92 },
-      { name: "Design", level: 90 },
-      { name: "PR", level: 85 }
+        { name: "Content Creation", level: 92 },
+        { name: "Design", level: 90 },
+        { name: "PR", level: 85 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-amber-500 to-yellow-500",
@@ -408,9 +432,9 @@ const SOLUPERS_DATA = [
     commits: 600,
     projects: 10,
     skills: [
-      { name: "Research", level: 92 },
-      { name: "Data Science", level: 85 },
-      { name: "Python", level: 88 }
+        { name: "Research", level: 92 },
+        { name: "Data Science", level: 85 },
+        { name: "Python", level: 88 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-amber-500 to-yellow-400",
@@ -459,16 +483,16 @@ const SOLUPERS_DATA = [
     commits: 1100,
     projects: 12,
     skills: [
-      { name: "System Arch", level: 95 },
-      { name: "Cloud", level: 90 },
-      { name: "Security", level: 85 },
-      { name: "DevOps", level: 88 }
+        { name: "System Arch", level: 95 },
+        { name: "Cloud", level: 90 },
+        { name: "Security", level: 85 },
+        { name: "DevOps", level: 88 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-red-500 to-rose-600",
     featured: false,
     personalAchievements: [
-      { title: "Open Source Contributor", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=400&auto=format&fit=crop", desc: "Top 1% contributor on GitHub in 2024." }
+        { title: "Open Source Contributor", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=400&auto=format&fit=crop", desc: "Top 1% contributor on GitHub in 2024." }
     ]
   },
   {
@@ -484,16 +508,16 @@ const SOLUPERS_DATA = [
     commits: 890,
     projects: 8,
     skills: [
-      { name: "Python", level: 98 },
-      { name: "PyTorch", level: 85 },
-      { name: "TensorFlow", level: 80 },
-      { name: "Data Pipelines", level: 90 }
+        { name: "Python", level: 98 },
+        { name: "PyTorch", level: 85 },
+        { name: "TensorFlow", level: 80 },
+        { name: "Data Pipelines", level: 90 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-purple-500 to-pink-500",
     featured: false,
     personalAchievements: [
-      { title: "AI Summit Speaker", image: "https://images.unsplash.com/photo-1475721027767-p42f56b2327b?q=80&w=400&auto=format&fit=crop", desc: "Keynote on Future of NLP." }
+        { title: "AI Summit Speaker", image: "https://images.unsplash.com/photo-1475721027767-p42f56b2327b?q=80&w=400&auto=format&fit=crop", desc: "Keynote on Future of NLP." }
     ]
   },
   {
@@ -509,10 +533,10 @@ const SOLUPERS_DATA = [
     commits: 450,
     projects: 22,
     skills: [
-      { name: "Figma", level: 95 },
-      { name: "Tailwind", level: 90 },
-      { name: "Motion", level: 85 },
-      { name: "Prototyping", level: 88 }
+        { name: "Figma", level: 95 },
+        { name: "Tailwind", level: 90 },
+        { name: "Motion", level: 85 },
+        { name: "Prototyping", level: 88 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-orange-400 to-red-500",
@@ -532,10 +556,10 @@ const SOLUPERS_DATA = [
     commits: 2100,
     projects: 40,
     skills: [
-      { name: "Docker", level: 95 },
-      { name: "Kubernetes", level: 85 },
-      { name: "CI/CD", level: 90 },
-      { name: "Terraform", level: 80 }
+        { name: "Docker", level: 95 },
+        { name: "Kubernetes", level: 85 },
+        { name: "CI/CD", level: 90 },
+        { name: "Terraform", level: 80 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-emerald-400 to-green-600",
@@ -555,8 +579,8 @@ const SOLUPERS_DATA = [
     commits: 120,
     projects: 3,
     skills: [
-      { name: "Sketch", level: 90 },
-      { name: "CSS", level: 95 }
+        { name: "Sketch", level: 90 },
+        { name: "CSS", level: 95 }
     ],
     social: { github: "#", linkedin: "#", twitter: "#" },
     gradient: "from-gray-500 to-gray-700",
@@ -617,51 +641,51 @@ const FOUNDERS_NOTES = [
 ];
 
 const NOTICES = [
-  {
-    id: 1,
-    type: 'Urgent',
-    date: 'Oct 24',
-    title: 'Hackathon Registration Closing',
+  { 
+    id: 1, 
+    type: 'Urgent', 
+    date: 'Oct 24', 
+    title: 'Hackathon Registration Closing', 
     desc: 'Final call for the AI Innovation Summit. Teams must submit proposals by Friday.',
     image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=600&auto=format&fit=crop'
   },
-  {
-    id: 2,
-    type: 'System',
-    date: 'Oct 22',
-    title: 'v2.4 Deployment Successful',
+  { 
+    id: 2, 
+    type: 'System', 
+    date: 'Oct 22', 
+    title: 'v2.4 Deployment Successful', 
     desc: 'Performance optimizations are now live. API latency reduced by 40%. All clusters report normal health.',
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600&auto=format&fit=crop'
   },
-  {
-    id: 3,
-    type: 'Event',
-    date: 'Oct 20',
-    title: 'Community Meetup',
+  { 
+    id: 3, 
+    type: 'Event', 
+    date: 'Oct 20', 
+    title: 'Community Meetup', 
     desc: 'Join us this Friday at the Tech Hub for a deep dive session on Distributed Systems and Rust.',
     image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=600&auto=format&fit=crop'
   },
 ];
 
 const LEADERSHIP_TIMELINE = [
-  {
-    year: "Era III President (July 2026 - Dec 2026)",
-    leader: "Sammed Chaugule & Sneha Jadhav",
-    role: "President",
-    desc: "Current Presidents of Era III, leading the collective through new administrative expansion, mobile innovation, and community milestones."
-  },
-  {
-    year: "Era II President (Jan 2026 - June 2026)",
-    leader: "Prem Gosawi & Ragini Waghmare",
-    role: "President",
-    desc: "Presidents of Era II, spearheading technological excellence, operational scaling, and core system modernization."
-  },
-  {
-    year: "Era I President (July 2025 - Dec 2025)",
-    leader: "Hariom Sandve",
-    role: "President",
-    desc: "Founder and President of Era I, establishing the strategic foundation and visionary blueprint for Solution Developers."
-  }
+    { 
+      year: "Era III President (July 2026 - Dec 2026)", 
+      leader: "Sammed Chaugule & Sneha Jadhav", 
+      role: "President", 
+      desc: "Current Presidents of Era III, leading the collective through new administrative expansion, mobile innovation, and community milestones." 
+    },
+    { 
+      year: "Era II President (Jan 2026 - June 2026)", 
+      leader: "Prem Gosawi & Ragini Waghmare", 
+      role: "President", 
+      desc: "Presidents of Era II, spearheading technological excellence, operational scaling, and core system modernization." 
+    },
+    { 
+      year: "Era I President (July 2025 - Dec 2025)", 
+      leader: "Hariom Sandve", 
+      role: "President", 
+      desc: "Founder and President of Era I, establishing the strategic foundation and visionary blueprint for Solution Developers." 
+    }
 ];
 
 const PROJECTS = [
@@ -850,40 +874,40 @@ const GALLERY_DATA = {
 };
 
 const COLLABORATIONS = [
-  {
+  { 
     id: 1,
-    name: "TechCorp Inc.",
-    type: "Industry Partner",
+    name: "TechCorp Inc.", 
+    type: "Industry Partner", 
     desc: "Joint research on AI pipelines and distributed computing architectures.",
     status: "Active",
     stats: "3 Joint Patents",
     icon: Building2,
     color: "blue"
   },
-  {
+  { 
     id: 2,
-    name: "OpenSource Alliance",
-    type: "Community",
+    name: "OpenSource Alliance", 
+    type: "Community", 
     desc: "Strategic contribution partnership to support critical open web infrastructure.",
     status: "Forever",
     stats: "1.2k Commits",
     icon: Globe,
     color: "green"
   },
-  {
+  { 
     id: 3,
-    name: "Future University",
-    type: "Academic",
+    name: "Future University", 
+    type: "Academic", 
     desc: "Providing internship opportunities and syllabus consultancy for CS streams.",
     status: "Seasonal",
     stats: "50+ Interns",
     icon: GraduationCap,
     color: "purple"
   },
-  {
+  { 
     id: 4,
-    name: "CloudSystems",
-    type: "Infrastructure",
+    name: "CloudSystems", 
+    type: "Infrastructure", 
     desc: "Sponsoring our high-performance computing clusters for ML training.",
     status: "Sponsor",
     stats: "$10k Credits",
@@ -904,11 +928,11 @@ const CATEGORIES = ["All", "Full Stack", "Frontend", "Backend", "AI & Data", "De
 // --- STYLING UTILS ---
 
 const useTheme = () => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('light'); 
   const toggleTheme = () => setTheme(prev => {
     if (prev === 'light') return 'dark';
     if (prev === 'dark') return 'bot';
-    return 'light';
+    return 'light'; 
   });
   return { theme, toggleTheme };
 };
@@ -916,16 +940,16 @@ const useTheme = () => {
 // --- BASE COMPONENTS ---
 
 const SectionTitle = ({ title, subtitle, align = "center", theme }) => (
-  <div className={`mb-12 sm:mb-16 ${align === "left" ? "text-left" : "text-center"} relative z-10 px-2`}>
-    <h2 className={`text-3xl sm:text-4xl md:text-5xl font-black mb-3 sm:mb-4 tracking-tight 
+  <div className={`mb-16 ${align === "left" ? "text-left" : "text-center"} relative z-10`}>
+    <h2 className={`text-4xl md:text-5xl font-black mb-4 tracking-tight 
       ${theme === 'bot' ? 'text-green-400 font-mono uppercase' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>
       {theme === 'bot' && <span className="mr-2 text-green-600 blink">&gt;</span>}
       {title}
       <span className={theme === 'bot' ? 'text-green-600' : 'text-amber-500'}>{theme === 'bot' ? '_' : '.'}</span>
     </h2>
-    <div className={`h-1.5 w-20 sm:w-24 rounded-full ${align === "center" ? "mx-auto" : ""} ${theme === 'bot' ? 'bg-green-700 h-0.5' : 'bg-gradient-to-r from-amber-600 to-yellow-400'}`}></div>
-    {subtitle && <p className={`mt-4 sm:mt-6 max-w-2xl mx-auto text-sm sm:text-base md:text-lg 
-      ${theme === 'bot' ? 'text-green-600/80 font-mono text-xs sm:text-sm' : (theme === 'light' ? 'text-slate-600' : 'text-slate-400')}`}>
+    <div className={`h-1.5 w-24 rounded-full ${align === "center" ? "mx-auto" : ""} ${theme === 'bot' ? 'bg-green-700 h-0.5' : 'bg-gradient-to-r from-amber-600 to-yellow-400'}`}></div>
+    {subtitle && <p className={`mt-6 max-w-2xl mx-auto text-lg 
+      ${theme === 'bot' ? 'text-green-600/80 font-mono text-sm' : (theme === 'light' ? 'text-slate-600' : 'text-slate-400')}`}>
       {subtitle}</p>}
   </div>
 );
@@ -955,7 +979,7 @@ const RevealOnScroll = ({ children, className = "" }) => {
 // --- ENHANCED BUTTON COMPONENT ---
 const Button = ({ children, variant = 'primary', icon: Icon, theme, className = "", onClick, ...props }) => {
   const baseStyles = "relative px-6 py-3 font-bold transition-all duration-300 ease-out flex items-center justify-center gap-2 group cursor-pointer active:scale-95 focus:outline-none tracking-wide overflow-hidden";
-
+  
   const lightStyles = {
     primary: "bg-slate-900 text-white rounded-xl shadow-[0_10px_20px_-5px_rgba(15,23,42,0.3)] hover:shadow-[0_20px_30px_-5px_rgba(15,23,42,0.4)] hover:-translate-y-1",
     secondary: "bg-white text-slate-700 border border-slate-200 rounded-xl shadow-sm hover:border-amber-500 hover:text-amber-600 hover:shadow-lg",
@@ -985,7 +1009,7 @@ const Button = ({ children, variant = 'primary', icon: Icon, theme, className = 
       {(theme !== 'bot' && variant === 'primary') && (
         <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite]" />
       )}
-
+      
       {theme === 'bot' && (
         <span className="absolute inset-0 bg-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
       )}
@@ -1011,13 +1035,13 @@ const LoadingScreen = ({ theme, onComplete, toggleTheme }) => {
       // Random increment between 1 and 5
       const increment = Math.random() * 4 + 1;
       current += increment;
-
+      
       if (current >= 100) {
         current = 100;
         clearInterval(interval);
         setTimeout(() => {
-          setIsFading(true);
-          setTimeout(onComplete, 800);
+            setIsFading(true);
+            setTimeout(onComplete, 800); 
         }, 600);
       }
       setProgress(current);
@@ -1043,7 +1067,7 @@ const LoadingScreen = ({ theme, onComplete, toggleTheme }) => {
 
   return (
     <div className={`fixed inset-0 z-[100] flex flex-col items-center justify-center transition-all duration-1000 ${bgClass} ${isFading ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100 scale-100'}`}>
-
+      
       {/* Theme Toggle in Corner */}
       <button onClick={toggleTheme} className={`absolute top-8 right-8 p-3 rounded-full transition-all duration-300 z-[110] flex items-center gap-2 group backdrop-blur-md border ${theme === 'bot' ? 'bg-black/50 border-green-500/30 text-green-500' : 'bg-white/10 border-slate-500/20 text-slate-500'}`}>
         <span className="text-[10px] font-bold tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute right-full mr-3 whitespace-nowrap">SWITCH MODE</span>
@@ -1053,13 +1077,15 @@ const LoadingScreen = ({ theme, onComplete, toggleTheme }) => {
       </button>
 
       <div className="w-full max-w-lg px-8 relative flex flex-col items-center">
-
+        
         {/* Logo Container with Ambient Glow */}
         <div className="relative mb-16 group">
-          <div className={`absolute -inset-10 opacity-20 group-hover:opacity-40 transition-opacity duration-1000 blur-3xl rounded-full ${theme === 'bot' ? 'bg-emerald-500' : 'bg-amber-500'}`}></div>
-          <SolutionDevelopersLogo
-            className="relative w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl animate-pulse"
-          />
+           <div className={`absolute -inset-10 opacity-20 group-hover:opacity-40 transition-opacity duration-1000 blur-3xl rounded-full ${theme === 'bot' ? 'bg-emerald-500' : 'bg-amber-500'}`}></div>
+           <img 
+             src="/my-logo.png" 
+             alt="Solution Developers Logo" 
+             className="relative w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl animate-pulse" 
+           />
         </div>
 
         {/* Typography */}
@@ -1078,28 +1104,28 @@ const LoadingScreen = ({ theme, onComplete, toggleTheme }) => {
 
         {/* GLAMOROUS LOADING BAR */}
         <div className="w-full relative">
-          {/* Percentage Float */}
-          <div
-            className={`absolute -top-8 transition-all duration-100 ease-out font-mono font-bold text-xs ${getTextColor()}`}
-            style={{ left: `calc(${progress}% - 12px)` }}
-          >
-            {Math.round(progress)}%
-          </div>
-
-          {/* Bar Container (Glass Effect) */}
-          <div className={`h-2 w-full rounded-full overflow-hidden backdrop-blur-xl border ${theme === 'bot' ? 'bg-emerald-900/20 border-emerald-500/20' : 'bg-slate-200/50 border-white/50'}`}>
-            {/* The Progress Fill */}
-            <div
-              className={`h-full relative transition-all duration-200 ease-out rounded-full ${getBarGradient()}`}
-              style={{ width: `${progress}%` }}
+            {/* Percentage Float */}
+            <div 
+                className={`absolute -top-8 transition-all duration-100 ease-out font-mono font-bold text-xs ${getTextColor()}`}
+                style={{ left: `calc(${progress}% - 12px)` }}
             >
-              {/* Shimmer Effect Overlay */}
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent animate-[shimmer_1.5s_infinite]"></div>
-
-              {/* Leading Glow Head */}
-              <div className="absolute right-0 top-0 bottom-0 w-2 bg-white box-shadow-[0_0_10px_white] blur-[2px]"></div>
+                {Math.round(progress)}%
             </div>
-          </div>
+
+            {/* Bar Container (Glass Effect) */}
+            <div className={`h-2 w-full rounded-full overflow-hidden backdrop-blur-xl border ${theme === 'bot' ? 'bg-emerald-900/20 border-emerald-500/20' : 'bg-slate-200/50 border-white/50'}`}>
+                {/* The Progress Fill */}
+                <div 
+                    className={`h-full relative transition-all duration-200 ease-out rounded-full ${getBarGradient()}`} 
+                    style={{ width: `${progress}%` }}
+                >
+                    {/* Shimmer Effect Overlay */}
+                    <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent animate-[shimmer_1.5s_infinite]"></div>
+                    
+                    {/* Leading Glow Head */}
+                    <div className="absolute right-0 top-0 bottom-0 w-2 bg-white box-shadow-[0_0_10px_white] blur-[2px]"></div>
+                </div>
+            </div>
         </div>
 
       </div>
@@ -1114,7 +1140,6 @@ const Background3D = ({ theme }) => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let animationFrameId;
 
@@ -1125,45 +1150,40 @@ const Background3D = ({ theme }) => {
     window.addEventListener('resize', resize);
     resize();
 
-    const handleMouseMove = (e) => {
+    window.addEventListener('mousemove', (e) => {
       mouseRef.current = { x: e.clientX - canvas.width / 2, y: e.clientY - canvas.height / 2 };
-    };
-    window.addEventListener('mousemove', handleMouseMove);
+    });
 
     let lastScrollY = window.scrollY;
-    const handleScroll = () => {
+    window.addEventListener('scroll', () => {
       scrollRef.current = window.scrollY - lastScrollY;
       lastScrollY = window.scrollY;
-    };
-    window.addEventListener('scroll', handleScroll);
+    });
 
-    // Generate 3D floating cubes
-    const cubes = Array.from({ length: 45 }, () => ({
-      x: (Math.random() - 0.5) * canvas.width * 1.4,
-      y: (Math.random() - 0.5) * canvas.height * 1.4,
-      z: Math.random() * 800 + 150,
-      size: Math.random() * 45 + 25,
+    const cubes = Array.from({ length: 40 }, () => ({
+      x: (Math.random() - 0.5) * canvas.width * 1.5,
+      y: (Math.random() - 0.5) * canvas.height * 1.5,
+      z: Math.random() * 800 + 200,
+      size: Math.random() * 40 + 20,
       vx: 0,
       vy: 0,
       vz: 0,
-      baseVx: (Math.random() - 0.5) * 0.35,
-      baseVy: (Math.random() - 0.5) * 0.35,
-      baseVz: (Math.random() - 0.5) * 0.35,
+      baseVx: (Math.random() - 0.5) * 0.3,
+      baseVy: (Math.random() - 0.5) * 0.3,
+      baseVz: (Math.random() - 0.5) * 0.3,
       rotX: Math.random() * Math.PI,
       rotY: Math.random() * Math.PI,
-      rotZ: Math.random() * Math.PI,
-      vRotX: (Math.random() - 0.5) * 0.018,
-      vRotY: (Math.random() - 0.5) * 0.018,
-      vRotZ: (Math.random() - 0.5) * 0.015
+      vRotX: (Math.random() - 0.5) * 0.02,
+      vRotY: (Math.random() - 0.5) * 0.02
     }));
 
-    const particles = Array.from({ length: 60 }, () => ({
+    const particles = Array.from({ length: 50 }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.6,
-      vy: (Math.random() - 0.5) * 0.6,
-      size: Math.random() * 2.5 + 1,
-      opacity: Math.random() * 0.25 + 0.08
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      size: Math.random() * 2 + 1,
+      opacity: Math.random() * 0.16 + 0.04
     }));
 
     const project = (x, y, z) => {
@@ -1171,35 +1191,13 @@ const Background3D = ({ theme }) => {
       return { x: x * scale + canvas.width / 2, y: y * scale + canvas.height / 2, scale };
     };
 
-    const rotateX = (x, y, z, angle) => {
-      const cos = Math.cos(angle), sin = Math.sin(angle);
-      return { x, y: y * cos - z * sin, z: y * sin + z * cos };
-    };
-    const rotateY = (x, y, z, angle) => {
-      const cos = Math.cos(angle), sin = Math.sin(angle);
-      return { x: x * cos + z * sin, y, z: -x * sin + z * cos };
-    };
-    const rotateZ = (x, y, z, angle) => {
-      const cos = Math.cos(angle), sin = Math.sin(angle);
-      return { x: x * cos - y * sin, y: x * sin + y * cos, z };
-    };
+    const rotate = (a, b, angle) => ({ a: a * Math.cos(angle) - b * Math.sin(angle), b: a * Math.sin(angle) + b * Math.cos(angle) });
 
     const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const strokeColor = theme === 'bot' ? '34, 197, 94' : (theme === 'light' ? '217, 119, 6' : '245, 158, 11');
 
-      // Theme-based colors
-      // Light mode: Dark charcoal / slate (#333333 / 51, 51, 51) so cubes are crisp and prominent
-      // Dark mode: High contrast amber gold (245, 158, 11) or indigo accent (79, 70, 229)
-      // Bot mode: Matrix cyber cyan / green (0, 255, 204)
-      const primaryRgb = theme === 'bot'
-        ? '0, 255, 204'
-        : (theme === 'light' ? '51, 51, 51' : '245, 158, 11');
-
-      const secondaryRgb = theme === 'bot'
-        ? '34, 197, 94'
-        : (theme === 'light' ? '217, 119, 6' : '79, 70, 229');
-
-      // Draw drifting particles
+      // Draw drifting particles background layer
       particles.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
@@ -1208,39 +1206,38 @@ const Background3D = ({ theme }) => {
         if (p.y < 0) p.y = canvas.height;
         if (p.y > canvas.height) p.y = 0;
 
-        ctx.fillStyle = `rgba(${primaryRgb}, ${p.opacity})`;
+        ctx.fillStyle = `rgba(${strokeColor}, ${p.opacity})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      // Draw 3D Floating Cubes
       cubes.forEach(cube => {
+        // Apply ambient base velocity + active dynamic velocity
         cube.x += cube.vx + cube.baseVx;
         cube.y += cube.vy + cube.baseVy;
         cube.z += cube.vz + cube.baseVz;
-
-        // Mouse interaction
+        
+        // Interactions
         const dx = cube.x - mouseRef.current.x * 1.5;
         const dy = cube.y - mouseRef.current.y * 1.5;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 400) {
-          cube.vx += (dx / 400) * 0.8;
-          cube.vy += (dy / 400) * 0.8;
+        if (Math.sqrt(dx*dx + dy*dy) < 400) {
+            cube.vx += (dx / 400) * 0.8;
+            cube.vy += (dy / 400) * 0.8;
         }
-
         if (Math.abs(scrollRef.current) > 0.1) {
-          cube.vy -= scrollRef.current * 0.15;
+            cube.vy -= scrollRef.current * 0.15;
         }
 
         cube.rotX += cube.vRotX;
         cube.rotY += cube.vRotY;
-        cube.rotZ += cube.vRotZ;
 
+        // Apply friction to dynamic velocity only
         cube.vx *= 0.95;
         cube.vy *= 0.95;
         cube.vz *= 0.95;
 
+        // Wrap around boundaries dynamically
         const boundX = canvas.width * 1.2;
         const boundY = canvas.height * 1.2;
 
@@ -1254,173 +1251,119 @@ const Background3D = ({ theme }) => {
         else if (cube.z < 100) cube.z = 1200;
 
         const s = cube.size;
-        const rawVertices = [
-          { x: -s, y: -s, z: -s }, { x: s, y: -s, z: -s }, { x: s, y: s, z: -s }, { x: -s, y: s, z: -s },
-          { x: -s, y: -s, z: s }, { x: s, y: -s, z: s }, { x: s, y: s, z: s }, { x: -s, y: s, z: s }
-        ];
-
-        const vertices = rawVertices.map(v => {
-          let p = rotateX(v.x, v.y, v.z, cube.rotX);
-          p = rotateY(p.x, p.y, p.z, cube.rotY);
-          p = rotateZ(p.x, p.y, p.z, cube.rotZ);
-          return project(p.x + cube.x, p.y + cube.y, p.z + cube.z);
+        const vertices = [
+          {x:-s, y:-s, z:-s}, {x:s, y:-s, z:-s}, {x:s, y:s, z:-s}, {x:-s, y:s, z:-s},
+          {x:-s, y:-s, z:s},  {x:s, y:-s, z:s},  {x:s, y:s, z:s},  {x:-s, y:s, z:s}
+        ].map(v => {
+            let r = rotate(v.y, v.z, cube.rotX); let vy = r.a, vz = r.b;
+            r = rotate(v.x, vz, cube.rotY); let vx = r.a; vz = r.b;
+            return project(vx + cube.x, vy + cube.y, vz + cube.z);
         });
 
-        // Calculate opacity based on depth z and theme
-        const depthFactor = Math.max(0, 1 - cube.z / 1200);
-        const baseOpacity = theme === 'light' ? 0.38 : (theme === 'bot' ? 0.5 : 0.42);
-        const strokeOpacity = Math.min(0.85, Math.max(0.12, depthFactor * baseOpacity));
-        const fillOpacity = strokeOpacity * (theme === 'light' ? 0.08 : 0.05);
-
-        // Fill front faces for 3D depth perception
-        const faces = [
-          [0, 1, 2, 3], [4, 5, 6, 7], [0, 1, 5, 4],
-          [2, 3, 7, 6], [0, 3, 7, 4], [1, 2, 6, 5]
-        ];
-
-        faces.forEach(f => {
-          ctx.beginPath();
-          ctx.moveTo(vertices[f[0]].x, vertices[f[0]].y);
-          ctx.lineTo(vertices[f[1]].x, vertices[f[1]].y);
-          ctx.lineTo(vertices[f[2]].x, vertices[f[2]].y);
-          ctx.lineTo(vertices[f[3]].x, vertices[f[3]].y);
-          ctx.closePath();
-          ctx.fillStyle = `rgba(${primaryRgb}, ${fillOpacity})`;
-          ctx.fill();
-        });
-
-        // Draw 12 Wireframe Edges
         ctx.beginPath();
-        const edges = [
-          [0, 1], [1, 2], [2, 3], [3, 0],
-          [4, 5], [5, 6], [6, 7], [7, 4],
-          [0, 4], [1, 5], [2, 6], [3, 7]
-        ];
-        ctx.strokeStyle = `rgba(${primaryRgb}, ${strokeOpacity})`;
-        ctx.lineWidth = Math.max(1.2, 2.2 * vertices[0].scale);
-        edges.forEach(e => {
-          ctx.moveTo(vertices[e[0]].x, vertices[e[0]].y);
-          ctx.lineTo(vertices[e[1]].x, vertices[e[1]].y);
-        });
+        const edges = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+        const distFromCenter = Math.sqrt(cube.x * cube.x + cube.y * cube.y);
+        const maxDist = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height) * 0.5;
+        const centerFade = Math.min(1, distFromCenter / (maxDist || 1));
+        const opacity = Math.max(0.02, (1 - cube.z/1200) * 0.24 * centerFade);
+        ctx.strokeStyle = `rgba(${strokeColor}, ${opacity})`;
+        ctx.lineWidth = 1.5 * vertices[0].scale;
+        edges.forEach(e => { ctx.moveTo(vertices[e[0]].x, vertices[e[0]].y); ctx.lineTo(vertices[e[1]].x, vertices[e[1]].y); });
         ctx.stroke();
-
-        // Draw vertex dots for a futuristic digital museum look
-        vertices.forEach(v => {
-          ctx.beginPath();
-          ctx.arc(v.x, v.y, Math.max(1.5, 2.5 * v.scale), 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${secondaryRgb}, ${strokeOpacity * 1.2})`;
-          ctx.fill();
-        });
       });
-
       scrollRef.current *= 0.9;
       animationFrameId = requestAnimationFrame(render);
     };
-
     render();
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => cancelAnimationFrame(animationFrameId);
   }, [theme]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      id="bg-canvas"
-      className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-    />
-  );
+  return <canvas ref={canvasRef} className="fixed inset-0 w-full h-full pointer-events-none z-0 blur-[0.8px]" />;
 };
 
 const DevBot = ({ theme }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([{ type: 'bot', text: 'Hello! I am DevBot. How can I assist you today?' }]);
-  const [input, setInput] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
+    const [messages, setMessages] = useState([{ type: 'bot', text: 'Hello! I am DevBot. How can I assist you today?' }]);
+    const [input, setInput] = useState("");
 
-  const handleSend = () => {
-    if (!input.trim()) return;
-    setMessages(prev => [...prev, { type: 'user', text: input }]);
-    setInput("");
-    setTimeout(() => {
-      let botText = "I'm focusing on the code right now. Contact the team for more info!";
-      if (input.toLowerCase().includes('hire') || input.toLowerCase().includes('contact')) botText = "You can reach us via the Contact form below or email us directly at hello@solutiondevs.com";
-      else if (input.toLowerCase().includes('tech')) botText = "We specialize in React, Node.js, Python, Go, and Cloud Native technologies.";
-      setMessages(prev => [...prev, { type: 'bot', text: botText }]);
-    }, 800);
-  };
+    const handleSend = () => {
+        if (!input.trim()) return;
+        setMessages(prev => [...prev, { type: 'user', text: input }]);
+        setInput("");
+        setTimeout(() => {
+            let botText = "I'm focusing on the code right now. Contact the team for more info!";
+            if (input.toLowerCase().includes('hire') || input.toLowerCase().includes('contact')) botText = "You can reach us via the Contact form below or email us directly at hello@solutiondevs.com";
+            else if (input.toLowerCase().includes('tech')) botText = "We specialize in React, Node.js, Python, Go, and Cloud Native technologies.";
+            setMessages(prev => [...prev, { type: 'bot', text: botText }]);
+        }, 800);
+    };
 
-  const containerClass = theme === 'bot' ? 'bg-black border-green-500' : (theme === 'light' ? 'bg-white border-slate-200 shadow-xl' : 'bg-slate-900 border-slate-700 shadow-xl');
-  const textClass = theme === 'bot' ? 'text-green-500 font-mono' : (theme === 'light' ? 'text-slate-800' : 'text-white');
+    const containerClass = theme === 'bot' ? 'bg-black border-green-500' : (theme === 'light' ? 'bg-white border-slate-200 shadow-xl' : 'bg-slate-900 border-slate-700 shadow-xl');
+    const textClass = theme === 'bot' ? 'text-green-500 font-mono' : (theme === 'light' ? 'text-slate-800' : 'text-white');
 
-  return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
-      {isOpen && (
-        <div className={`mb-4 w-80 h-96 rounded-2xl border flex flex-col overflow-hidden ${containerClass}`}>
-          <div className={`p-4 border-b flex justify-between items-center ${theme === 'bot' ? 'border-green-800 bg-green-900/20' : 'border-slate-700/50 bg-slate-800/50'}`}>
-            <span className={`font-bold flex items-center gap-2 ${textClass}`}><Bot className="w-5 h-5" /> DevBot AI</span>
-            <button onClick={() => setIsOpen(false)} className={textClass}><X className="w-4 h-4" /></button>
-          </div>
-          <div className="flex-1 p-4 overflow-y-auto space-y-3">
-            {messages.map((msg, i) => (
-              <div key={i} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[80%] p-3 rounded-xl text-sm ${msg.type === 'user' ? (theme === 'bot' ? 'bg-green-900/50 text-green-400 border border-green-700' : 'bg-amber-600 text-white') : (theme === 'bot' ? 'bg-black border border-green-800 text-green-500' : (theme === 'light' ? 'bg-slate-100 text-slate-700' : 'bg-slate-800 text-slate-300'))}`}>{msg.text}</div>
-              </div>
-            ))}
-          </div>
-          <div className="p-3 border-t border-slate-700/50 flex gap-2">
-            <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyPress={(e) => e.key === 'Enter' && handleSend()} placeholder="Type a message..." className={`flex-1 bg-transparent border-none outline-none text-sm ${textClass}`} />
-            <button onClick={handleSend} className={theme === 'bot' ? 'text-green-500' : 'text-amber-500'}><Send className="w-4 h-4" /></button>
-          </div>
+    return (
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+            {isOpen && (
+                <div className={`mb-4 w-80 h-96 rounded-2xl border flex flex-col overflow-hidden ${containerClass}`}>
+                    <div className={`p-4 border-b flex justify-between items-center ${theme === 'bot' ? 'border-green-800 bg-green-900/20' : 'border-slate-700/50 bg-slate-800/50'}`}>
+                        <span className={`font-bold flex items-center gap-2 ${textClass}`}><Bot className="w-5 h-5" /> DevBot AI</span>
+                        <button onClick={() => setIsOpen(false)} className={textClass}><X className="w-4 h-4"/></button>
+                    </div>
+                    <div className="flex-1 p-4 overflow-y-auto space-y-3">
+                        {messages.map((msg, i) => (
+                            <div key={i} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                <div className={`max-w-[80%] p-3 rounded-xl text-sm ${msg.type === 'user' ? (theme === 'bot' ? 'bg-green-900/50 text-green-400 border border-green-700' : 'bg-amber-600 text-white') : (theme === 'bot' ? 'bg-black border border-green-800 text-green-500' : (theme === 'light' ? 'bg-slate-100 text-slate-700' : 'bg-slate-800 text-slate-300'))}`}>{msg.text}</div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="p-3 border-t border-slate-700/50 flex gap-2">
+                        <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyPress={(e) => e.key === 'Enter' && handleSend()} placeholder="Type a message..." className={`flex-1 bg-transparent border-none outline-none text-sm ${textClass}`} />
+                        <button onClick={handleSend} className={theme === 'bot' ? 'text-green-500' : 'text-amber-500'}><Send className="w-4 h-4" /></button>
+                    </div>
+                </div>
+            )}
+            <button onClick={() => setIsOpen(!isOpen)} className={`p-4 rounded-full shadow-lg transition-transform hover:scale-110 ${theme === 'bot' ? 'bg-black border border-green-500 text-green-500' : 'bg-amber-600 text-white'}`}>
+                {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
+            </button>
         </div>
-      )}
-      <button onClick={() => setIsOpen(!isOpen)} className={`p-4 rounded-full shadow-lg transition-transform hover:scale-110 ${theme === 'bot' ? 'bg-black border border-green-500 text-green-500' : 'bg-amber-600 text-white'}`}>
-        {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
-      </button>
-    </div>
-  );
+    );
 };
 
 const TechTicker = ({ theme }) => {
-  const techItems = [
-    { name: "React", icon: Atom },
-    { name: "Node.js", icon: Server },
-    { name: "Python", icon: Terminal },
-    { name: "AWS", icon: Cloud },
-    { name: "Docker", icon: Box },
-    { name: "Kubernetes", icon: Layers },
-    { name: "Go", icon: Code2 },
-    { name: "Rust", icon: Shield },
-    { name: "TensorFlow", icon: Brain },
-    { name: "Figma", icon: Palette },
-    { name: "Next.js", icon: Zap },
-    { name: "GraphQL", icon: Database }
-  ];
+    const techItems = [
+      { name: "React", icon: Atom },
+      { name: "Node.js", icon: Server },
+      { name: "Python", icon: Terminal },
+      { name: "AWS", icon: Cloud },
+      { name: "Docker", icon: Box },
+      { name: "Kubernetes", icon: Layers },
+      { name: "Go", icon: Code2 },
+      { name: "Rust", icon: Shield },
+      { name: "TensorFlow", icon: Brain },
+      { name: "Figma", icon: Palette },
+      { name: "Next.js", icon: Zap },
+      { name: "GraphQL", icon: Database }
+    ];
 
-  return (
-    <div className={`w-full py-6 overflow-hidden border-y backdrop-blur-sm ${theme === 'bot' ? 'bg-black/50 border-green-900' : (theme === 'light' ? 'bg-white/50 border-slate-200' : 'bg-slate-900/50 border-slate-800')}`}>
-      <div className="flex animate-marquee whitespace-nowrap">
-        {[...techItems, ...techItems, ...techItems].map((item, i) => {
-          const Icon = item.icon;
-          return (
-            <div key={i} className="mx-8 flex items-center gap-2 group">
-              <Icon className={`w-6 h-6 ${theme === 'bot' ? 'text-green-500' : (theme === 'light' ? 'text-amber-600' : 'text-amber-400')} transition-transform group-hover:scale-110`} />
-              <span className={`text-lg font-bold uppercase tracking-wider ${theme === 'bot' ? 'text-green-500/70 font-mono' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400')}`}>
-                {item.name}
-              </span>
-              <span className={`text-xs ml-2 ${theme === 'bot' ? 'text-green-900' : 'text-slate-700/20'}`}>•</span>
+    return (
+        <div className={`w-full py-6 overflow-hidden border-y backdrop-blur-sm ${theme === 'bot' ? 'bg-black/50 border-green-900' : (theme === 'light' ? 'bg-white/50 border-slate-200' : 'bg-slate-900/50 border-slate-800')}`}>
+            <div className="flex animate-marquee whitespace-nowrap">
+                {[...techItems, ...techItems, ...techItems].map((item, i) => {
+                    const Icon = item.icon;
+                    return (
+                        <div key={i} className="mx-8 flex items-center gap-2 group">
+                             <Icon className={`w-6 h-6 ${theme === 'bot' ? 'text-green-500' : (theme === 'light' ? 'text-amber-600' : 'text-amber-400')} transition-transform group-hover:scale-110`} />
+                             <span className={`text-lg font-bold uppercase tracking-wider ${theme === 'bot' ? 'text-green-500/70 font-mono' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400')}`}>
+                                {item.name}
+                             </span>
+                             <span className={`text-xs ml-2 ${theme === 'bot' ? 'text-green-900' : 'text-slate-700/20'}`}>•</span>
+                        </div>
+                    );
+                })}
             </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
-// --- NEW COMPONENT: NOTICE SECTION ---
+        </div>
+    );
+};// --- NEW COMPONENT: NOTICE SECTION ---
 const NoticeSection = ({ theme }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -1441,79 +1384,83 @@ const NoticeSection = ({ theme }) => {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto px-2 sm:px-4 relative z-20">
-      <h3 className={`mb-4 sm:mb-6 text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center justify-center lg:justify-start gap-2 ${theme === 'bot' ? 'text-green-500 font-mono' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400')}`}>
-        <Radio className={`w-4 h-4 ${theme === 'bot' ? 'animate-pulse' : ''}`} /> {theme === 'bot' ? "SYSTEM_BROADCAST" : "Broadcast Feed"}
+    <div className="w-full max-w-xl mx-auto px-4 relative z-20">
+      <h3 className={`mb-6 text-sm font-bold uppercase tracking-widest flex items-center justify-center lg:justify-start gap-2 ${theme === 'bot' ? 'text-green-500 font-mono' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400')}`}>
+         <Radio className={`w-4 h-4 ${theme === 'bot' ? 'animate-pulse' : ''}`} /> {theme === 'bot' ? "SYSTEM_BROADCAST" : "Broadcast Feed"}
       </h3>
-      <div className={`rounded-2xl sm:rounded-3xl overflow-hidden border flex flex-col transition-all duration-500 min-h-[300px] sm:h-[280px] relative ${theme === 'bot'
-          ? 'bg-black border-green-900 rounded-none shadow-[0_0_15px_rgba(34,197,94,0.1)]'
+      <div className={`rounded-3xl overflow-hidden border flex flex-col transition-all duration-500 h-[280px] relative ${
+        theme === 'bot' 
+          ? 'bg-black border-green-900 rounded-none shadow-[0_0_15px_rgba(34,197,94,0.1)]' 
           : (theme === 'light' ? 'bg-white border-slate-200 shadow-xl' : 'bg-slate-900/60 border-slate-800 shadow-2xl')
-        }`}>
+      }`}>
         <div className="relative flex-1 flex flex-col md:flex-row overflow-hidden">
           {/* Card Image */}
-          <div className="w-full md:w-2/5 h-32 sm:h-36 md:h-full relative overflow-hidden bg-slate-800 flex-shrink-0">
-            <img
-              src={activeNotice.image}
-              alt={activeNotice.title}
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+          <div className="w-full md:w-2/5 h-28 md:h-full relative overflow-hidden bg-slate-800 flex-shrink-0">
+            <img 
+              src={activeNotice.image} 
+              alt={activeNotice.title} 
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" 
             />
-            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/60 to-transparent"></div>
           </div>
 
           {/* Card Details */}
-          <div className="flex-1 p-3.5 sm:p-5 flex flex-col justify-between text-left">
+          <div className="flex-1 p-5 flex flex-col justify-between text-left">
             <div>
-              <div className="flex items-center justify-between gap-2 sm:gap-4 mb-1.5 sm:mb-2">
-                <span className={`text-[8px] sm:text-[9px] px-2 py-0.5 rounded border font-bold uppercase tracking-wider ${getTagColor(activeNotice.type)}`}>
+              <div className="flex items-center justify-between gap-4 mb-2">
+                <span className={`text-[9px] px-2 py-0.5 rounded border font-bold uppercase tracking-wider ${getTagColor(activeNotice.type)}`}>
                   {activeNotice.type}
                 </span>
-                <span className={`text-[9px] sm:text-[10px] ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-500'}`}>
+                <span className={`text-[10px] ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-500'}`}>
                   {activeNotice.date}
                 </span>
               </div>
-
-              <h4 className={`text-xs sm:text-sm font-bold mb-1.5 sm:mb-2 line-clamp-2 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>
+              
+              <h4 className={`text-sm font-bold mb-2 line-clamp-2 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>
                 {activeNotice.title}
               </h4>
-
-              <p className={`text-[11px] sm:text-xs leading-relaxed line-clamp-3 sm:line-clamp-4 ${theme === 'bot' ? 'text-green-800 font-mono' : (theme === 'light' ? 'text-slate-600' : 'text-slate-400')}`}>
+              
+              <p className={`text-xs leading-relaxed line-clamp-4 ${theme === 'bot' ? 'text-green-800 font-mono' : (theme === 'light' ? 'text-slate-600' : 'text-slate-400')}`}>
                 {activeNotice.desc}
               </p>
             </div>
 
             {/* Navigation and Indicators */}
-            <div className="flex items-center justify-between pt-2.5 sm:pt-3 mt-2 sm:mt-auto border-t border-slate-200/10">
+            <div className="flex items-center justify-between pt-3 mt-auto border-t border-slate-200/10">
               {/* Dot Indicators */}
               <div className="flex gap-1.5">
                 {NOTICES.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setActiveIndex(idx)}
-                    className={`h-1.5 transition-all duration-300 rounded-full ${idx === activeIndex
-                        ? (theme === 'bot' ? 'w-4 bg-green-500' : 'w-4 bg-amber-500')
+                  <button 
+                    key={idx} 
+                    onClick={() => setActiveIndex(idx)} 
+                    className={`h-1.5 transition-all duration-300 rounded-full ${
+                      idx === activeIndex 
+                        ? (theme === 'bot' ? 'w-4 bg-green-500' : 'w-4 bg-amber-500') 
                         : (theme === 'bot' ? 'w-1.5 bg-green-900' : 'w-1.5 bg-slate-600')
-                      }`}
+                    }`}
                   />
                 ))}
               </div>
 
               {/* Arrow Buttons */}
               <div className="flex gap-1.5">
-                <button
-                  onClick={handlePrev}
-                  className={`p-1.5 rounded-full border transition-all ${theme === 'bot'
-                      ? 'border-green-800 text-green-500 hover:border-green-500 hover:bg-green-950/30 rounded-none'
+                <button 
+                  onClick={handlePrev} 
+                  className={`p-1.5 rounded-full border transition-all ${
+                    theme === 'bot' 
+                      ? 'border-green-800 text-green-500 hover:border-green-500 hover:bg-green-950/30 rounded-none' 
                       : 'border-slate-700 text-slate-400 hover:text-amber-500 hover:border-amber-500 hover:bg-slate-800/40'
-                    }`}
+                  }`}
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                 </button>
-                <button
-                  onClick={handleNext}
-                  className={`p-1.5 rounded-full border transition-all ${theme === 'bot'
-                      ? 'border-green-800 text-green-500 hover:border-green-500 hover:bg-green-950/30 rounded-none'
+                <button 
+                  onClick={handleNext} 
+                  className={`p-1.5 rounded-full border transition-all ${
+                    theme === 'bot' 
+                      ? 'border-green-800 text-green-500 hover:border-green-500 hover:bg-green-950/30 rounded-none' 
                       : 'border-slate-700 text-slate-400 hover:text-amber-500 hover:border-amber-500 hover:bg-slate-800/40'
-                    }`}
+                  }`}
                 >
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
@@ -1524,13 +1471,11 @@ const NoticeSection = ({ theme }) => {
       </div>
     </div>
   );
-};
-
-// --- NEW COMPONENT: 3D FOUNDERS CAROUSEL ---
+};// --- NEW COMPONENT: 3D FOUNDERS CAROUSEL ---
 const FoundersCarousel = ({ theme }) => {
   const activeNotes = FOUNDERS_NOTES.filter(note => SOLUPERS_DATA.some(m => m.name === note.name && m.status === 'Active'));
   const count = activeNotes.length;
-
+  
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -1558,31 +1503,31 @@ const FoundersCarousel = ({ theme }) => {
 
   if (isMobile) {
     return (
-      <div className="w-full flex flex-col items-center justify-center relative z-20 px-2 sm:px-4">
-        <h3 className={`mb-4 sm:mb-6 text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2 ${theme === 'bot' ? 'text-green-500 font-mono' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400')}`}>
-          <Quote className="w-4 h-4" /> {theme === 'bot' ? "SOLUPERS_LOGS" : "Solupers' Notes"}
+      <div className="w-full flex flex-col items-center justify-center relative z-20 px-4">
+        <h3 className={`mb-6 text-sm font-bold uppercase tracking-widest flex items-center gap-2 ${theme === 'bot' ? 'text-green-500 font-mono' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400')}`}>
+           <Quote className="w-4 h-4" /> {theme === 'bot' ? "SOLUPERS_LOGS" : "Solupers' Notes"}
         </h3>
-        <div className="w-full max-w-sm overflow-hidden relative pb-2">
-          <div
-            className="flex transition-transform duration-500 ease-out"
+        <div className="w-full max-w-sm overflow-hidden relative pb-4">
+          <div 
+            className="flex transition-transform duration-500 ease-out" 
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
           >
             {activeNotes.map((note, index) => {
               const soluper = SOLUPERS_DATA.find(m => m.name === note.name);
               const displayRole = soluper ? soluper.role : note.role;
               return (
-                <div key={index} className="w-full flex-shrink-0 px-1.5">
-                  <div className={`rounded-2xl p-4 sm:p-5 border backdrop-blur-md flex flex-col justify-between min-h-[160px] text-left
+                <div key={index} className="w-full flex-shrink-0 px-2">
+                  <div className={`rounded-2xl p-5 border backdrop-blur-md flex flex-col justify-center h-[170px] text-left
                     ${theme === 'bot' ? 'bg-black/90 border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.2)]' : (theme === 'light' ? 'bg-white/95 border-slate-200 shadow-xl' : 'bg-slate-900/95 border-slate-700 shadow-2xl')}
                   `}>
-                    <div className="flex items-center gap-3 mb-2.5">
+                    <div className="flex items-center gap-3 mb-3">
                       <img src={note.image} alt={note.name} className={`w-10 h-10 rounded-full border-2 object-cover ${theme === 'bot' ? 'border-green-500' : 'border-amber-500'}`} />
                       <div>
                         <h4 className={`text-xs font-bold ${theme === 'bot' ? 'text-green-400' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>{note.name}</h4>
                         <span className={`text-[10px] ${theme === 'bot' ? 'text-green-700 font-mono' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400')}`}>{displayRole}</span>
                       </div>
                     </div>
-                    <p className={`text-[11px] sm:text-xs leading-relaxed italic ${theme === 'bot' ? 'text-green-600 font-mono' : (theme === 'light' ? 'text-slate-600' : 'text-slate-300')}`}>
+                    <p className={`text-xs leading-relaxed italic ${theme === 'bot' ? 'text-green-600 font-mono' : (theme === 'light' ? 'text-slate-600' : 'text-slate-300')}`}>
                       "{note.quote}"
                     </p>
                   </div>
@@ -1590,31 +1535,32 @@ const FoundersCarousel = ({ theme }) => {
               );
             })}
           </div>
-
+          
           {/* Navigation Controls */}
-          <div className="flex justify-between items-center mt-3 px-2">
-            <button
-              onClick={() => setActiveIndex((activeIndex - 1 + count) % count)}
+          <div className="flex justify-between items-center mt-4 px-2">
+            <button 
+              onClick={() => setActiveIndex((activeIndex - 1 + count) % count)} 
               className={`p-1.5 rounded-full border transition-all ${theme === 'bot' ? 'border-green-800 text-green-500 rounded-none' : 'border-slate-800 text-slate-400 hover:text-amber-500'}`}
             >
               <ArrowLeft className="w-3.5 h-3.5" />
             </button>
-
+            
             <div className="flex gap-1.5">
               {activeNotes.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveIndex(idx)}
-                  className={`h-1.5 transition-all duration-300 rounded-full ${idx === activeIndex
-                      ? (theme === 'bot' ? 'w-4 bg-green-500' : 'w-4 bg-amber-500')
+                <button 
+                  key={idx} 
+                  onClick={() => setActiveIndex(idx)} 
+                  className={`h-1.5 transition-all duration-300 rounded-full ${
+                    idx === activeIndex 
+                      ? (theme === 'bot' ? 'w-4 bg-green-500' : 'w-4 bg-amber-500') 
                       : (theme === 'bot' ? 'w-1.5 bg-green-900' : 'w-1.5 bg-slate-600')
-                    }`}
+                  }`}
                 />
               ))}
             </div>
-
-            <button
-              onClick={() => setActiveIndex((activeIndex + 1) % count)}
+            
+            <button 
+              onClick={() => setActiveIndex((activeIndex + 1) % count)} 
               className={`p-1.5 rounded-full border transition-all ${theme === 'bot' ? 'border-green-800 text-green-500 rounded-none' : 'border-slate-800 text-slate-400 hover:text-amber-500'}`}
             >
               <ArrowRight className="w-3.5 h-3.5" />
@@ -1629,42 +1575,42 @@ const FoundersCarousel = ({ theme }) => {
   return (
     <div className="w-full h-[320px] perspective-1000 overflow-visible flex flex-col items-center justify-center relative z-20">
       <h3 className={`mb-8 text-sm font-bold uppercase tracking-widest flex items-center gap-2 ${theme === 'bot' ? 'text-green-500 font-mono' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400')}`}>
-        <Quote className="w-4 h-4" /> {theme === 'bot' ? "SOLUPERS_LOGS" : "Solupers' Notes"}
+         <Quote className="w-4 h-4" /> {theme === 'bot' ? "SOLUPERS_LOGS" : "Solupers' Notes"}
       </h3>
       {/* 3D Container */}
-      <div
+      <div 
         className="relative preserve-3d animate-spin-3d pause-on-hover cursor-pointer"
         style={{ width: `${cardWidth}px`, height: `${cardHeight}px` }}
       >
-        {activeNotes.map((note, index) => {
-          const soluper = SOLUPERS_DATA.find(m => m.name === note.name);
-          const displayRole = soluper ? soluper.role : note.role;
-          const angle = (360 / count) * index;
-          return (
-            <div
-              key={index}
-              className={`absolute inset-0 rounded-2xl p-4 border backdrop-blur-md backface-hidden flex flex-col justify-center transition-all duration-300
+         {activeNotes.map((note, index) => {
+            const soluper = SOLUPERS_DATA.find(m => m.name === note.name);
+            const displayRole = soluper ? soluper.role : note.role;
+            const angle = (360 / count) * index;
+            return (
+               <div 
+                 key={index}
+                 className={`absolute inset-0 rounded-2xl p-4 border backdrop-blur-md backface-hidden flex flex-col justify-center transition-all duration-300
                     ${theme === 'bot' ? 'bg-black/90 border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.2)]' : (theme === 'light' ? 'bg-white/95 border-slate-200 shadow-xl' : 'bg-slate-900/95 border-slate-700 shadow-2xl')}
                  `}
-              style={{
-                transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
-                width: `${cardWidth}px`,
-                height: `${cardHeight}px`
-              }}
-            >
-              <div className="flex items-center gap-3 mb-2 text-left">
-                <img src={note.image} alt={note.name} className={`w-9 h-9 rounded-full border border-2 object-cover ${theme === 'bot' ? 'border-green-500' : 'border-amber-500'}`} />
-                <div className="min-w-0">
-                  <h4 className={`text-xs font-bold truncate ${theme === 'bot' ? 'text-green-400' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>{note.name}</h4>
-                  <span className={`text-[9px] block truncate ${theme === 'bot' ? 'text-green-700' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400')}`}>{displayRole}</span>
-                </div>
-              </div>
-              <p className={`text-[11px] leading-relaxed italic text-left ${theme === 'bot' ? 'text-green-600 font-mono' : (theme === 'light' ? 'text-slate-600' : 'text-slate-300')}`}>
-                "{note.quote}"
-              </p>
-            </div>
-          );
-        })}
+                 style={{
+                    transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
+                    width: `${cardWidth}px`,
+                    height: `${cardHeight}px`
+                 }}
+               >
+                  <div className="flex items-center gap-3 mb-2 text-left">
+                     <img src={note.image} alt={note.name} className={`w-9 h-9 rounded-full border border-2 object-cover ${theme === 'bot' ? 'border-green-500' : 'border-amber-500'}`} />
+                     <div className="min-w-0">
+                        <h4 className={`text-xs font-bold truncate ${theme === 'bot' ? 'text-green-400' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>{note.name}</h4>
+                        <span className={`text-[9px] block truncate ${theme === 'bot' ? 'text-green-700' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400')}`}>{displayRole}</span>
+                     </div>
+                  </div>
+                  <p className={`text-[11px] leading-relaxed italic text-left ${theme === 'bot' ? 'text-green-600 font-mono' : (theme === 'light' ? 'text-slate-600' : 'text-slate-300')}`}>
+                    "{note.quote}"
+                  </p>
+               </div>
+            );
+         })}
       </div>
     </div>
   );
@@ -1711,20 +1657,11 @@ const MISSION_CARDS = [
 
 const MissionSection = ({ theme }) => {
   const sectionRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 1024);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (isMobile) return;
-
     let ctx = gsap.context(() => {
       const cards = gsap.utils.toArray('.mission-goal-card');
-
+      
       // Setup GSAP scroll-lock timeline with pinning
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -1742,15 +1679,15 @@ const MissionSection = ({ theme }) => {
         if (idx === 0) {
           gsap.set(card, { opacity: 1, y: 0, scale: 1, pointerEvents: "auto" });
         } else {
-          tl.fromTo(card,
+          tl.fromTo(card, 
             { opacity: 0, y: 100, scale: 0.95 },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              pointerEvents: "auto",
-              duration: 1
-            },
+            { 
+              opacity: 1, 
+              y: 0, 
+              scale: 1, 
+              pointerEvents: "auto", 
+              duration: 1 
+            }, 
             idx * 1.5 - 0.3
           );
         }
@@ -1768,77 +1705,25 @@ const MissionSection = ({ theme }) => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [theme, isMobile]);
+  }, [theme]);
 
-  const cardBgClass = theme === 'bot'
-    ? 'bg-black/90 border-green-950 text-green-500 rounded-none shadow-[0_0_25px_rgba(34,197,94,0.1)]'
-    : (theme === 'light' ? 'bg-white/95 border-amber-300 shadow-2xl shadow-amber-500/5 rounded-2xl lg:rounded-[32px]' : 'bg-slate-900/90 border-amber-500/25 shadow-2xl shadow-amber-500/5 rounded-2xl lg:rounded-[32px]');
-
-  if (isMobile) {
-    return (
-      <section className="py-12 sm:py-16 px-4 bg-transparent z-20 relative">
-        <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-10">
-          <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 ${theme === 'bot' ? 'bg-green-950/40 text-green-500 border border-green-800' : 'bg-amber-100 text-amber-600 border border-amber-200'
-            }`}>
-            <Atom className="w-3.5 h-3.5 animate-spin" /> Our Core Philosophy
-          </div>
-          <h2 className={`text-2xl sm:text-3xl font-black tracking-tight ${theme === 'bot' ? 'text-green-500 font-mono' : 'text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-yellow-400'
-            }`}>
-            Our Mission, Together
-          </h2>
-        </div>
-
-        <div className="max-w-3xl mx-auto flex flex-col gap-6">
-          {MISSION_CARDS.map((card, idx) => {
-            const Icon = card.icon;
-            return (
-              <div
-                key={idx}
-                className={`p-5 sm:p-7 border backdrop-blur-md transition-all duration-300 ${cardBgClass}`}
-              >
-                <div className="flex items-center gap-3 mb-3.5">
-                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center border ${theme === 'bot' ? 'border-green-800 bg-green-950/40 text-green-400' : 'border-amber-200 bg-amber-50 text-amber-600'
-                    }`}>
-                    <Icon className="w-4 h-4 animate-pulse" />
-                  </div>
-                  <span className={`text-xs font-mono font-bold tracking-wider ${theme === 'bot' ? 'text-green-600' : 'text-amber-500'
-                    }`}>
-                    GOAL 0{idx + 1}
-                  </span>
-                </div>
-
-                <div className="w-full h-44 sm:h-52 rounded-xl overflow-hidden mb-4 border border-slate-500/10">
-                  <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
-                </div>
-
-                <h3 className={`text-lg sm:text-xl font-extrabold tracking-tight mb-2 ${theme === 'bot' ? 'text-white font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')
-                  }`}>
-                  {card.title}
-                </h3>
-
-                <p className={`text-xs sm:text-sm leading-relaxed ${theme === 'bot' ? 'text-green-700 font-mono' : (theme === 'light' ? 'text-slate-600' : 'text-slate-400')
-                  }`}>
-                  {card.desc}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-    );
-  }
+  const cardBgClass = theme === 'bot' 
+    ? 'bg-black/90 border-green-950 text-green-500 rounded-none shadow-[0_0_25px_rgba(34,197,94,0.1)]' 
+    : (theme === 'light' ? 'bg-white/95 border-amber-300 shadow-2xl shadow-amber-500/5 rounded-[32px]' : 'bg-slate-900/90 border-amber-500/25 shadow-2xl shadow-amber-500/5 rounded-[32px]');
 
   return (
     <section ref={sectionRef} className="relative min-h-screen bg-transparent flex items-center justify-center overflow-hidden z-20">
-
+      
       {/* Persistent Sticky Section Title */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 text-center max-w-3xl px-6 pointer-events-none w-full z-30">
-        <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 ${theme === 'bot' ? 'bg-green-950/40 text-green-500 border border-green-800' : 'bg-amber-100 text-amber-600 border border-amber-200'
-          }`}>
+        <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 ${
+          theme === 'bot' ? 'bg-green-950/40 text-green-500 border border-green-800' : 'bg-amber-100 text-amber-600 border border-amber-200'
+        }`}>
           <Atom className="w-3.5 h-3.5 animate-spin" /> Our Core Philosophy
         </div>
-        <h2 className={`text-3xl lg:text-4xl font-black tracking-tight ${theme === 'bot' ? 'text-green-500 font-mono' : 'text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-yellow-400'
-          }`}>
+        <h2 className={`text-3xl lg:text-4xl font-black tracking-tight ${
+          theme === 'bot' ? 'text-green-500 font-mono' : 'text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-yellow-400'
+        }`}>
           Our Mission, Together
         </h2>
       </div>
@@ -1856,12 +1741,13 @@ const MissionSection = ({ theme }) => {
               style={{ willChange: "transform, opacity" }}
             >
               {/* Image Block: Left-Right Alternation */}
-              <div className={`w-full h-[24vh] lg:h-full rounded-2xl overflow-hidden border shadow-md relative order-1 ${isEven ? 'lg:order-1' : 'lg:order-2'} ${theme === 'bot' ? 'border-green-900' : 'border-slate-200/10'
-                }`}>
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              <div className={`w-full h-[24vh] lg:h-full rounded-2xl overflow-hidden border shadow-md relative order-1 ${isEven ? 'lg:order-1' : 'lg:order-2'} ${
+                theme === 'bot' ? 'border-green-900' : 'border-slate-200/10'
+              }`}>
+                <img 
+                  src={card.image} 
+                  alt={card.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
               </div>
@@ -1869,23 +1755,27 @@ const MissionSection = ({ theme }) => {
               {/* Text Block: Right-Left Alternation */}
               <div className={`space-y-4 lg:space-y-6 text-left flex flex-col justify-center order-2 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                 <div className="flex items-center gap-4">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${theme === 'bot' ? 'border-green-800 bg-green-950/40 text-green-400' : 'border-amber-200 bg-amber-50 text-amber-600'
-                    }`}>
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${
+                    theme === 'bot' ? 'border-green-800 bg-green-950/40 text-green-400' : 'border-amber-200 bg-amber-50 text-amber-600'
+                  }`}>
                     <Icon className="w-5 h-5 animate-pulse" />
                   </div>
-                  <span className={`text-xs font-mono font-bold tracking-wider ${theme === 'bot' ? 'text-green-600 font-mono' : 'text-amber-500'
-                    }`}>
+                  <span className={`text-xs font-mono font-bold tracking-wider ${
+                    theme === 'bot' ? 'text-green-600 font-mono' : 'text-amber-500'
+                  }`}>
                     GOAL 0{idx + 1}
                   </span>
                 </div>
-
-                <h3 className={`text-2xl lg:text-3xl font-extrabold tracking-tight ${theme === 'bot' ? 'text-white font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')
-                  }`}>
+                
+                <h3 className={`text-2xl lg:text-3xl font-extrabold tracking-tight ${
+                  theme === 'bot' ? 'text-white font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')
+                }`}>
                   {card.title}
                 </h3>
-
-                <p className={`text-sm lg:text-base leading-relaxed ${theme === 'bot' ? 'text-green-700 font-mono' : (theme === 'light' ? 'text-slate-600' : 'text-slate-400')
-                  }`}>
+                
+                <p className={`text-sm lg:text-base leading-relaxed ${
+                  theme === 'bot' ? 'text-green-700 font-mono' : (theme === 'light' ? 'text-slate-600' : 'text-slate-400')
+                }`}>
                   {card.desc}
                 </p>
               </div>
@@ -1899,121 +1789,121 @@ const MissionSection = ({ theme }) => {
 };
 
 const ContactSection = ({ theme }) => {
-  const inputClass = `w-full px-4 py-3 rounded-lg outline-none transition-all ${theme === 'bot' ? 'bg-black border border-green-800 text-green-500 placeholder-green-800 focus:border-green-500 font-mono' : (theme === 'light' ? 'bg-slate-50 border border-slate-200 text-slate-800 focus:border-indigo-500' : 'bg-slate-900 border border-slate-700 text-white focus:border-amber-500')}`;
-  return (
-    <div className={`py-20 px-6 ${theme === 'bot' ? 'bg-black border-t border-green-900' : (theme === 'light' ? 'bg-white border-t border-slate-200' : 'bg-slate-950 border-t border-slate-800')}`}>
-      <div className="max-w-4xl mx-auto">
-        <SectionTitle theme={theme} title="Initialize Contact" subtitle="Ready to start a project? Transmit your data." />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-6">
-            <input type="text" className={inputClass} placeholder="Name" />
-            <input type="email" className={inputClass} placeholder="Email" />
-            <textarea className={`${inputClass} h-32 resize-none`} placeholder="Message..."></textarea>
-            <Button theme={theme} variant="primary" className="w-full">{theme === 'bot' ? 'TRANSMIT_PACKET' : 'Send Message'}</Button>
-          </div>
-          <div className={`p-8 rounded-3xl border flex flex-col justify-center items-center text-center space-y-6 ${theme === 'bot' ? 'bg-black border-green-900' : (theme === 'light' ? 'bg-slate-50 border-slate-200' : 'bg-slate-900 border-slate-800')}`}>
-            <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-2 ${theme === 'bot' ? 'bg-green-900/20 text-green-500' : 'bg-amber-600/10 text-amber-600'}`}><Mail className="w-8 h-8" /></div>
-            <div><h3 className={`text-xl font-bold mb-1 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>Direct Channel</h3><p className={theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-500'}>hello@solutiondevelopers.com</p></div>
-            <div className="flex gap-4"><Github className="w-6 h-6" /><Twitter className="w-6 h-6" /><Linkedin className="w-6 h-6" /></div>
-          </div>
+    const inputClass = `w-full px-4 py-3 rounded-lg outline-none transition-all ${theme === 'bot' ? 'bg-black border border-green-800 text-green-500 placeholder-green-800 focus:border-green-500 font-mono' : (theme === 'light' ? 'bg-slate-50 border border-slate-200 text-slate-800 focus:border-indigo-500' : 'bg-slate-900 border border-slate-700 text-white focus:border-amber-500')}`;
+    return (
+        <div className={`py-20 px-6 ${theme === 'bot' ? 'bg-black border-t border-green-900' : (theme === 'light' ? 'bg-white border-t border-slate-200' : 'bg-slate-950 border-t border-slate-800')}`}>
+            <div className="max-w-4xl mx-auto">
+                <SectionTitle theme={theme} title="Initialize Contact" subtitle="Ready to start a project? Transmit your data." />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div className="space-y-6">
+                        <input type="text" className={inputClass} placeholder="Name" />
+                        <input type="email" className={inputClass} placeholder="Email" />
+                        <textarea className={`${inputClass} h-32 resize-none`} placeholder="Message..."></textarea>
+                        <Button theme={theme} variant="primary" className="w-full">{theme === 'bot' ? 'TRANSMIT_PACKET' : 'Send Message'}</Button>
+                    </div>
+                    <div className={`p-8 rounded-3xl border flex flex-col justify-center items-center text-center space-y-6 ${theme === 'bot' ? 'bg-black border-green-900' : (theme === 'light' ? 'bg-slate-50 border-slate-200' : 'bg-slate-900 border-slate-800')}`}>
+                        <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-2 ${theme === 'bot' ? 'bg-green-900/20 text-green-500' : 'bg-amber-600/10 text-amber-600'}`}><Mail className="w-8 h-8" /></div>
+                        <div><h3 className={`text-xl font-bold mb-1 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>Direct Channel</h3><p className={theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-500'}>hello@solutiondevelopers.com</p></div>
+                        <div className="flex gap-4"><Github className="w-6 h-6" /><Twitter className="w-6 h-6" /><Linkedin className="w-6 h-6" /></div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 const LeadershipTimeline = ({ theme }) => {
-  return (
-    <div className={`mb-16 sm:mb-24 p-4 sm:p-8 rounded-2xl sm:rounded-3xl border relative overflow-hidden ${theme === 'bot' ? 'bg-black/50 border-green-900 rounded-none' : (theme === 'light' ? 'bg-white/50 border-slate-200' : 'bg-slate-900/50 border-slate-800')}`}>
-      <h3 className={`text-xl sm:text-2xl font-bold mb-8 sm:mb-12 flex items-center gap-2 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}><Activity className="w-5 h-5 sm:w-6 sm:h-6" /> Presidential Map</h3>
-      <div className="relative">
-        <div className={`absolute left-3 sm:left-4 top-0 bottom-0 w-0.5 ${theme === 'bot' ? 'bg-green-900' : 'bg-slate-700'}`}></div>
-        <div className="space-y-8 sm:space-y-12">
-          {LEADERSHIP_TIMELINE.map((item, idx) => (
-            <div key={idx} className="relative pl-8 sm:pl-12">
-              <div className={`absolute left-[7px] sm:left-[11px] top-1.5 w-3 h-3 rounded-full border-2 ${theme === 'bot' ? 'bg-black border-green-500 shadow-[0_0_10px_#22c55e]' : 'bg-slate-900 border-amber-500'}`}></div>
-              <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 mb-2">
-                <span className={`text-xs sm:text-sm font-bold px-2 py-0.5 rounded w-fit ${theme === 'bot' ? 'bg-green-900/30 text-green-400 font-mono' : 'bg-amber-600/10 text-amber-500'}`}>{item.year}</span>
-                <h4 className={`text-base sm:text-lg font-bold ${theme === 'bot' ? 'text-white' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>{item.leader}</h4>
-                <span className={`text-xs sm:text-sm ${theme === 'bot' ? 'text-green-700' : 'text-slate-500'}`}>// {item.role}</span>
-              </div>
-              <p className={`${theme === 'bot' ? 'text-green-800 font-mono text-xs sm:text-sm' : 'text-slate-400 text-xs sm:text-sm'}`}>{item.desc}</p>
+    return (
+        <div className={`mb-24 p-8 rounded-3xl border relative overflow-hidden ${theme === 'bot' ? 'bg-black/50 border-green-900 rounded-none' : (theme === 'light' ? 'bg-white/50 border-slate-200' : 'bg-slate-900/50 border-slate-800')}`}>
+            <h3 className={`text-2xl font-bold mb-12 flex items-center gap-2 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}><Activity className="w-6 h-6" /> Presidential Map</h3>
+            <div className="relative">
+                <div className={`absolute left-4 top-0 bottom-0 w-0.5 ${theme === 'bot' ? 'bg-green-900' : 'bg-slate-700'}`}></div>
+                <div className="space-y-12">
+                    {LEADERSHIP_TIMELINE.map((item, idx) => (
+                        <div key={idx} className="relative pl-12">
+                            <div className={`absolute left-[11px] top-1.5 w-3 h-3 rounded-full border-2 ${theme === 'bot' ? 'bg-black border-green-500 shadow-[0_0_10px_#22c55e]' : 'bg-slate-900 border-amber-500'}`}></div>
+                            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
+                                <span className={`text-sm font-bold px-2 py-0.5 rounded ${theme === 'bot' ? 'bg-green-900/30 text-green-400 font-mono' : 'bg-amber-600/10 text-amber-500'}`}>{item.year}</span>
+                                <h4 className={`text-lg font-bold ${theme === 'bot' ? 'text-white' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>{item.leader}</h4>
+                                <span className={`text-sm ${theme === 'bot' ? 'text-green-700' : 'text-slate-500'}`}>// {item.role}</span>
+                            </div>
+                            <p className={`${theme === 'bot' ? 'text-green-800 font-mono text-sm' : 'text-slate-400'}`}>{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
-          ))}
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 const FoundersSection = ({ theme }) => {
-  // Explicitly define the order
-  const orderedNames = [
-    "Hariom Sandve",
-    "Tasnim Chaugule",
-    "Sammed Chaugule",
-    "Vaibhav Gangurde",
-    "Prem Gosawi",
-    "Ragini Waghmare",
-    "Avinash Ailwad"
-  ];
+    // Explicitly define the order
+    const orderedNames = [
+        "Hariom Sandve",
+        "Tasnim Chaugule",
+        "Sammed Chaugule",
+        "Vaibhav Gangurde",
+        "Prem Gosawi",
+        "Ragini Waghmare",
+        "Avinash Ailwad"
+    ];
 
-  // Filter SOLUPERS_DATA to get only active founders
-  const founders = SOLUPERS_DATA.filter(m => orderedNames.includes(m.name) && m.status === 'Active');
+    // Filter SOLUPERS_DATA to get only active founders
+    const founders = SOLUPERS_DATA.filter(m => orderedNames.includes(m.name) && m.status === 'Active');
 
-  // Sort them exactly according to the orderedNames array
-  founders.sort((a, b) => {
-    return orderedNames.indexOf(a.name) - orderedNames.indexOf(b.name);
-  });
+    // Sort them exactly according to the orderedNames array
+    founders.sort((a, b) => {
+        return orderedNames.indexOf(a.name) - orderedNames.indexOf(b.name);
+    });
 
-  // Unified Styles for all Originators
-  const cardClass = theme === 'bot' ? 'bg-black/90 border-green-500 rounded-none' : (theme === 'light' ? 'bg-white/90 border-amber-200 shadow-xl' : 'bg-slate-900/90 border-amber-500/50');
-  const textClass = theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white');
-  const subTextClass = theme === 'bot' ? 'text-green-700' : 'text-amber-500';
+    // Unified Styles for all Originators
+    const cardClass = theme === 'bot' ? 'bg-black/90 border-green-500 rounded-none' : (theme === 'light' ? 'bg-white/90 border-amber-200 shadow-xl' : 'bg-slate-900/90 border-amber-500/50');
+    const textClass = theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white');
+    const subTextClass = theme === 'bot' ? 'text-green-700' : 'text-amber-500';
 
-  return (
-    <div className="mb-16 sm:mb-24">
-      {/* --- THE ORIGINATORS --- */}
-      <div className="flex items-end justify-between mb-6 sm:mb-8">
-        <h3 className={`text-xl sm:text-2xl font-bold flex items-center gap-2 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>
-          <Crown className={`w-5 h-5 sm:w-6 sm:h-6 ${theme === 'bot' ? 'text-green-500' : 'text-amber-500'}`} />
-          The Originators
-        </h3>
-      </div>
-
-      {/* Single Grid for all Founders/Co-Founders */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16">
-        {founders.map(founder => (
-          <div key={founder.id} className={`p-5 sm:p-8 border-2 rounded-2xl sm:rounded-3xl flex flex-col items-center text-center gap-4 sm:gap-6 relative overflow-hidden group transition-all hover:scale-[1.02] ${cardClass}`}>
-            {theme !== 'bot' && <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"></div>}
-            <div className={`w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 rounded-full border-4 overflow-hidden shadow-lg ${theme === 'bot' ? 'border-green-500' : 'border-amber-400'}`}>
-              <img src={founder.image} alt={founder.name} className="w-full h-full object-cover bg-slate-800" />
-            </div>
-            <div className="relative z-10">
-              <h4 className={`text-xl sm:text-2xl font-bold mb-1.5 sm:mb-2 ${textClass}`}>{founder.name}</h4>
-              <p className={`font-bold tracking-wide uppercase text-xs sm:text-sm mb-3 sm:mb-4 ${subTextClass}`}>{founder.role}</p>
-              <p className={`text-xs sm:text-sm leading-relaxed ${theme === 'bot' ? 'text-green-800' : 'text-slate-500'}`}>{founder.bio}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    return (
+        <div className="mb-24">
+             {/* --- THE ORIGINATORS --- */}
+             <div className="flex items-end justify-between mb-8">
+                 <h3 className={`text-2xl font-bold flex items-center gap-2 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>
+                    <Crown className={`w-6 h-6 ${theme === 'bot' ? 'text-green-500' : 'text-amber-500'}`} /> 
+                    The Originators
+                 </h3>
+             </div>
+             
+             {/* Single Grid for all Founders/Co-Founders */}
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
+                 {founders.map(founder => (
+                     <div key={founder.id} className={`p-8 border-2 flex flex-col items-center text-center gap-6 relative overflow-hidden group transition-all hover:scale-[1.02] ${cardClass}`}>
+                         {theme !== 'bot' && <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"></div>}
+                         <div className={`w-32 h-32 flex-shrink-0 rounded-full border-4 overflow-hidden shadow-lg ${theme === 'bot' ? 'border-green-500' : 'border-amber-400'}`}>
+                             <img src={founder.image} alt={founder.name} className="w-full h-full object-cover bg-slate-800" />
+                         </div>
+                         <div className="relative z-10">
+                             <h4 className={`text-2xl font-bold mb-2 ${textClass}`}>{founder.name}</h4>
+                             <p className={`font-bold tracking-wide uppercase text-sm mb-4 ${subTextClass}`}>{founder.role}</p>
+                             <p className={`text-sm leading-relaxed ${theme === 'bot' ? 'text-green-800' : 'text-slate-500'}`}>{founder.bio}</p>
+                         </div>
+                     </div>
+                 ))}
+             </div>
+        </div>
+    );
 };
 
 const SpotlightCard = ({ soluper, theme, onClick }) => (
   <div onClick={() => onClick(soluper)} className={`relative h-[26rem] overflow-hidden group cursor-pointer border ${theme === 'bot' ? 'rounded-none border-green-800 hover:border-green-500' : 'rounded-3xl border-transparent hover:border-white/20'}`}>
     {theme === 'bot' ? <div className="absolute inset-0 bg-black/80"><div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(34,197,94,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(34,197,94,0.1)_1px,transparent_1px)] bg-[size:20px_20px] opacity-20"></div></div> : <div className={`absolute inset-0 bg-gradient-to-br ${soluper.gradient} opacity-90 transition-opacity duration-300 ${soluper.status === 'Past' || soluper.status === 'Alumni' ? 'grayscale opacity-70' : ''}`}></div>}
-
+    
     <img src={soluper.image} alt={soluper.name} className={`absolute right-[-20px] bottom-[-20px] w-64 h-64 object-cover transform group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-500 opacity-80 mix-blend-overlay ${soluper.status === 'Past' || soluper.status === 'Alumni' ? 'grayscale' : ''}`} />
-
+    
     <div className="absolute inset-0 p-8 flex flex-col justify-between z-10">
       <div className="flex justify-between items-start">
         <div className="flex gap-2">
-          <span className={`px-3 py-1 backdrop-blur-md text-xs font-bold uppercase tracking-wider ${theme === 'bot' ? 'bg-green-900/50 text-green-400 border border-green-600 rounded-none' : 'bg-white/20 rounded-full text-white'}`}>Lead</span>
-          {(soluper.status === 'Past' || soluper.status === 'Alumni') && (
-            <span className={`px-3 py-1 backdrop-blur-md text-xs font-bold uppercase tracking-wider ${theme === 'bot' ? 'bg-gray-900/50 text-gray-400 border border-gray-600 rounded-none' : 'bg-black/40 rounded-full text-white/80'}`}>Past Soluper</span>
-          )}
+            <span className={`px-3 py-1 backdrop-blur-md text-xs font-bold uppercase tracking-wider ${theme === 'bot' ? 'bg-green-900/50 text-green-400 border border-green-600 rounded-none' : 'bg-white/20 rounded-full text-white'}`}>Lead</span>
+            {(soluper.status === 'Past' || soluper.status === 'Alumni') && (
+                <span className={`px-3 py-1 backdrop-blur-md text-xs font-bold uppercase tracking-wider ${theme === 'bot' ? 'bg-gray-900/50 text-gray-400 border border-gray-600 rounded-none' : 'bg-black/40 rounded-full text-white/80'}`}>Past Soluper</span>
+            )}
         </div>
         <div className={`p-2 transition-colors ${theme === 'bot' ? 'bg-green-900/30 text-green-400' : 'bg-white/10 rounded-full hover:bg-white/20'}`}><Star className={`w-5 h-5 ${theme === 'bot' ? 'text-green-500' : 'text-yellow-300 fill-yellow-300'}`} /></div>
       </div>
@@ -2033,11 +1923,11 @@ const DirectoryCard = ({ soluper, theme, onClick }) => {
   const getDesign = () => {
     const role = soluper.role.toLowerCase();
     const isPast = soluper.status === 'Past';
-
+    
     if (isPast) {
       return {
-        bg: theme === 'bot'
-          ? 'bg-black border-zinc-800 text-zinc-500 font-mono'
+        bg: theme === 'bot' 
+          ? 'bg-black border-zinc-800 text-zinc-500 font-mono' 
           : 'bg-gradient-to-b from-zinc-900 via-neutral-900 to-black text-slate-350 shadow-[0_15px_30px_rgba(0,0,0,0.5)]',
         border: 'border-zinc-800/80',
         glow: 'shadow-[inset_0_0_20px_rgba(255,255,255,0.02)]',
@@ -2050,8 +1940,8 @@ const DirectoryCard = ({ soluper, theme, onClick }) => {
 
     if (role.includes('founder') || role.includes('chief executive')) {
       return {
-        bg: theme === 'bot'
-          ? 'bg-black border-red-600 text-red-500 font-mono shadow-[0_0_20px_rgba(220,38,38,0.25)]'
+        bg: theme === 'bot' 
+          ? 'bg-black border-red-600 text-red-500 font-mono shadow-[0_0_20px_rgba(220,38,38,0.25)]' 
           : 'bg-gradient-to-b from-red-950 via-red-900 to-rose-950 text-white shadow-[0_15px_35px_rgba(220,38,38,0.18)]',
         border: 'border-amber-500/50',
         glow: 'shadow-[inset_0_0_30px_rgba(245,158,11,0.18)]',
@@ -2061,11 +1951,11 @@ const DirectoryCard = ({ soluper, theme, onClick }) => {
         innerBorder: 'border-amber-500/20'
       };
     }
-
+    
     if (role.includes('architect')) {
       return {
-        bg: theme === 'bot'
-          ? 'bg-black border-orange-500 text-orange-500 font-mono shadow-[0_0_20px_rgba(249,115,22,0.25)]'
+        bg: theme === 'bot' 
+          ? 'bg-black border-orange-500 text-orange-500 font-mono shadow-[0_0_20px_rgba(249,115,22,0.25)]' 
           : 'bg-gradient-to-b from-orange-950 via-amber-950 to-stone-900 text-white shadow-[0_15px_35px_rgba(249,115,22,0.15)]',
         border: 'border-yellow-500/50',
         glow: 'shadow-[inset_0_0_30px_rgba(234,179,8,0.18)]',
@@ -2078,8 +1968,8 @@ const DirectoryCard = ({ soluper, theme, onClick }) => {
 
     if (role.includes('president')) {
       return {
-        bg: theme === 'bot'
-          ? 'bg-black border-red-500 text-red-500 font-mono shadow-[0_0_25px_rgba(239,68,68,0.25)]'
+        bg: theme === 'bot' 
+          ? 'bg-black border-red-500 text-red-500 font-mono shadow-[0_0_25px_rgba(239,68,68,0.25)]' 
           : 'bg-gradient-to-b from-red-950 via-red-900 to-rose-950 text-white shadow-[0_15px_35px_rgba(220,38,38,0.18)]',
         border: 'border-amber-500/50',
         glow: 'shadow-[inset_0_0_30px_rgba(245,158,11,0.18)]',
@@ -2092,8 +1982,8 @@ const DirectoryCard = ({ soluper, theme, onClick }) => {
 
     if (role.includes('technical lead')) {
       return {
-        bg: theme === 'bot'
-          ? 'bg-black border-cyan-500 text-cyan-400 font-mono shadow-[0_0_20px_rgba(6,182,212,0.25)]'
+        bg: theme === 'bot' 
+          ? 'bg-black border-cyan-500 text-cyan-400 font-mono shadow-[0_0_20px_rgba(6,182,212,0.25)]' 
           : 'bg-gradient-to-b from-blue-950 via-slate-900 to-indigo-950 text-white shadow-[0_15px_35px_rgba(59,130,246,0.15)]',
         border: 'border-slate-400/50',
         glow: 'shadow-[inset_0_0_30px_rgba(148,163,184,0.18)]',
@@ -2106,8 +1996,8 @@ const DirectoryCard = ({ soluper, theme, onClick }) => {
 
     if (role.includes('operational')) {
       return {
-        bg: theme === 'bot'
-          ? 'bg-black border-purple-500 text-purple-400 font-mono shadow-[0_0_20px_rgba(168,85,247,0.25)]'
+        bg: theme === 'bot' 
+          ? 'bg-black border-purple-500 text-purple-400 font-mono shadow-[0_0_20px_rgba(168,85,247,0.25)]' 
           : 'bg-gradient-to-b from-purple-950 via-fuchsia-950 to-indigo-950 text-white shadow-[0_15px_35px_rgba(168,85,247,0.15)]',
         border: 'border-pink-500/40',
         glow: 'shadow-[inset_0_0_30px_rgba(236,72,153,0.18)]',
@@ -2120,8 +2010,8 @@ const DirectoryCard = ({ soluper, theme, onClick }) => {
 
     if (role.includes('event')) {
       return {
-        bg: theme === 'bot'
-          ? 'bg-black border-yellow-500 text-yellow-500 font-mono shadow-[0_0_20px_rgba(234,179,8,0.25)]'
+        bg: theme === 'bot' 
+          ? 'bg-black border-yellow-500 text-yellow-500 font-mono shadow-[0_0_20px_rgba(234,179,8,0.25)]' 
           : 'bg-gradient-to-b from-amber-950 via-yellow-950 to-stone-900 text-white shadow-[0_15px_35px_rgba(234,179,8,0.15)]',
         border: 'border-yellow-600/50',
         glow: 'shadow-[inset_0_0_30px_rgba(202,138,4,0.18)]',
@@ -2134,8 +2024,8 @@ const DirectoryCard = ({ soluper, theme, onClick }) => {
 
     if (role.includes('documentation') || role.includes('marketing')) {
       return {
-        bg: theme === 'bot'
-          ? 'bg-black border-green-500 text-green-400 font-mono shadow-[0_0_20px_rgba(34,197,94,0.25)]'
+        bg: theme === 'bot' 
+          ? 'bg-black border-green-500 text-green-400 font-mono shadow-[0_0_20px_rgba(34,197,94,0.25)]' 
           : 'bg-gradient-to-b from-emerald-950 via-green-950 to-stone-900 text-white shadow-[0_15px_35px_rgba(16,185,129,0.15)]',
         border: 'border-emerald-500/40',
         glow: 'shadow-[inset_0_0_30px_rgba(16,185,129,0.18)]',
@@ -2148,8 +2038,8 @@ const DirectoryCard = ({ soluper, theme, onClick }) => {
 
     if (role.includes('media') || role.includes('project & research')) {
       return {
-        bg: theme === 'bot'
-          ? 'bg-black border-purple-500 text-purple-400 font-mono shadow-[0_0_20px_rgba(168,85,247,0.25)]'
+        bg: theme === 'bot' 
+          ? 'bg-black border-purple-500 text-purple-400 font-mono shadow-[0_0_20px_rgba(168,85,247,0.25)]' 
           : 'bg-gradient-to-b from-purple-950 via-fuchsia-950 to-indigo-950 text-white shadow-[0_15px_35px_rgba(168,85,247,0.15)]',
         border: 'border-pink-500/40',
         glow: 'shadow-[inset_0_0_30px_rgba(236,72,153,0.18)]',
@@ -2161,8 +2051,8 @@ const DirectoryCard = ({ soluper, theme, onClick }) => {
     }
 
     return {
-      bg: theme === 'bot'
-        ? 'bg-black border-green-900 text-green-700 font-mono'
+      bg: theme === 'bot' 
+        ? 'bg-black border-green-900 text-green-700 font-mono' 
         : 'bg-gradient-to-b from-zinc-900 via-stone-900 to-neutral-950 text-white shadow-[0_15px_30px_rgba(0,0,0,0.5)]',
       border: 'border-zinc-700/60',
       glow: 'shadow-[inset_0_0_25px_rgba(255,255,255,0.03)]',
@@ -2176,104 +2066,82 @@ const DirectoryCard = ({ soluper, theme, onClick }) => {
   const design = getDesign();
 
   return (
-    <div
-      onClick={() => onClick(soluper)}
-      className={`relative p-6 pt-7 pb-6 cursor-pointer flex flex-col items-center justify-between overflow-hidden group transition-all duration-500 hover:scale-[1.03] hover:-translate-y-1.5 active:scale-95 ${design.bg} ${design.border} ${design.glow} ${theme === 'bot' ? 'rounded-none border-[1.5px]' : 'rounded-3xl border-[1.5px] hover:shadow-[0_20px_45px_rgba(0,0,0,0.5)]'
-        }`}
-      style={{ minHeight: '390px' }}
+    <div 
+      onClick={() => onClick(soluper)} 
+      className={`relative p-5 pt-6 pb-5 cursor-pointer flex flex-col items-center justify-between overflow-hidden group transition-all duration-500 hover:scale-[1.03] hover:-translate-y-1.5 active:scale-95 ${design.bg} ${design.border} ${design.glow} ${
+        theme === 'bot' ? 'rounded-none border-[1.5px]' : 'rounded-3xl border-[1.5px] hover:shadow-[0_20px_45px_rgba(0,0,0,0.5)]'
+      }`}
+      style={{ height: '350px' }}
     >
       {/* Decorative Frame Layout (Apple / Luxury Style) */}
       {theme !== 'bot' && (
         <>
           {/* Golden/Silver Ornamental Corners */}
-          <div className={`absolute top-3.5 left-3.5 w-4 h-4 border-t-[1.5px] border-l-[1.5px] ${design.accentColor} pointer-events-none z-10 transition-transform duration-500 group-hover:-translate-x-0.5 group-hover:-translate-y-0.5`} />
-          <div className={`absolute top-3.5 right-3.5 w-4 h-4 border-t-[1.5px] border-r-[1.5px] ${design.accentColor} pointer-events-none z-10 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5`} />
-          <div className={`absolute bottom-3.5 left-3.5 w-4 h-4 border-b-[1.5px] border-l-[1.5px] ${design.accentColor} pointer-events-none z-10 transition-transform duration-500 group-hover:-translate-x-0.5 group-hover:translate-y-0.5`} />
-          <div className={`absolute bottom-3.5 right-3.5 w-4 h-4 border-b-[1.5px] border-r-[1.5px] ${design.accentColor} pointer-events-none z-10 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:translate-y-0.5`} />
+          <div className={`absolute top-3 left-3 w-3.5 h-3.5 border-t-[1.5px] border-l-[1.5px] ${design.accentColor} pointer-events-none z-10 transition-transform duration-500 group-hover:-translate-x-0.5 group-hover:-translate-y-0.5`} />
+          <div className={`absolute top-3 right-3 w-3.5 h-3.5 border-t-[1.5px] border-r-[1.5px] ${design.accentColor} pointer-events-none z-10 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5`} />
+          <div className={`absolute bottom-3 left-3 w-3.5 h-3.5 border-b-[1.5px] border-l-[1.5px] ${design.accentColor} pointer-events-none z-10 transition-transform duration-500 group-hover:-translate-x-0.5 group-hover:translate-y-0.5`} />
+          <div className={`absolute bottom-3 right-3 w-3.5 h-3.5 border-b-[1.5px] border-r-[1.5px] ${design.accentColor} pointer-events-none z-10 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:translate-y-0.5`} />
 
           {/* Double border inner box */}
-          <div className={`absolute inset-3.5 border-[1.5px] ${design.innerBorder} rounded-[22px] pointer-events-none transition-all duration-500 group-hover:scale-[0.98]`} />
-
+          <div className={`absolute inset-3 border-[1.5px] ${design.innerBorder} rounded-[20px] pointer-events-none transition-all duration-500 group-hover:scale-[0.98]`} />
+          
           {/* Radial Light glow / Radial background pattern */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06)_0%,transparent_70%)] pointer-events-none opacity-40" />
-
+          
           {/* High-end Metallic sheen hover effect */}
           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_ease-out] pointer-events-none" />
         </>
       )}
 
       {/* Profile cut-out with circular background glow */}
-      <div className="relative flex justify-center mt-1">
+      <div className="relative flex justify-center mt-2">
         {/* Glow behind portrait */}
-        <div className="absolute w-44 h-44 rounded-full blur-xl opacity-40 bg-white/20 transition-all duration-500 group-hover:scale-110 pointer-events-none" />
-
+        <div className="absolute w-44 h-44 rounded-full blur-xl opacity-35 bg-white/20 transition-all duration-500 group-hover:scale-110 pointer-events-none" />
+        
         <div className="relative w-44 h-44 transition-transform duration-500 group-hover:scale-105">
-          {/* Profile Image with Gold/Silver border frame */}
-          <div className={`w-full h-full overflow-hidden relative flex-shrink-0 flex items-center justify-center transition-all duration-500 ${theme === 'bot'
-              ? 'rounded-none border-2 border-green-500 grayscale group-hover:grayscale-0'
-              : `rounded-full p-[5px] bg-gradient-to-b from-white/15 via-transparent to-black/40 border-[2px] ${design.accentColor} shadow-[0_8px_25px_rgba(0,0,0,0.5),0_0_25px_rgba(255,255,255,0.03)] group-hover:shadow-[0_10px_35px_rgba(255,255,255,0.12)]`
-            }`}>
+          {/* Profile Image with Gold/Silver border frame (Bevel, Inner Glow, Secondary ring) */}
+          <div className={`w-full h-full overflow-hidden relative flex-shrink-0 flex items-center justify-center transition-all duration-500 ${
+            theme === 'bot' 
+              ? 'rounded-none border border-green-500 grayscale group-hover:grayscale-0' 
+              : `rounded-full p-[4px] bg-gradient-to-b from-white/10 via-transparent to-black/35 border-[1.5px] ${design.accentColor} shadow-[0_6px_20px_rgba(0,0,0,0.45),0_0_20px_rgba(255,255,255,0.02)] group-hover:shadow-[0_8px_30px_rgba(255,255,255,0.08)]`
+          }`}>
             {/* Inner secondary border frame */}
-            <div className="w-full h-full rounded-full overflow-hidden border-[2px] border-black/40 flex items-center justify-center bg-slate-800">
-              <img
-                src={soluper.image}
-                alt={soluper.name}
-                className="w-full h-full object-cover transition-transform duration-750 group-hover:scale-[1.08]"
+            <div className={`w-full h-full rounded-full overflow-hidden border-[2px] border-black/40 flex items-center justify-center bg-slate-800`}>
+              <img 
+                src={soluper.image} 
+                alt={soluper.name} 
+                className="w-full h-full object-cover transition-transform duration-750 group-hover:scale-[1.08]" 
               />
             </div>
           </div>
 
-          {/* Active Status Dot */}
+          {/* Small Active Status Dot (Aligned to larger frame) */}
           {soluper.status === 'Active' && (
-            <div className={`absolute bottom-2 right-2 w-5 h-5 rounded-full border-2 z-10 transition-transform duration-500 group-hover:scale-110 ${theme === 'bot' ? 'border-black bg-green-500 rounded-none' : 'border-slate-900 bg-green-400'
-              }`} />
+            <div className={`absolute bottom-2 right-2 w-5 h-5 rounded-full border-2 z-10 transition-transform duration-500 group-hover:scale-105 ${
+              theme === 'bot' ? 'border-black bg-green-500 rounded-none' : 'border-slate-955 bg-green-400'
+            }`} />
           )}
         </div>
       </div>
 
       {/* Information Section / Glassmorphism Panel */}
-      <div className="relative z-10 w-full text-center mt-3 pb-1 flex flex-col items-center flex-1 justify-end">
-        {/* Social Icons (LinkedIn & GitHub circular buttons) */}
-        <div className="flex items-center justify-center gap-3 my-3 relative z-20">
-          <a
-            href={soluper.social?.linkedin || '#'}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 hover:scale-110 active:scale-95 ${theme === 'bot'
-                ? 'bg-black border-green-700 text-green-400 hover:bg-green-950 hover:border-green-400'
-                : 'bg-white/10 border-white/25 text-white/90 hover:bg-white/20 hover:text-white hover:border-amber-400 hover:shadow-[0_0_14px_rgba(245,158,11,0.4)]'
-              }`}
-            aria-label={`${soluper.name}'s LinkedIn`}
-            title="LinkedIn Profile"
-          >
-            <Linkedin className="w-5 h-5" />
-          </a>
-          <a
-            href={soluper.social?.github || '#'}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 hover:scale-110 active:scale-95 ${theme === 'bot'
-                ? 'bg-black border-green-700 text-green-400 hover:bg-green-950 hover:border-green-400'
-                : 'bg-white/10 border-white/25 text-white/90 hover:bg-white/20 hover:text-white hover:border-amber-400 hover:shadow-[0_0_14px_rgba(245,158,11,0.4)]'
-              }`}
-            aria-label={`${soluper.name}'s GitHub`}
-            title="GitHub Profile"
-          >
-            <Github className="w-5 h-5" />
-          </a>
+      <div className="relative z-10 w-full text-center mt-2 pb-0.5 flex flex-col items-center flex-1 justify-end">
+        {/* Role Badge */}
+        <div className={`inline-flex items-center gap-1 px-3 py-0.5 mb-2 rounded-full border text-[9.5px] font-bold uppercase tracking-wider ${design.badgeColor}`}>
+          {design.badge}
         </div>
 
         {/* Member Name */}
-        <h4 className={`text-xl sm:text-[21px] font-black tracking-tight transition-colors ${theme === 'bot' ? 'text-green-400 font-mono group-hover:text-green-300' : 'text-white'
-          }`}>
+        <h4 className={`text-[17px] font-extrabold tracking-tight transition-colors ${
+          theme === 'bot' ? 'text-green-400 font-mono group-hover:text-green-300' : 'text-white'
+        }`}>
           {soluper.name}
         </h4>
 
         {/* Designation Title */}
-        <p className={`text-xs sm:text-[12.5px] font-extrabold tracking-widest uppercase mt-1.5 ${theme === 'bot' ? 'text-green-600 font-mono' : 'text-amber-400/90'
-          }`}>
+        <p className={`text-[10.5px] font-semibold tracking-wider uppercase mt-1 ${
+          theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-300/80'
+        }`}>
           {soluper.role}
         </p>
       </div>
@@ -2285,8 +2153,6 @@ const DirectoryCard = ({ soluper, theme, onClick }) => {
 
 const Navbar = ({ theme, toggleTheme, activePage, onNavigate }) => {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
@@ -2315,50 +2181,37 @@ const Navbar = ({ theme, toggleTheme, activePage, onNavigate }) => {
     return 'DARK';
   };
 
-  const getNavButtonStyle = (linkId, isMobile = false) => {
+  const getNavButtonStyle = (linkId) => {
     const isActive = activePage === linkId;
-    let style = isMobile
-      ? "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 w-full text-left "
-      : "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[13px] font-medium transition-all duration-300 relative group overflow-hidden ";
-
+    let style = "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[13px] font-medium transition-all duration-300 relative group overflow-hidden ";
     if (theme === 'bot') {
-      style += "rounded-none border-l-2 " + (isActive ? "border-green-500 bg-green-900/40 text-green-400 font-mono" : "border-transparent text-green-700 hover:text-green-400 hover:bg-green-900/10 font-mono");
+        style += "rounded-none border-l-2 border-r-2 " + (isActive ? "border-green-500 bg-green-900/30 text-green-400 shadow-[0_0_10px_rgba(34,197,94,0.3)]" : "border-transparent text-green-700 hover:text-green-400 hover:bg-green-900/10");
     } else {
-      if (isActive) {
-        if (theme === 'light') style += "bg-amber-600 text-white shadow-md shadow-amber-500/20";
-        else style += "bg-amber-600 text-white shadow-lg shadow-amber-500/25";
-      } else {
-        if (theme === 'light') style += "text-slate-700 hover:bg-slate-100/80 hover:text-slate-900";
-        else style += "text-slate-300 hover:text-white hover:bg-white/10";
-      }
+        if (isActive) {
+            // Updated to be a distinct pill shape for light/dark modes
+            if (theme === 'light') style += "bg-white text-indigo-600 shadow-md transform scale-105"; 
+            else style += "bg-amber-600 text-white shadow-lg shadow-amber-500/25 transform scale-105";
+        } else {
+            if (theme === 'light') style += "text-slate-600 hover:bg-white/50 hover:text-slate-900";
+            else style += "text-slate-400 hover:text-white hover:bg-white/10";
+        }
     }
     return style;
   };
 
-  const handleMobileNav = (id) => {
-    onNavigate(id);
-    setMobileMenuOpen(false);
-  };
-
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? (theme === 'bot' ? "bg-black/95 border-b border-green-900 py-3" : (theme === 'light' ? "bg-white/80 backdrop-blur-xl border-b border-slate-200 py-3 shadow-sm" : "bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 py-3 shadow-lg")) : "bg-transparent py-4 sm:py-5"}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? (theme === 'bot' ? "bg-black/90 border-b border-green-900 py-3" : (theme === 'light' ? "bg-white/30 backdrop-blur-xl border-b border-slate-200 py-3" : "bg-slate-950/30 backdrop-blur-xl border-b border-slate-800 py-3")) : "bg-transparent py-5"}`}>
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between">
-          <div className={`flex items-center gap-2 font-bold text-base sm:text-xl tracking-tighter cursor-pointer select-none ${theme === 'bot' ? 'text-green-500 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`} onClick={() => handleMobileNav('home')}>
-            <img
-              src="/images/soluperslogo.png"
-              alt="Solution Developers"
-              className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
-              onError={(e) => {
-                if (e.currentTarget.src.includes('/images/soluperslogo.png')) {
-                  e.currentTarget.src = '/soluperslogo.png';
-                }
-              }}
+          <div className={`flex items-center gap-2 font-bold text-xl tracking-tighter cursor-pointer ${theme === 'bot' ? 'text-green-500 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`} onClick={() => onNavigate('home')}>
+            {/* Replaced SVG with Image - Change 'image_cd1378.png' to your uploaded file name */}
+            <img 
+              src="/my-logo.png" 
+              alt="Solution Developers" 
+              className="w-10 h-10 object-contain" 
             />
-            <span className="truncate">SOLUTION DEVELOPERS</span>
+            SOLUTION DEVELOPERS
           </div>
-
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-3">
             <div className={`flex items-center p-1 rounded-full border backdrop-blur-md transition-colors mr-2 ${theme === 'bot' ? 'bg-black/50 border-green-900 rounded-none' : (theme === 'light' ? 'bg-white/40 border-slate-200 shadow-sm' : 'bg-slate-900/40 border-slate-700 shadow-xl')}`}>
               {navLinks.map(link => {
@@ -2367,71 +2220,22 @@ const Navbar = ({ theme, toggleTheme, activePage, onNavigate }) => {
               })}
             </div>
             <button onClick={toggleTheme} className={`flex items-center gap-2 px-3.5 py-2 rounded-full text-[11px] font-bold border transition-all shadow-sm ${theme === 'bot' ? 'border-green-800 text-green-700 hover:border-green-500 hover:bg-green-950/30 rounded-none' : (theme === 'light' ? 'bg-white border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300 hover:shadow-md' : 'bg-slate-850 border-slate-700 text-slate-300 hover:text-white hover:border-slate-600 hover:shadow-lg hover:shadow-amber-500/10')}`}>{getThemeIcon()}{getThemeLabel()}</button>
-            <button
-              onClick={() => onNavigate('auth')}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] font-bold border transition-all shadow-sm ${theme === 'bot'
-                  ? 'border-green-500 text-green-500 bg-black hover:border-green-400 hover:bg-green-950/30 rounded-none font-mono shadow-[0_0_10px_rgba(34,197,94,0.2)]'
+            <button 
+              onClick={() => onNavigate('auth')} 
+              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] font-bold border transition-all shadow-sm ${
+                theme === 'bot' 
+                  ? 'border-green-500 text-green-500 bg-black hover:border-green-400 hover:bg-green-950/30 rounded-none font-mono shadow-[0_0_10px_rgba(34,197,94,0.2)]' 
                   : (theme === 'light' ? 'bg-amber-600 border-amber-600 text-white hover:bg-amber-500 hover:shadow-md' : 'bg-amber-600 border-amber-600 text-white hover:bg-amber-500 hover:shadow-lg hover:shadow-amber-500/15')
-                }`}
+              }`}
             >
               <User className="w-3.5 h-3.5" /> Portal
             </button>
           </div>
-
-          {/* Mobile Right Controls */}
-          <div className="md:hidden flex items-center gap-2.5">
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle Theme"
-              className={`p-2 rounded-full border ${theme === 'bot' ? 'border-green-800 text-green-500 bg-black' : (theme === 'light' ? 'border-slate-200 text-slate-700 bg-slate-50' : 'border-slate-700 text-slate-200 bg-slate-900')}`}
-            >
-              {getThemeIcon()}
-            </button>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle Mobile Menu"
-              className={`p-2 rounded-xl border transition-colors ${theme === 'bot' ? 'border-green-800 text-green-500 bg-black' : (theme === 'light' ? 'border-slate-200 text-slate-800 bg-slate-50' : 'border-slate-700 text-slate-100 bg-slate-900')}`}
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
+          <div className="md:hidden flex items-center gap-4">
+             <button onClick={toggleTheme} className={theme === 'bot' ? 'text-green-500' : (theme === 'light' ? 'text-slate-700' : 'text-white')}>{getThemeIcon()}</button>
+             <button onClick={() => onNavigate('auth')} className={theme === 'bot' ? 'text-green-500' : (theme === 'light' ? 'text-slate-700' : 'text-white')}><User className="w-5 h-5" /></button>
           </div>
         </div>
-
-        {/* Mobile Navigation Drawer Overlay */}
-        {mobileMenuOpen && (
-          <div className={`md:hidden mt-3 p-4 rounded-2xl border backdrop-blur-2xl shadow-2xl transition-all animate-fadeIn ${theme === 'bot'
-              ? 'bg-black/95 border-green-900 text-green-500'
-              : (theme === 'light' ? 'bg-white/95 border-slate-200 text-slate-900 shadow-slate-300/50' : 'bg-slate-900/95 border-slate-800 text-white shadow-black/80')
-            }`}>
-            <div className="flex flex-col gap-1.5">
-              {navLinks.map(link => {
-                const Icon = link.icon;
-                return (
-                  <button
-                    key={link.id}
-                    onClick={() => handleMobileNav(link.id)}
-                    className={getNavButtonStyle(link.id, true)}
-                  >
-                    <Icon className="w-4 h-4" />
-                    <span>{link.name}</span>
-                  </button>
-                );
-              })}
-
-              <div className="pt-3 mt-2 border-t border-slate-200/10 flex items-center justify-between gap-3">
-                <button
-                  onClick={() => handleMobileNav('auth')}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold border transition-all ${theme === 'bot'
-                      ? 'border-green-500 text-green-500 bg-black font-mono'
-                      : (theme === 'light' ? 'bg-amber-600 border-amber-600 text-white' : 'bg-amber-600 border-amber-600 text-white')
-                    }`}
-                >
-                  <User className="w-4 h-4" /> Member Portal
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   );
@@ -2520,26 +2324,28 @@ const InitiativesSection = ({ theme }) => {
               Active Initiatives
             </h2>
           </div>
-
+          
           {/* Custom Side-Scroll Controls */}
           <div className="flex gap-3 mt-6 md:mt-0">
             <button
               onClick={() => handleScroll('left')}
               disabled={!canScrollLeft}
-              className={`p-2.5 rounded-full border transition-all ${!canScrollLeft
-                  ? 'opacity-40 cursor-not-allowed border-slate-800 text-slate-500'
+              className={`p-2.5 rounded-full border transition-all ${
+                !canScrollLeft 
+                  ? 'opacity-40 cursor-not-allowed border-slate-800 text-slate-500' 
                   : (theme === 'bot' ? 'border-green-800 text-green-500 hover:border-green-500 hover:bg-green-950/30' : (theme === 'light' ? 'border-slate-200 text-slate-700 hover:bg-slate-100' : 'border-slate-700 text-slate-300 hover:bg-slate-800'))
-                }`}
+              }`}
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={() => handleScroll('right')}
               disabled={!canScrollRight}
-              className={`p-2.5 rounded-full border transition-all ${!canScrollRight
-                  ? 'opacity-40 cursor-not-allowed border-slate-800 text-slate-500'
+              className={`p-2.5 rounded-full border transition-all ${
+                !canScrollRight 
+                  ? 'opacity-40 cursor-not-allowed border-slate-800 text-slate-500' 
                   : (theme === 'bot' ? 'border-green-800 text-green-500 hover:border-green-500 hover:bg-green-950/30' : (theme === 'light' ? 'border-slate-200 text-slate-700 hover:bg-slate-100' : 'border-slate-700 text-slate-300 hover:bg-slate-800'))
-                }`}
+              }`}
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -2547,30 +2353,32 @@ const InitiativesSection = ({ theme }) => {
         </div>
 
         {/* Scrollable Container */}
-        <div
+        <div 
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-6"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {INITIATIVES_DATA.map((item) => (
-            <div
+            <div 
               key={item.id}
-              className={`w-[290px] sm:w-[350px] flex-shrink-0 snap-start border backdrop-blur-md rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:scale-[1.01] ${theme === 'bot'
-                  ? 'bg-black/90 border-green-900 rounded-none shadow-[0_0_15px_rgba(34,197,94,0.1)]'
+              className={`w-[290px] sm:w-[350px] flex-shrink-0 snap-start border backdrop-blur-md rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:scale-[1.01] ${
+                theme === 'bot' 
+                  ? 'bg-black/90 border-green-900 rounded-none shadow-[0_0_15px_rgba(34,197,94,0.1)]' 
                   : (theme === 'light' ? 'bg-white/90 border-slate-200 shadow-xl' : 'bg-slate-900/90 border-slate-850 shadow-2xl')
-                }`}
+              }`}
             >
               <div>
                 {/* Image Container with Hover Zoom */}
                 <div className="relative h-44 w-full overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
                   />
                   <div className="absolute top-3 left-3">
-                    <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${theme === 'bot' ? 'bg-green-950/95 border border-green-500 text-green-400 font-mono rounded-none' : 'bg-amber-600/90 text-white'
-                      }`}>
+                    <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${
+                      theme === 'bot' ? 'bg-green-950/95 border border-green-500 text-green-400 font-mono rounded-none' : 'bg-amber-600/90 text-white'
+                    }`}>
                       {item.category}
                     </span>
                   </div>
@@ -2588,8 +2396,9 @@ const InitiativesSection = ({ theme }) => {
               </div>
 
               {/* Bottom Badge Detail */}
-              <div className={`px-6 py-4 border-t flex items-center gap-2 ${theme === 'bot' ? 'border-green-950 font-mono text-green-500' : (theme === 'light' ? 'border-slate-100 text-amber-600' : 'border-slate-850 text-amber-500')
-                }`}>
+              <div className={`px-6 py-4 border-t flex items-center gap-2 ${
+                theme === 'bot' ? 'border-green-950 font-mono text-green-500' : (theme === 'light' ? 'border-slate-100 text-amber-600' : 'border-slate-850 text-amber-500')
+              }`}>
                 <Trophy className="w-4 h-4 flex-shrink-0" />
                 <span className="text-xs font-bold uppercase tracking-wider">{item.achievement}</span>
               </div>
@@ -2612,16 +2421,16 @@ const HomePage = ({ theme, onNavigate }) => (
           </span>
           <span className={`text-sm font-medium ${theme === 'bot' ? 'text-green-500 font-mono tracking-widest uppercase' : (theme === 'light' ? 'text-slate-600' : 'text-slate-300')}`}>{theme === 'bot' ? 'SYSTEM ONLINE v2.0' : 'v2.0 System Online'}</span>
         </div>
-        <h1 className={`text-4xl sm:text-6xl md:text-8xl font-black mb-6 leading-tight ${theme === 'bot' ? 'text-green-500 font-mono tracking-tighter' : (theme === 'light' ? 'text-slate-900 tracking-tighter' : 'text-white font-black tracking-tighter')}`}>
+        <h1 className={`text-6xl md:text-8xl font-black mb-6 leading-tight ${theme === 'bot' ? 'text-green-500 font-mono tracking-tighter' : (theme === 'light' ? 'text-slate-900 tracking-tighter' : 'text-white font-black tracking-tighter')}`}>
           {theme === 'bot' ? 'INITIATE_' : 'SOLVE'} <span className={`text-transparent bg-clip-text ${theme === 'bot' ? 'bg-green-400 animate-pulse' : 'bg-gradient-to-r from-amber-400 to-yellow-300'}`}>{theme === 'bot' ? 'FUTURE' : 'FUTURE'}</span><br />
-          <span className={theme === 'bot' ? 'text-green-800 text-3xl sm:text-5xl md:text-7xl' : (theme === 'light' ? 'text-slate-400 text-3xl sm:text-5xl md:text-7xl' : 'text-slate-600 text-3xl sm:text-5xl md:text-7xl')}>{theme === 'bot' ? '>> DEVELOP_TODAY();' : 'DEVELOP TODAY.'}</span>
+          <span className={theme === 'bot' ? 'text-green-800 text-5xl md:text-7xl' : (theme === 'light' ? 'text-slate-400' : 'text-slate-600')}>{theme === 'bot' ? '>> DEVELOP_TODAY();' : 'DEVELOP TODAY.'}</span>
         </h1>
-        <p className={`text-base sm:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed ${theme === 'bot' ? 'text-green-700 font-mono text-xs sm:text-sm' : (theme === 'light' ? 'text-slate-600' : 'text-slate-400')}`}>Once A Soluper , Always a Solution Developer.</p>
-
+        <p className={`text-xl max-w-2xl mx-auto mb-10 leading-relaxed ${theme === 'bot' ? 'text-green-700 font-mono text-sm' : (theme === 'light' ? 'text-slate-600' : 'text-slate-400')}`}>Once A Soluper , Always a Solution Developer.</p>
+        
         {/* Side-by-side Founders Carousel and Interactive Notice Board */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto mb-12 sm:mb-16 items-center">
-          <FoundersCarousel theme={theme} />
-          <NoticeSection theme={theme} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto mb-16 items-center">
+           <FoundersCarousel theme={theme} />
+           <NoticeSection theme={theme} />
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
@@ -2640,10 +2449,10 @@ const HomePage = ({ theme, onNavigate }) => (
 // --- INTERACTIVE ALBUM LIGHTBOX ---
 const Lightbox = ({ album, isOpen, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [prevAlbum, setPrevAlbum] = useState(album);
-
-  if (album !== prevAlbum) {
-    setPrevAlbum(album);
+  const [prevAlbumId, setPrevAlbumId] = useState(album?.id);
+  
+  if (album?.id !== prevAlbumId) {
+    setPrevAlbumId(album?.id);
     setCurrentIndex(0);
   }
 
@@ -2669,23 +2478,23 @@ const Lightbox = ({ album, isOpen, onClose }) => {
       {/* Main Image Slider */}
       <div className="relative max-w-5xl w-full px-6 flex flex-col items-center">
         <div className="relative aspect-[16/10] w-full max-h-[70vh] flex items-center justify-center overflow-hidden rounded-2xl bg-black/60 shadow-2xl border border-white/10">
-          <img
-            src={album.photos[currentIndex]}
-            alt={`${album.title} - ${currentIndex + 1}`}
+          <img 
+            src={album.photos[currentIndex]} 
+            alt={`${album.title} - ${currentIndex + 1}`} 
             className="max-w-full max-h-full object-contain animate-[scale-up_0.3s_ease-out]"
           />
-
+          
           {/* Prev/Next buttons */}
           {album.photos.length > 1 && (
             <>
-              <button
-                onClick={handlePrev}
+              <button 
+                onClick={handlePrev} 
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/75 hover:scale-105 active:scale-95 text-white p-3 rounded-full transition-all border border-white/10 hover:border-white/25 z-10"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
-              <button
-                onClick={handleNext}
+              <button 
+                onClick={handleNext} 
                 className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/75 hover:scale-105 active:scale-95 text-white p-3 rounded-full transition-all border border-white/10 hover:border-white/25 z-10"
               >
                 <ChevronRight className="w-6 h-6" />
@@ -2709,11 +2518,12 @@ const Lightbox = ({ album, isOpen, onClose }) => {
         {album.photos.length > 1 && (
           <div className="flex gap-2.5 mt-6 overflow-x-auto max-w-full py-2 no-scrollbar justify-center">
             {album.photos.map((photo, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentIndex(i)}
-                className={`w-16 h-12 rounded-lg overflow-hidden border-2 transition-all relative flex-shrink-0 ${currentIndex === i ? 'border-amber-500 scale-105 shadow-lg shadow-amber-500/10' : 'border-white/10 hover:border-white/40 opacity-60 hover:opacity-90'
-                  }`}
+              <button 
+                key={i} 
+                onClick={() => setCurrentIndex(i)} 
+                className={`w-16 h-12 rounded-lg overflow-hidden border-2 transition-all relative flex-shrink-0 ${
+                  currentIndex === i ? 'border-amber-500 scale-105 shadow-lg shadow-amber-500/10' : 'border-white/10 hover:border-white/40 opacity-60 hover:opacity-90'
+                }`}
               >
                 <img src={photo} alt="" className="w-full h-full object-cover" />
               </button>
@@ -2798,7 +2608,7 @@ const JourneyTimeline = ({ theme }) => {
     <div className="relative max-w-4xl mx-auto py-16 px-4">
       {/* Timeline line */}
       <div className={`absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 ${lineBg} hidden sm:block`} />
-
+      
       <div className="space-y-12 relative">
         {timelineEvents.map((evt, idx) => {
           const IconComponent = evt.icon;
@@ -2807,13 +2617,14 @@ const JourneyTimeline = ({ theme }) => {
           return (
             <div key={idx} className="flex flex-col sm:flex-row items-start sm:justify-between relative group">
               {/* Timeline dot */}
-              <div
-                className={`absolute left-4 md:left-1/2 top-1.5 w-6 h-6 rounded-full border-2 -translate-x-1/2 flex items-center justify-center z-10 transition-all duration-300 group-hover:scale-115 ${theme === 'bot'
-                    ? 'border-green-500 bg-black text-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]'
-                    : (theme === 'light'
-                      ? 'border-amber-600 bg-white text-amber-600 shadow-md'
-                      : 'border-amber-500 bg-slate-900 text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.35)]')
-                  }`}
+              <div 
+                className={`absolute left-4 md:left-1/2 top-1.5 w-6 h-6 rounded-full border-2 -translate-x-1/2 flex items-center justify-center z-10 transition-all duration-300 group-hover:scale-115 ${
+                  theme === 'bot' 
+                    ? 'border-green-500 bg-black text-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' 
+                    : (theme === 'light' 
+                        ? 'border-amber-600 bg-white text-amber-600 shadow-md' 
+                        : 'border-amber-500 bg-slate-900 text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.35)]')
+                }`}
                 style={{ boxShadow: `0 0 12px ${glowColor}` }}
               >
                 <div className={`w-2 h-2 rounded-full ${theme === 'bot' ? 'bg-green-500' : 'bg-amber-500'}`} />
@@ -2821,25 +2632,29 @@ const JourneyTimeline = ({ theme }) => {
 
               {/* Grid content columns */}
               <div className={`w-full sm:w-[45%] pl-12 sm:pl-0 ${isEven ? 'sm:text-right' : 'sm:order-2 sm:text-left'}`}>
-                <span className={`inline-block px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider mb-2 ${theme === 'bot'
-                    ? 'bg-green-950/40 text-green-400 border border-green-800 font-mono'
-                    : (theme === 'light'
-                      ? 'bg-amber-50 text-amber-800 border-amber-200'
-                      : 'bg-amber-500/10 text-amber-400 border border-amber-500/20')
-                  }`}>
+                <span className={`inline-block px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider mb-2 ${
+                  theme === 'bot' 
+                    ? 'bg-green-950/40 text-green-400 border border-green-800 font-mono' 
+                    : (theme === 'light' 
+                        ? 'bg-amber-50 text-amber-800 border-amber-200' 
+                        : 'bg-amber-500/10 text-amber-400 border border-amber-500/20')
+                }`}>
                   {evt.date} &bull; {evt.tag}
                 </span>
-
-                <h4 className={`text-lg font-extrabold flex items-center gap-2 ${isEven ? 'sm:justify-end' : 'sm:justify-start'
-                  } ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')
-                  }`}>
+                
+                <h4 className={`text-lg font-extrabold flex items-center gap-2 ${
+                  isEven ? 'sm:justify-end' : 'sm:justify-start'
+                } ${
+                  theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')
+                }`}>
                   {!isEven && <IconComponent className="w-4 h-4 text-amber-500 flex-shrink-0" />}
                   {evt.title}
                   {isEven && <IconComponent className="w-4 h-4 text-amber-500 flex-shrink-0" />}
                 </h4>
-
-                <p className={`mt-2 text-sm leading-relaxed ${theme === 'bot' ? 'text-green-700 font-mono' : (theme === 'light' ? 'text-slate-650' : 'text-slate-455')
-                  }`}>
+                
+                <p className={`mt-2 text-sm leading-relaxed ${
+                  theme === 'bot' ? 'text-green-700 font-mono' : (theme === 'light' ? 'text-slate-650' : 'text-slate-455')
+                }`}>
                   {evt.desc}
                 </p>
               </div>
@@ -2854,561 +2669,211 @@ const JourneyTimeline = ({ theme }) => {
   );
 };
 
-// --- DYNAMIC 3D CUBE GALLERY COMPONENT WITH SIDE HUD DETAILS ---
-const Cube3DGallery = ({ theme }) => {
-  const [rotation, setRotation] = useState({ x: -15, y: 25 });
-  const [isDragging, setIsDragging] = useState(false);
+// --- FUTURISTIC CENTERPIECE COMPONENT ---
+const FuturisticCenterpiece = ({ theme, onClick }) => {
+  const canvasRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [autoRotate, setAutoRotate] = useState(true);
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+  const rotationSpeed = useRef(0.008);
+  const angleX = useRef(Math.PI / 6);
+  const angleY = useRef(Math.PI / 4);
+  const scale = useRef(1);
+  const pulseDirection = useRef(1);
 
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
 
-  const isSmallScreen = windowWidth < 640;
-  const tzValue = isSmallScreen ? '105px' : '135px';
+    const resize = () => {
+      canvas.width = 300;
+      canvas.height = 300;
+    };
+    resize();
 
-  const dragStart = useRef({ x: 0, y: 0 });
-  const rotStart = useRef({ x: -15, y: 25 });
-  const animationId = useRef(null);
-
-  // 6 Cube faces representing achievements & photo highlights with rich HUD details
-  const cubeFaces = [
-    {
-      id: "front",
-      label: "Front",
-      badge: "National Triumph",
-      title: "Smart India Hackathon Winners",
-      desc: "Team 'ByteBusters' secured 1st Prize in the Smart Education track out of 10,000+ national teams. Built an AI-driven educational platform with real-time student analytics, voice summarization, and interactive learning loops.",
-      date: "Dec 2025",
-      icon: Trophy,
-      stat: "1st Place (National)",
-      location: "New Delhi, India",
-      team: "Team 'ByteBusters' (4 Solupers)",
-      tags: ["React", "Python", "Gemini AI", "IoT Sensors", "Tailwind"],
-      metrics: [
-        { label: "Competitors", value: "10,000+ Teams" },
-        { label: "Grand Prize", value: "₹1,000,000" },
-        { label: "Sprint Duration", value: "36 Hours" }
-      ],
-      img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop",
-      faceTransform: "rotateY(0deg) translateZ(150px)"
-    },
-    {
-      id: "right",
-      label: "Right",
-      badge: "Innovation",
-      title: "Project Alpha Ecosystem",
-      desc: "Designed and launched DevForge CLI & Cloud Orchestration suite, empowering student developers with instant environment provisioning, containerized sandboxes, and automated deployment pipelines.",
-      date: "Oct 2025",
-      icon: Target,
-      stat: "10k+ Installs",
-      location: "Cloud Infrastructure",
-      team: "DevForge Core Ops",
-      tags: ["Docker", "Cloud Run", "Go", "TypeScript", "CLI Tooling"],
-      metrics: [
-        { label: "Active Installs", value: "10,000+" },
-        { label: "System Uptime", value: "99.9%" },
-        { label: "GitHub Stars", value: "150+" }
-      ],
-      img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop",
-      faceTransform: "rotateY(90deg) translateZ(150px)"
-    },
-    {
-      id: "back",
-      label: "Back",
-      badge: "Workshops",
-      title: "System Design & Cloud Masterclass",
-      desc: "Conducted a hands-on intensive 3-day workshop training 300+ Solupers on distributed system architecture, database sharding, high-throughput microservices caching, and fault tolerant infrastructure.",
-      date: "Nov 2025",
-      icon: GraduationCap,
-      stat: "300+ Students",
-      location: "Auditorium Hall B",
-      team: "Solution Developers Mentors",
-      tags: ["System Design", "Redis", "PostgreSQL", "Kafka", "Microservices"],
-      metrics: [
-        { label: "Attendees", value: "300+ Solupers" },
-        { label: "Satisfaction", value: "4.9 / 5.0" },
-        { label: "Projects Built", value: "12 Live Apps" }
-      ],
-      img: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop",
-      faceTransform: "rotateY(180deg) translateZ(150px)"
-    },
-    {
-      id: "left",
-      label: "Left",
-      badge: "Outreach",
-      title: "Campus Technical Infrastructure Audits",
-      desc: "Inspected and audited institutional IT infrastructure across 15+ engineering campuses, providing detailed security vulnerability assessments, hardware reports, and cloud upgrade blueprints.",
-      date: "Jan 2026",
-      icon: Users,
-      stat: "15+ Campuses",
-      location: "Statewide Campuses",
-      team: "Soluper Audit Squad",
-      tags: ["Network Audit", "Security", "Linux Admin", "Hardware Analysis"],
-      metrics: [
-        { label: "Campuses Audited", value: "15+ Colleges" },
-        { label: "Systems Inspected", value: "1,200+" },
-        { label: "Audit Reports", value: "100% Delivered" }
-      ],
-      img: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=800&auto=format&fit=crop",
-      faceTransform: "rotateY(-90deg) translateZ(150px)"
-    },
-    {
-      id: "top",
-      label: "Top",
-      badge: "Community",
-      title: "House of Soluper Core Members",
-      desc: "A vibrant ecosystem of 75+ elite student developers, UI/UX designers, and open-source contributors actively driving technology projects, hackathon victories, and peer mentorship.",
-      date: "2025-2026",
-      icon: Sparkles,
-      stat: "75+ Solupers",
-      location: "House of Soluper HQ",
-      team: "Executive Council & Members",
-      tags: ["Leadership", "Open Source", "Mentorship", "Community"],
-      metrics: [
-        { label: "Active Members", value: "75+ Solupers" },
-        { label: "Live Projects", value: "40+ Repos" },
-        { label: "Awards Won", value: "12 National" }
-      ],
-      img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop",
-      faceTransform: "rotateX(90deg) translateZ(150px)"
-    },
-    {
-      id: "bottom",
-      label: "Bottom",
-      badge: "Legacy",
-      title: "Founders & Presidential Eras",
-      desc: "Honoring the founding leaders and presidential administrations that established House of Soluper's culture of engineering excellence, student leadership, and continuous innovation.",
-      date: "Established 2024",
-      icon: Medal,
-      stat: "3 Leadership Eras",
-      location: "Legacy Hall",
-      team: "Founders & Presidents Board",
-      tags: ["Vision", "Culture", "Sponsorships", "Alumni Network"],
-      metrics: [
-        { label: "Leadership Eras", value: "3 Generations" },
-        { label: "Alumni Network", value: "500+ Engineers" },
-        { label: "Founded", value: "2024" }
-      ],
-      img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800&auto=format&fit=crop",
-      faceTransform: "rotateX(-90deg) translateZ(150px)"
-    }
-  ];
-
-  // Presets to snap to a specific face
-  const faceRotations = [
-    { x: -10, y: 0 },    // Front
-    { x: -10, y: -90 },  // Right
-    { x: -10, y: -180 }, // Back
-    { x: -10, y: 90 },   // Left
-    { x: -90, y: 0 },    // Top
-    { x: 90, y: 0 }      // Bottom
-  ];
-
-  // Dynamically compute front-facing face index in real-time as the cube rotates
-  const activeFaceIndex = useMemo(() => {
-    const radX = (rotation.x * Math.PI) / 180;
-    const radY = (rotation.y * Math.PI) / 180;
-    const sinX = Math.sin(radX);
-    const cosX = Math.cos(radX);
-    const sinY = Math.sin(radY);
-    const cosY = Math.cos(radY);
-
-    // Z component facing towards camera for each face normal vector
-    const zValues = [
-      cosY * cosX,      // 0: Front
-      -sinY * cosX,     // 1: Right
-      -cosY * cosX,     // 2: Back
-      sinY * cosX,      // 3: Left
-      sinX,             // 4: Top
-      -sinX             // 5: Bottom
+    // 3D Box vertices (rectangular prism)
+    const sizeX = 65;
+    const sizeY = 85;
+    const sizeZ = 65;
+    const vertices = [
+      { x: -sizeX, y: -sizeY, z: -sizeZ },
+      { x: sizeX, y: -sizeY, z: -sizeZ },
+      { x: sizeX, y: sizeY, z: -sizeZ },
+      { x: -sizeX, y: sizeY, z: -sizeZ },
+      { x: -sizeX, y: -sizeY, z: sizeZ },
+      { x: sizeX, y: -sizeY, z: sizeZ },
+      { x: sizeX, y: sizeY, z: sizeZ },
+      { x: -sizeX, y: sizeY, z: sizeZ }
     ];
 
-    let maxZ = -Infinity;
-    let maxIndex = 0;
-    for (let i = 0; i < zValues.length; i++) {
-      if (zValues[i] > maxZ) {
-        maxZ = zValues[i];
-        maxIndex = i;
+    const edges = [
+      [0, 1], [1, 2], [2, 3], [3, 0], // back face
+      [4, 5], [5, 6], [6, 7], [7, 4], // front face
+      [0, 4], [1, 5], [2, 6], [3, 7]  // connecting edges
+    ];
+
+    const project = (x, y, z) => {
+      const perspective = 350;
+      const scaleProject = perspective / (perspective + z);
+      return {
+        x: x * scaleProject + canvas.width / 2,
+        y: y * scaleProject + canvas.height / 2
+      };
+    };
+
+    const rotateX = (x, y, z, angle) => {
+      const cos = Math.cos(angle);
+      const sin = Math.sin(angle);
+      return { x, y: y * cos - z * sin, z: y * sin + z * cos };
+    };
+
+    const rotateY = (x, y, z, angle) => {
+      const cos = Math.cos(angle);
+      const sin = Math.sin(angle);
+      return { x: x * cos + z * sin, y, z: -x * sin + z * cos };
+    };
+
+    const render = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Pulse scaling
+      if (pulseDirection.current === 1) {
+        scale.current += 0.0008;
+        if (scale.current >= 1.04) pulseDirection.current = -1;
+      } else {
+        scale.current -= 0.0008;
+        if (scale.current <= 0.96) pulseDirection.current = 1;
       }
-    }
-    return maxIndex;
-  }, [rotation.x, rotation.y]);
 
-  const handleSnapToFace = (index) => {
-    setAutoRotate(false);
-    setRotation(faceRotations[index]);
-  };
+      // Dynamic speed based on hover
+      const targetSpeed = isHovered ? 0.002 : 0.006;
+      rotationSpeed.current += (targetSpeed - rotationSpeed.current) * 0.1;
+      
+      angleX.current += rotationSpeed.current;
+      angleY.current += rotationSpeed.current * 0.75;
 
-  // Auto rotation loop
-  useEffect(() => {
-    if (!autoRotate || isDragging || isHovered) return;
+      // Project vertices
+      const projected = vertices.map(v => {
+        let x = v.x * scale.current;
+        let y = v.y * scale.current;
+        let z = v.z * scale.current;
 
-    let lastTime = performance.now();
-    const animate = (time) => {
-      const delta = (time - lastTime) / 1000;
-      lastTime = time;
-      setRotation((prev) => ({
-        x: prev.x + delta * 3,
-        y: prev.y + delta * 20
-      }));
-      animationId.current = requestAnimationFrame(animate);
+        let rot = rotateX(x, y, z, angleX.current);
+        rot = rotateY(rot.x, rot.y, rot.z, angleY.current);
+
+        return project(rot.x, rot.y, rot.z);
+      });
+
+      // Translucent inner faces for glassmorphism look
+      ctx.fillStyle = theme === 'bot' ? 'rgba(34, 197, 94, 0.04)' : 'rgba(245, 158, 11, 0.05)';
+      ctx.beginPath();
+      ctx.moveTo(projected[4].x, projected[4].y);
+      ctx.lineTo(projected[5].x, projected[5].y);
+      ctx.lineTo(projected[6].x, projected[6].y);
+      ctx.lineTo(projected[7].x, projected[7].y);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(projected[0].x, projected[0].y);
+      ctx.lineTo(projected[1].x, projected[1].y);
+      ctx.lineTo(projected[2].x, projected[2].y);
+      ctx.lineTo(projected[3].x, projected[3].y);
+      ctx.closePath();
+      ctx.fill();
+
+      // Draw wireframe edges
+      ctx.strokeStyle = theme === 'bot' ? 'rgba(34, 197, 94, 0.85)' : 'rgba(245, 158, 11, 0.95)';
+      ctx.lineWidth = isHovered ? 2.2 : 1.6;
+      ctx.shadowBlur = isHovered ? 18 : 6;
+      ctx.shadowColor = theme === 'bot' ? 'rgba(34, 197, 94, 0.6)' : 'rgba(245, 158, 11, 0.6)';
+
+      edges.forEach(edge => {
+        ctx.beginPath();
+        ctx.moveTo(projected[edge[0]].x, projected[edge[0]].y);
+        ctx.lineTo(projected[edge[1]].x, projected[edge[1]].y);
+        ctx.stroke();
+      });
+
+      // Vertex nodes
+      ctx.shadowBlur = 0;
+      projected.forEach(v => {
+        ctx.beginPath();
+        ctx.arc(v.x, v.y, isHovered ? 3.5 : 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = theme === 'bot' ? '#22c55e' : '#D4AF37';
+        ctx.fill();
+      });
+
+      animationFrameId = requestAnimationFrame(render);
     };
+    render();
 
-    animationId.current = requestAnimationFrame(animate);
-    return () => {
-      if (animationId.current) cancelAnimationFrame(animationId.current);
-    };
-  }, [autoRotate, isDragging, isHovered]);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [theme, isHovered]);
 
-  // Drag handlers
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setAutoRotate(false);
-    dragStart.current = { x: e.clientX, y: e.clientY };
-    rotStart.current = { ...rotation };
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    const deltaX = e.clientX - dragStart.current.x;
-    const deltaY = e.clientY - dragStart.current.y;
-    setRotation({
-      x: rotStart.current.x - deltaY * 0.4,
-      y: rotStart.current.y + deltaX * 0.4
-    });
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleTouchStart = (e) => {
-    setIsDragging(true);
-    setAutoRotate(false);
-    dragStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    rotStart.current = { ...rotation };
-  };
-
-  const handleTouchMove = (e) => {
-    if (!isDragging) return;
-    const deltaX = e.touches[0].clientX - dragStart.current.x;
-    const deltaY = e.touches[0].clientY - dragStart.current.y;
-    setRotation({
-      x: rotStart.current.x - deltaY * 0.4,
-      y: rotStart.current.y + deltaX * 0.4
-    });
-  };
-
-  const activeFace = cubeFaces[activeFaceIndex] || cubeFaces[0];
-  const ActiveIcon = activeFace.icon;
+  const infoCards = [
+    { label: "Achievements", value: "25+ Awards", icon: Trophy, posClass: "top-0 left-1/2 -translate-x-1/2 -translate-y-6 md:-translate-y-8" },
+    { label: "Events & Memories", value: "60+ Memories", icon: Images, posClass: "bottom-0 left-1/2 -translate-x-1/2 translate-y-6 md:translate-y-8" },
+    { label: "Hackathons", value: "15 Competitions", icon: Target, posClass: "top-1/2 left-0 -translate-y-1/2 -translate-x-6 md:-translate-x-12 lg:-translate-x-20" },
+    { label: "Community", value: "500+ Members", icon: Users, posClass: "top-1/2 right-0 -translate-y-1/2 translate-x-6 md:translate-x-12 lg:translate-x-20" }
+  ];
 
   return (
-    <div className="relative w-full py-6 my-2 select-none overflow-hidden">
-      {/* Background ambient radial glow */}
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.08)_0%,transparent_70%)] z-0" />
+    <div 
+      className="relative flex items-center justify-center w-full h-[420px] my-8 cursor-pointer select-none group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
+    >
+      {/* SVG Connecting lines */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+        <defs>
+          <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.8" />
+            <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.2" />
+          </linearGradient>
+        </defs>
+        
+        {/* Draw lines from center to 4 panels */}
+        {/* Left connector line */}
+        <line x1="20%" y1="50%" x2="40%" y2="50%" stroke="url(#glowGrad)" strokeWidth="1.5" strokeDasharray="3 3" className="opacity-80 animate-pulse" />
+        {/* Right connector line */}
+        <line x1="80%" y1="50%" x2="60%" y2="50%" stroke="url(#glowGrad)" strokeWidth="1.5" strokeDasharray="3 3" className="opacity-80 animate-pulse" />
+        {/* Top connector line */}
+        <line x1="50%" y1="18%" x2="50%" y2="40%" stroke="url(#glowGrad)" strokeWidth="1.5" strokeDasharray="3 3" className="opacity-80 animate-pulse" />
+        {/* Bottom connector line */}
+        <line x1="50%" y1="82%" x2="50%" y2="60%" stroke="url(#glowGrad)" strokeWidth="1.5" strokeDasharray="3 3" className="opacity-80 animate-pulse" />
+      </svg>
 
-      {/* Header Badge */}
-      <div className="relative z-10 flex justify-center items-center gap-2 mb-8">
-        <span className={`px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border backdrop-blur-md flex items-center gap-2 shadow-lg ${theme === 'bot'
-            ? 'bg-black/80 border-green-500/40 text-green-400 font-mono'
-            : (theme === 'light' ? 'bg-amber-50 border-amber-200 text-amber-800' : 'bg-slate-900/80 border-amber-500/30 text-amber-400')
-          }`}>
-          <RotateCw className={`w-3.5 h-3.5 ${autoRotate ? 'animate-spin' : ''}`} style={{ animationDuration: '6s' }} />
-          3D Interactive Achievement Cube Gallery
-        </span>
+      {/* Center 3D Cube Canvas Frame */}
+      <div className={`relative z-10 w-[240px] h-[240px] md:w-[280px] md:h-[280px] flex items-center justify-center rounded-full transition-all duration-500 bg-gradient-to-br from-white/5 to-white/0 border border-white/5 ${
+        isHovered ? 'scale-105 shadow-[0_0_60px_rgba(245,158,11,0.18)] border-amber-500/25' : ''
+      }`}>
+        <canvas ref={canvasRef} />
       </div>
 
-      {/* Main Split Grid Layout: Left Cube, Right Cyber HUD Side Details */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-6xl mx-auto px-4 relative z-10">
-
-        {/* LEFT COLUMN: 3D Cube & Rotator Controls (lg:col-span-5) */}
-        <div className="lg:col-span-5 flex flex-col items-center justify-center space-y-4">
-          {/* 3D Scene Viewport */}
-          <div
-            className="relative w-[270px] sm:w-[330px] h-[270px] sm:h-[330px] flex items-center justify-center cursor-grab active:cursor-grabbing"
-            style={{ perspective: '1100px' }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => {
-              setIsHovered(false);
-              setIsDragging(false);
-            }}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleMouseUp}
+      {/* Floating Info Panels */}
+      {infoCards.map((card, i) => {
+        const Icon = card.icon;
+        return (
+          <div 
+            key={i} 
+            className={`absolute z-20 flex flex-col items-center p-3 md:p-4 rounded-2xl border backdrop-blur-md transition-all duration-350 shadow-md ${card.posClass} ${
+              theme === 'bot' 
+                ? 'bg-black/90 border-green-900 text-green-500 font-mono text-[10px]' 
+                : (theme === 'light' 
+                    ? 'bg-white/90 border-slate-200 text-slate-800 hover:shadow-lg' 
+                    : 'bg-slate-900/90 border-slate-850 text-slate-250 hover:shadow-2xl')
+            } ${isHovered ? 'scale-105 border-amber-500/35' : ''}`}
           >
-            {/* 3D Rotating Cube */}
-            <div
-              className="w-[210px] h-[210px] sm:w-[270px] sm:h-[270px] relative transition-transform duration-100 ease-out"
-              style={{
-                transformStyle: 'preserve-3d',
-                transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`
-              }}
-            >
-              {cubeFaces.map((face, index) => {
-                const Icon = face.icon;
-                const isSelected = activeFaceIndex === index;
-                const computedTransform = face.faceTransform.replace('150px', tzValue);
-
-                return (
-                  <div
-                    key={face.id}
-                    onClick={() => handleSnapToFace(index)}
-                    className={`absolute inset-0 w-full h-full rounded-2xl border-2 backdrop-blur-md overflow-hidden flex flex-col justify-between p-3 sm:p-4 shadow-2xl transition-all cursor-pointer group ${isSelected
-                        ? (theme === 'bot' ? 'border-green-400 ring-2 ring-green-400/50' : 'border-amber-400 ring-2 ring-amber-400/50')
-                        : ''
-                      } ${theme === 'bot'
-                        ? 'bg-black/90 border-green-500/50 text-green-400 font-mono shadow-[0_0_20px_rgba(34,197,94,0.2)]'
-                        : (theme === 'light'
-                          ? 'bg-white/95 border-amber-300 text-slate-900 shadow-[0_10px_30px_rgba(212,175,55,0.25)]'
-                          : 'bg-slate-900/95 border-amber-500/40 text-white shadow-[0_10px_35px_rgba(0,0,0,0.6)]')
-                      }`}
-                    style={{
-                      transform: computedTransform,
-                      backfaceVisibility: 'visible',
-                      WebkitBackfaceVisibility: 'visible'
-                    }}
-                  >
-                    {/* Background Image with Gradient Overlay */}
-                    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                      <img
-                        src={face.img}
-                        alt={face.title}
-                        className="w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className={`absolute inset-0 bg-gradient-to-t ${theme === 'bot'
-                          ? 'from-black via-black/80 to-transparent'
-                          : (theme === 'light' ? 'from-white via-white/80 to-transparent' : 'from-slate-950 via-slate-950/80 to-transparent')
-                        }`} />
-                    </div>
-
-                    {/* Corner Status LED Indicator */}
-                    <div className={`absolute top-3 right-3 w-2 h-2 rounded-full ${isSelected ? 'bg-amber-400 scale-125' : (theme === 'bot' ? 'bg-green-400' : 'bg-slate-400')} animate-pulse z-20 pointer-events-none`} />
-
-                    {/* Header Badge & Date */}
-                    <div className="relative z-10 flex justify-between items-center pointer-events-none">
-                      <span className={`px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider ${theme === 'bot'
-                          ? 'bg-green-950/90 text-green-400 border border-green-500/40'
-                          : 'bg-amber-500/20 text-amber-500 border border-amber-500/30'
-                        }`}>
-                        {face.badge}
-                      </span>
-                      <span className="text-[9px] font-bold text-slate-400">{face.date}</span>
-                    </div>
-
-                    {/* Body Details */}
-                    <div className="relative z-10 my-auto text-left space-y-1 pointer-events-none">
-                      <div className="flex items-center gap-1.5">
-                        <div className={`p-1.5 rounded-lg ${theme === 'bot'
-                            ? 'bg-green-500/20 text-green-400'
-                            : 'bg-amber-500/20 text-amber-500'
-                          }`}>
-                          <Icon className="w-3.5 h-3.5" />
-                        </div>
-                        <span className="text-[11px] font-black uppercase tracking-wider text-amber-400">{face.stat}</span>
-                      </div>
-
-                      <h3 className={`text-sm font-black leading-tight tracking-tight line-clamp-1 ${theme === 'bot' ? 'text-green-400' : (theme === 'light' ? 'text-slate-900' : 'text-white')
-                        }`}>
-                        {face.title}
-                      </h3>
-                    </div>
-
-                    {/* Bottom Bar */}
-                    <div className="relative z-10 pt-1.5 border-t border-white/10 flex justify-between items-center text-[9px] font-bold pointer-events-none">
-                      <span className="text-slate-400">FACE #{index + 1}</span>
-                      <span className={`${theme === 'bot' ? 'text-green-500' : 'text-amber-400'} flex items-center gap-0.5`}>
-                        Click Face <ChevronRight className="w-3 h-3" />
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
+            <div className={`p-2 rounded-xl mb-1.5 ${theme === 'light' ? 'bg-amber-50 text-amber-600' : 'bg-amber-500/10 text-amber-400'}`}>
+              <Icon className="w-4 h-4 md:w-5 md:h-5" />
             </div>
+            <span className="text-[9px] uppercase font-bold tracking-widest text-slate-500">{card.label}</span>
+            <span className={`text-xs md:text-sm font-black mt-0.5 ${theme === 'light' ? 'text-slate-900' : 'text-white'}`}>{card.value}</span>
           </div>
-
-          {/* Floating Base Shadow */}
-          <div className={`w-[220px] h-[12px] rounded-full blur-xl pointer-events-none ${theme === 'bot' ? 'bg-green-500/20' : 'bg-amber-500/20'
-            }`} />
-
-          {/* Auto Rotation & View Controls */}
-          <div className="flex items-center justify-center gap-2">
-            <button
-              onClick={() => setAutoRotate(!autoRotate)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 border shadow-sm ${autoRotate
-                  ? (theme === 'bot' ? 'bg-green-950 border-green-500 text-green-400' : 'bg-amber-600 text-white border-amber-400')
-                  : (theme === 'bot' ? 'bg-black border-green-900 text-green-700' : 'bg-slate-800/80 border-slate-700 text-slate-300')
-                }`}
-            >
-              <RotateCw className={`w-3.5 h-3.5 ${autoRotate ? 'animate-spin' : ''}`} />
-              {autoRotate ? 'Pause Rotation' : 'Resume Auto Spin'}
-            </button>
-
-            <button
-              onClick={() => {
-                setAutoRotate(false);
-                setRotation({ x: -15, y: 25 });
-              }}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${theme === 'bot'
-                  ? 'bg-black/60 border-green-900 text-green-600 hover:text-green-400'
-                  : (theme === 'light' ? 'bg-white border-slate-200 text-slate-600 hover:bg-amber-50' : 'bg-slate-900/80 border-slate-800 text-slate-400 hover:text-white')
-                }`}
-            >
-              Reset View
-            </button>
-          </div>
-
-          <p className={`text-[11px] font-semibold text-slate-500 text-center ${theme === 'bot' ? 'font-mono text-green-700' : ''}`}>
-            💡 Drag cube directly to spin & view live details on right panel
-          </p>
-        </div>
-
-        {/* RIGHT COLUMN: HIGH-TECH HUD SIDE DETAILS PANEL (lg:col-span-7) */}
-        <div className="lg:col-span-7 w-full">
-          <div className={`relative rounded-3xl border p-4 sm:p-6 md:p-8 backdrop-blur-xl transition-all duration-500 overflow-hidden shadow-2xl ${theme === 'bot'
-              ? 'bg-black/90 border-green-500/40 font-mono text-green-400 shadow-[0_0_30px_rgba(34,197,94,0.15)]'
-              : (theme === 'light'
-                ? 'bg-white/95 border-amber-200/80 text-slate-900 shadow-[0_20px_50px_rgba(212,175,55,0.15)]'
-                : 'bg-slate-900/90 border-amber-500/30 text-white shadow-[0_20px_50px_rgba(0,0,0,0.5)]')
-            }`}>
-            {/* Cyber HUD Corner Elements */}
-            <div className="absolute top-0 left-0 w-8 h-8 sm:w-12 sm:h-12 border-t-2 border-l-2 border-amber-500/50 rounded-tl-3xl pointer-events-none" />
-            <div className="absolute top-0 right-0 w-8 h-8 sm:w-12 sm:h-12 border-t-2 border-r-2 border-amber-500/50 rounded-tr-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-8 h-8 sm:w-12 sm:h-12 border-b-2 border-l-2 border-amber-500/50 rounded-bl-3xl pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-8 h-8 sm:w-12 sm:h-12 border-b-2 border-r-2 border-amber-500/50 rounded-br-3xl pointer-events-none" />
-
-            {/* HUD Telemetry Top Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-2.5 pb-3 sm:pb-4 border-b border-slate-500/20 mb-4 sm:mb-6">
-              <div className="flex items-center gap-2">
-                <span className={`w-2.5 h-2.5 rounded-full ${theme === 'bot' ? 'bg-green-400' : 'bg-amber-400'} animate-ping`} />
-                <span className={`text-[10px] sm:text-xs font-black uppercase tracking-widest ${theme === 'bot' ? 'text-green-400' : 'text-amber-500'
-                  }`}>
-                  SYS.CUBE.TELEMETRY // LIVE: {activeFace.label.toUpperCase()}
-                </span>
-              </div>
-
-              {/* Real-time Status Badge */}
-              <div className="flex items-center gap-2 text-[9px] sm:text-[10px] font-mono px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/30 border border-white/10 text-slate-300">
-                <span className="text-amber-400 font-bold">FACE #{activeFaceIndex + 1}</span>
-                <span className="text-slate-500">|</span>
-                <span>ORIENT: {activeFace.badge}</span>
-              </div>
-            </div>
-
-            {/* Main Content Details */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-
-              {/* Event Image Banner with Tech Overlay */}
-              <div className="md:col-span-5 relative rounded-2xl overflow-hidden border border-slate-700/50 aspect-video md:aspect-square group shadow-lg">
-                <img
-                  src={activeFace.img}
-                  alt={activeFace.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
-
-                {/* HUD Overlay Crosshairs */}
-                <div className="absolute top-2 left-2 text-[9px] font-mono text-amber-400/80 bg-black/60 px-1.5 py-0.5 rounded">
-                  POS: {activeFace.id.toUpperCase()}
-                </div>
-                <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center text-[10px] text-white font-bold">
-                  <span className="flex items-center gap-1"><MapPin className="w-3 h-3 text-amber-400" /> {activeFace.location}</span>
-                  <span className="flex items-center gap-1"><Calendar className="w-3 h-3 text-amber-400" /> {activeFace.date}</span>
-                </div>
-              </div>
-
-              {/* Event Text & Impact Metrics */}
-              <div className="md:col-span-7 space-y-4">
-
-                {/* Header Title & Badge */}
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className={`px-2.5 py-0.5 rounded-full text-xs font-black uppercase tracking-wider ${theme === 'bot'
-                        ? 'bg-green-950 text-green-400 border border-green-500/40'
-                        : 'bg-amber-500/20 text-amber-500 border border-amber-500/30'
-                      }`}>
-                      {activeFace.badge}
-                    </span>
-                    <span className="text-xs font-extrabold text-amber-400 flex items-center gap-1">
-                      <ActiveIcon className="w-3.5 h-3.5" /> {activeFace.stat}
-                    </span>
-                  </div>
-
-                  <h2 className={`text-xl sm:text-2xl font-black tracking-tight leading-snug ${theme === 'bot' ? 'text-green-400' : (theme === 'light' ? 'text-slate-900' : 'text-white')
-                    }`}>
-                    {activeFace.title}
-                  </h2>
-                </div>
-
-                {/* Detailed Description */}
-                <p className={`text-xs sm:text-sm leading-relaxed ${theme === 'bot' ? 'text-green-700' : (theme === 'light' ? 'text-slate-600' : 'text-slate-300')
-                  }`}>
-                  {activeFace.desc}
-                </p>
-
-                {/* Key Metrics HUD Grid */}
-                <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5 py-1.5 sm:py-2">
-                  {activeFace.metrics.map((m, idx) => (
-                    <div
-                      key={idx}
-                      className={`p-1.5 sm:p-2.5 rounded-xl border text-center ${theme === 'bot'
-                          ? 'bg-green-950/40 border-green-800'
-                          : (theme === 'light' ? 'bg-amber-50/80 border-amber-200' : 'bg-slate-800/60 border-slate-700')
-                        }`}
-                    >
-                      <div className={`text-[10px] sm:text-xs md:text-sm font-black truncate ${theme === 'bot' ? 'text-green-400' : (theme === 'light' ? 'text-amber-800' : 'text-amber-400')
-                        }`}>
-                        {m.value}
-                      </div>
-                      <div className="text-[8px] sm:text-[9px] font-bold text-slate-400 uppercase tracking-tight mt-0.5 truncate">
-                        {m.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Tech & Skill Tags */}
-                <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                  {activeFace.tags.map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className={`text-[10px] font-mono px-2 py-0.5 rounded-md border ${theme === 'bot'
-                          ? 'bg-black border-green-800 text-green-500'
-                          : (theme === 'light' ? 'bg-slate-100 border-slate-200 text-slate-700' : 'bg-slate-800 border-slate-700 text-slate-300')
-                        }`}
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-
-              </div>
-            </div>
-
-            {/* Bottom HUD Footer */}
-            <div className="mt-6 pt-4 border-t border-slate-500/20 flex items-center justify-between">
-              <div className="text-[11px] font-semibold text-slate-400 flex items-center gap-1.5">
-                <Users className="w-3.5 h-3.5 text-amber-500" />
-                <span>Unit: <strong className={theme === 'bot' ? 'text-green-400' : 'text-slate-200'}>{activeFace.team}</strong></span>
-              </div>
-
-              <div className="text-[10px] font-mono text-slate-400 flex items-center gap-1.5 bg-black/20 px-2.5 py-1 rounded-full border border-white/5">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                REALTIME DETECTOR ACTIVE
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
+        );
+      })}
     </div>
   );
 };
@@ -3417,8 +2882,8 @@ const Cube3DGallery = ({ theme }) => {
 const StatsModal = ({ isOpen, onClose, theme }) => {
   if (!isOpen) return null;
 
-  const bgClass = theme === 'bot'
-    ? 'bg-black/95 border-green-950 text-green-400 font-mono rounded-none'
+  const bgClass = theme === 'bot' 
+    ? 'bg-black/95 border-green-950 text-green-400 font-mono rounded-none' 
     : (theme === 'light' ? 'bg-white border-slate-200 text-slate-900 rounded-3xl' : 'bg-slate-950/95 border-slate-850 text-white rounded-3xl');
 
   const stats = [
@@ -3452,12 +2917,13 @@ const StatsModal = ({ isOpen, onClose, theme }) => {
           {stats.map((stat, i) => {
             const Icon = stat.icon;
             return (
-              <div
-                key={i}
-                className={`p-5 rounded-2xl border ${theme === 'bot'
-                    ? 'border-green-950 bg-black/40'
+              <div 
+                key={i} 
+                className={`p-5 rounded-2xl border ${
+                  theme === 'bot' 
+                    ? 'border-green-950 bg-black/40' 
                     : (theme === 'light' ? 'bg-slate-50 border-slate-100' : 'bg-slate-900/40 border-slate-800/40')
-                  }`}
+                }`}
               >
                 <div className="flex justify-between items-start mb-3">
                   <span className={`text-3xl font-black ${theme === 'bot' ? 'text-green-400' : 'text-amber-500'}`}>{stat.value}</span>
@@ -3471,10 +2937,11 @@ const StatsModal = ({ isOpen, onClose, theme }) => {
         </div>
 
         {/* Short Timeline summary */}
-        <div className={`p-6 rounded-2xl border mb-6 ${theme === 'bot'
-            ? 'border-green-950 bg-black/40'
+        <div className={`p-6 rounded-2xl border mb-6 ${
+          theme === 'bot' 
+            ? 'border-green-950 bg-black/40' 
             : (theme === 'light' ? 'bg-slate-50 border-slate-100' : 'bg-slate-900/40 border-slate-800/40')
-          }`}>
+        }`}>
           <h3 className="font-extrabold mb-4 text-sm uppercase tracking-wider flex items-center gap-2">
             <Milestone className="w-4 h-4 text-amber-500" /> Historic Landmark Eras
           </h3>
@@ -3505,240 +2972,250 @@ const StatsModal = ({ isOpen, onClose, theme }) => {
 
 // --- REDESIGNED GALLERY PAGE ---
 const GalleryPage = ({ theme }) => {
-  const [activeTab, setActiveTab] = useState('achievements');
-  const [selectedAlbum, setSelectedAlbum] = useState(null);
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const [isStatsOpen, setIsStatsOpen] = useState(false);
+    const [activeTab, setActiveTab] = useState('achievements');
+    const [selectedAlbum, setSelectedAlbum] = useState(null);
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+    const [isStatsOpen, setIsStatsOpen] = useState(false);
 
-  const data = GALLERY_DATA[activeTab];
-  const featuredAlbum = GALLERY_DATA.achievements[0]; // SIH Winners
+    const data = GALLERY_DATA[activeTab];
+    const featuredAlbum = GALLERY_DATA.achievements[0]; // SIH Winners
 
-  const cardClass = theme === 'bot' ? 'bg-black/80 border border-green-900 hover:border-green-500' : (theme === 'light' ? 'bg-white border border-slate-200 hover:border-amber-300' : 'bg-slate-900/80 border border-slate-800 hover:border-amber-500');
-
-  return (
-    <section className="px-6 pb-24 min-h-screen pt-24 bg-transparent relative z-10">
-      <div className="max-w-7xl mx-auto">
-        <SectionTitle theme={theme} title="Digital Museum" subtitle="Documenting our memories, collaborations, and celebrations." />
-
-        {/* 3D Interactive Achievement Cube */}
-        <div className="animate-[fade-in_0.7s_ease-out]">
-          <Cube3DGallery theme={theme} onClick={() => setIsStatsOpen(true)} />
-        </div>
-
-        {/* Segmented Control / Tabs */}
-        <div className="flex justify-center mb-12">
-          <div className={`p-1.5 rounded-full flex gap-1 border backdrop-blur-md ${theme === 'bot'
-              ? 'bg-black border-green-900'
-              : (theme === 'light' ? 'bg-slate-100/80 border-slate-200' : 'bg-slate-900/80 border-slate-800')
-            }`}>
-            <button
-              onClick={() => setActiveTab('achievements')}
-              className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${activeTab === 'achievements'
-                  ? (theme === 'bot' ? 'bg-green-950/40 text-green-500 border border-green-500' : 'bg-amber-600 text-white shadow-md')
-                  : (theme === 'bot' ? 'text-green-700' : 'text-slate-500 hover:text-slate-400')
-                }`}
-            >
-              <Trophy className="w-4 h-4" /> Achievements & Celebrations
-            </button>
-            <button
-              onClick={() => setActiveTab('surveys')}
-              className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${activeTab === 'surveys'
-                  ? (theme === 'bot' ? 'bg-green-950/40 text-green-500 border border-green-500' : 'bg-amber-600 text-white shadow-md')
-                  : (theme === 'bot' ? 'text-green-700' : 'text-slate-500 hover:text-slate-400')
-                }`}
-            >
-              <Images className="w-4 h-4" /> Surveys
-            </button>
-          </div>
-        </div>
-
-        {/* Masonry Mosaic Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[250px] md:auto-rows-[280px] mb-16 animate-[fade-in_0.5s_ease-out]">
-          {data.map((item) => {
-            let IconElement = Award;
-            if (item.icon === 'trophy') IconElement = Trophy;
-            else if (item.icon === 'medal') IconElement = Medal;
-            else if (item.icon === 'award') IconElement = Award;
-            else if (item.icon === 'cheers') IconElement = Sparkles;
-            else if (item.icon === 'clipboard') IconElement = ClipboardList;
-            else if (item.icon === 'building') IconElement = Building2;
-            else if (item.icon === 'users') IconElement = Users;
-            else if (item.icon === 'book') IconElement = GraduationCap;
-            else if (item.icon === 'tree') IconElement = Trees;
-
-            return (
-              <div
-                key={item.id}
-                onClick={() => {
-                  setSelectedAlbum(item);
-                  setIsLightboxOpen(true);
-                }}
-                className={`group relative overflow-hidden rounded-[24px] ${cardClass} ${item.sizeClass} hover:-translate-y-2 transition-all duration-350 cursor-pointer shadow-lg hover:shadow-2xl`}
-              >
-                {/* Image cover with zoom */}
-                <div className="absolute inset-0 bg-slate-900 z-0">
-                  <img
-                    src={item.cover}
-                    alt={item.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent z-10" />
+    const cardClass = theme === 'bot' ? 'bg-black/80 border border-green-900 hover:border-green-500' : (theme === 'light' ? 'bg-white border border-slate-200 hover:border-amber-300' : 'bg-slate-900/80 border border-slate-800 hover:border-amber-500');
+    
+    return (
+        <section className="px-6 pb-24 min-h-screen pt-24 bg-transparent relative z-10">
+             <div className="max-w-7xl mx-auto">
+                <SectionTitle theme={theme} title="Digital Museum" subtitle="Documenting our memories, collaborations, and celebrations." />
+                
+                {/* NEW Animated Centerpiece with Floating Panels */}
+                <div className="animate-[fade-in_0.7s_ease-out]">
+                  <FuturisticCenterpiece theme={theme} onClick={() => setIsStatsOpen(true)} />
                 </div>
 
-                {/* Top badge */}
-                <div className="absolute top-4 left-4 z-20">
-                  <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-black/60 text-amber-400 border border-amber-500/25`}>
-                    {item.badge}
-                  </span>
-                </div>
-
-                {/* Photo count indicator */}
-                <div className="absolute top-4 right-4 z-20 flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-black/60 text-slate-300 border border-white/10">
-                  <Images className="w-3 h-3 text-amber-500" />
-                  {item.photos.length} Photos
-                </div>
-
-                {/* Content overlay */}
-                <div className="absolute inset-x-0 bottom-0 p-6 z-20 flex flex-col justify-end">
-                  <h3 className="text-lg sm:text-xl font-black text-white flex items-center gap-2 mb-1.5 tracking-tight group-hover:text-amber-300 transition-colors">
-                    <IconElement className="w-5 h-5 text-amber-500 flex-shrink-0" />
-                    {item.title}
-                  </h3>
-
-                  <p className="text-xs text-slate-300 line-clamp-2 mb-2 font-medium leading-relaxed">
-                    {item.desc}
-                  </p>
-
-                  <div className="flex items-center gap-3 text-[10.5px] font-bold text-slate-400">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5 text-amber-500/80" /> {item.date}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-amber-500/80" /> {item.location}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Featured Hero Section */}
-        <div className="mb-16 animate-[fade-in_0.6s_ease-out]">
-          <div className={`relative overflow-hidden rounded-[24px] border transition-all duration-350 ${theme === 'bot'
-              ? 'bg-black/90 border-green-900'
-              : (theme === 'light' ? 'bg-white border-slate-200 shadow-xl' : 'bg-slate-900/90 border-slate-850')
-            }`}>
-            <div className="grid grid-cols-1 lg:grid-cols-12">
-              {/* Image banner */}
-              <div className="lg:col-span-7 h-64 sm:h-96 relative overflow-hidden bg-slate-950">
-                <img
-                  src={featuredAlbum.cover}
-                  alt={featuredAlbum.title}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent lg:hidden" />
-              </div>
-
-              {/* Content text */}
-              <div className="lg:col-span-5 p-8 sm:p-10 flex flex-col justify-center">
-                <div className="mb-4">
-                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider ${theme === 'bot'
-                      ? 'bg-green-950/40 text-green-400 border border-green-800 font-mono'
-                      : (theme === 'light' ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-amber-500/10 text-amber-400 border border-amber-500/20')
+                {/* Segmented Control / Tabs */}
+                <div className="flex justify-center mb-12">
+                    <div className={`p-1.5 rounded-full flex gap-1 border backdrop-blur-md ${
+                      theme === 'bot' 
+                        ? 'bg-black border-green-900' 
+                        : (theme === 'light' ? 'bg-slate-100/80 border-slate-200' : 'bg-slate-900/80 border-slate-800')
                     }`}>
-                    <Trophy className="w-3.5 h-3.5 text-amber-500" /> Featured Memory
-                  </span>
+                        <button 
+                          onClick={() => setActiveTab('achievements')} 
+                          className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${
+                            activeTab === 'achievements' 
+                              ? (theme === 'bot' ? 'bg-green-950/40 text-green-500 border border-green-500' : 'bg-amber-600 text-white shadow-md') 
+                              : (theme === 'bot' ? 'text-green-700' : 'text-slate-500 hover:text-slate-400')
+                          }`}
+                        >
+                            <Trophy className="w-4 h-4"/> Achievements & Celebrations
+                        </button>
+                        <button 
+                          onClick={() => setActiveTab('surveys')} 
+                          className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${
+                            activeTab === 'surveys' 
+                              ? (theme === 'bot' ? 'bg-green-950/40 text-green-500 border border-green-500' : 'bg-amber-600 text-white shadow-md') 
+                              : (theme === 'bot' ? 'text-green-700' : 'text-slate-500 hover:text-slate-400')
+                          }`}
+                        >
+                            <Images className="w-4 h-4"/> Surveys & Journey
+                        </button>
+                    </div>
                 </div>
 
-                <h2 className={`text-2xl sm:text-3xl font-black tracking-tight mb-3 transition-colors ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')
-                  }`}>
-                  {featuredAlbum.title}
-                </h2>
+                {/* Masonry Mosaic Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[250px] md:auto-rows-[280px] mb-16 animate-[fade-in_0.5s_ease-out]">
+                    {data.map((item) => {
+                        let IconElement = Award;
+                        if (item.icon === 'trophy') IconElement = Trophy;
+                        else if (item.icon === 'medal') IconElement = Medal;
+                        else if (item.icon === 'award') IconElement = Award;
+                        else if (item.icon === 'cheers') IconElement = Sparkles;
+                        else if (item.icon === 'clipboard') IconElement = ClipboardList;
+                        else if (item.icon === 'building') IconElement = Building2;
+                        else if (item.icon === 'users') IconElement = Users;
+                        else if (item.icon === 'book') IconElement = GraduationCap;
+                        else if (item.icon === 'tree') IconElement = Trees;
 
-                <p className={`text-sm leading-relaxed mb-6 ${theme === 'bot' ? 'text-green-700 font-mono' : (theme === 'light' ? 'text-slate-650' : 'text-slate-400')
-                  }`}>
-                  {featuredAlbum.desc}
-                </p>
+                        return (
+                            <div 
+                              key={item.id} 
+                              onClick={() => {
+                                  setSelectedAlbum(item);
+                                  setIsLightboxOpen(true);
+                              }}
+                              className={`group relative overflow-hidden rounded-[24px] ${cardClass} ${item.sizeClass} hover:-translate-y-2 transition-all duration-350 cursor-pointer shadow-lg hover:shadow-2xl`}
+                            >
+                                 {/* Image cover with zoom */}
+                                 <div className="absolute inset-0 bg-slate-900 z-0">
+                                     <img 
+                                       src={item.cover} 
+                                       alt={item.title} 
+                                       loading="lazy"
+                                       className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-500" 
+                                     />
+                                     {/* Gradient overlay */}
+                                     <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent z-10" />
+                                 </div>
 
-                <div className={`flex flex-col sm:flex-row sm:items-center gap-4 mb-8 text-xs font-semibold ${theme === 'bot' ? 'text-green-700' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400')
-                  }`}>
-                  <div className="flex items-center gap-1.5">
-                    <Calendar className="w-4 h-4 text-amber-500" /> {featuredAlbum.date}
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <MapPin className="w-4 h-4 text-amber-500" /> {featuredAlbum.location}
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Images className="w-4 h-4 text-amber-500" /> {featuredAlbum.photos.length} Photos
-                  </div>
+                                 {/* Top badge */}
+                                 <div className="absolute top-4 left-4 z-20">
+                                     <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-black/60 text-amber-400 border border-amber-500/25`}>
+                                         {item.badge}
+                                     </span>
+                                 </div>
+
+                                 {/* Photo count indicator */}
+                                 <div className="absolute top-4 right-4 z-20 flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-black/60 text-slate-300 border border-white/10">
+                                     <Images className="w-3 h-3 text-amber-500" />
+                                     {item.photos.length} Photos
+                                 </div>
+
+                                 {/* Content overlay */}
+                                 <div className="absolute inset-x-0 bottom-0 p-6 z-20 flex flex-col justify-end">
+                                     <h3 className="text-lg sm:text-xl font-black text-white flex items-center gap-2 mb-1.5 tracking-tight group-hover:text-amber-300 transition-colors">
+                                         <IconElement className="w-5 h-5 text-amber-500 flex-shrink-0" />
+                                         {item.title}
+                                     </h3>
+                                     
+                                     <p className="text-xs text-slate-300 line-clamp-2 mb-2 font-medium leading-relaxed">
+                                         {item.desc}
+                                     </p>
+
+                                     <div className="flex items-center gap-3 text-[10.5px] font-bold text-slate-400">
+                                         <span className="flex items-center gap-1">
+                                             <Calendar className="w-3.5 h-3.5 text-amber-500/80" /> {item.date}
+                                         </span>
+                                         <span className="flex items-center gap-1">
+                                             <MapPin className="w-3.5 h-3.5 text-amber-500/80" /> {item.location}
+                                         </span>
+                                     </div>
+                                 </div>
+                            </div>
+                        );
+                    })}
                 </div>
 
-                <button
-                  onClick={() => {
-                    setSelectedAlbum(featuredAlbum);
-                    setIsLightboxOpen(true);
-                  }}
-                  className={`inline-flex items-center justify-center gap-2 self-start px-6 py-3 rounded-full font-black text-xs uppercase tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 ${theme === 'bot'
-                      ? 'bg-black border border-green-500 text-green-400 font-mono rounded-none'
-                      : (theme === 'light'
-                        ? 'bg-[#8a6500] hover:bg-[#705200] text-white hover:shadow-[0_0_15px_rgba(138,101,0,0.3)]'
-                        : 'bg-[#D4AF37] hover:bg-[#c59f2e] text-black hover:shadow-[0_0_15px_rgba(212,175,55,0.35)]')
-                    }`}
-                >
-                  <Eye className="w-4 h-4" /> View Full Album
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+                {/* Featured Hero Section */}
+                <div className="mb-16 animate-[fade-in_0.6s_ease-out]">
+                    <div className={`relative overflow-hidden rounded-[24px] border transition-all duration-350 ${
+                        theme === 'bot' 
+                          ? 'bg-black/90 border-green-900' 
+                          : (theme === 'light' ? 'bg-white border-slate-200 shadow-xl' : 'bg-slate-900/90 border-slate-850')
+                    }`}>
+                        <div className="grid grid-cols-1 lg:grid-cols-12">
+                            {/* Image banner */}
+                            <div className="lg:col-span-7 h-64 sm:h-96 relative overflow-hidden bg-slate-950">
+                                <img 
+                                  src={featuredAlbum.cover} 
+                                  alt={featuredAlbum.title} 
+                                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent lg:hidden" />
+                            </div>
 
-      </div>
+                            {/* Content text */}
+                            <div className="lg:col-span-5 p-8 sm:p-10 flex flex-col justify-center">
+                                <div className="mb-4">
+                                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider ${
+                                        theme === 'bot' 
+                                          ? 'bg-green-950/40 text-green-400 border border-green-800 font-mono' 
+                                          : (theme === 'light' ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-amber-500/10 text-amber-400 border border-amber-500/20')
+                                    }`}>
+                                      <Trophy className="w-3.5 h-3.5 text-amber-500" /> Featured Memory
+                                    </span>
+                                </div>
 
-      {/* Lightbox Album Modal */}
-      <Lightbox
-        album={selectedAlbum}
-        isOpen={isLightboxOpen}
-        onClose={() => {
-          setIsLightboxOpen(false);
-          setSelectedAlbum(null);
-        }}
-      />
+                                <h2 className={`text-2xl sm:text-3xl font-black tracking-tight mb-3 transition-colors ${
+                                    theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')
+                                }`}>
+                                    {featuredAlbum.title}
+                                </h2>
+                                
+                                <p className={`text-sm leading-relaxed mb-6 ${
+                                    theme === 'bot' ? 'text-green-700 font-mono' : (theme === 'light' ? 'text-slate-650' : 'text-slate-400')
+                                }`}>
+                                    {featuredAlbum.desc}
+                                </p>
 
-      {/* Stats Summary Modal Dashboard */}
-      <StatsModal
-        isOpen={isStatsOpen}
-        onClose={() => setIsStatsOpen(false)}
-        theme={theme}
-      />
-    </section>
-  );
+                                <div className={`flex flex-col sm:flex-row sm:items-center gap-4 mb-8 text-xs font-semibold ${
+                                    theme === 'bot' ? 'text-green-700' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400')
+                                }`}>
+                                    <div className="flex items-center gap-1.5">
+                                        <Calendar className="w-4 h-4 text-amber-500" /> {featuredAlbum.date}
+                                    </div>
+                                    <div className="flex items-center gap-1.5">
+                                        <MapPin className="w-4 h-4 text-amber-500" /> {featuredAlbum.location}
+                                    </div>
+                                    <div className="flex items-center gap-1.5">
+                                        <Images className="w-4 h-4 text-amber-500" /> {featuredAlbum.photos.length} Photos
+                                    </div>
+                                </div>
+
+                                <button 
+                                  onClick={() => {
+                                      setSelectedAlbum(featuredAlbum);
+                                      setIsLightboxOpen(true);
+                                  }}
+                                  className={`inline-flex items-center justify-center gap-2 self-start px-6 py-3 rounded-full font-black text-xs uppercase tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 ${
+                                      theme === 'bot' 
+                                        ? 'bg-black border border-green-500 text-green-400 font-mono rounded-none' 
+                                        : (theme === 'light' 
+                                            ? 'bg-[#8a6500] hover:bg-[#705200] text-white hover:shadow-[0_0_15px_rgba(138,101,0,0.3)]' 
+                                            : 'bg-[#D4AF37] hover:bg-[#c59f2e] text-black hover:shadow-[0_0_15px_rgba(212,175,55,0.35)]')
+                                  }`}
+                                >
+                                    <Eye className="w-4 h-4" /> View Full Album
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Timeline for Surveys & Journey */}
+                {activeTab === 'surveys' && (
+                  <div className="mt-16 animate-[fade-in_0.5s_ease-out]">
+                    <div className="text-center mb-12">
+                      <span className={`text-xs font-mono font-bold tracking-widest uppercase ${theme === 'bot' ? 'text-green-500' : 'text-amber-500'}`}>
+                        // OUR CHRONOLOGY
+                      </span>
+                      <h3 className={`text-3xl font-extrabold mt-2 ${theme === 'bot' ? 'text-white' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>
+                        Journey Timeline
+                      </h3>
+                    </div>
+                    <JourneyTimeline theme={theme} />
+                  </div>
+                )}
+             </div>
+
+             {/* Lightbox Album Modal */}
+             <Lightbox 
+               album={selectedAlbum} 
+               isOpen={isLightboxOpen} 
+               onClose={() => {
+                   setIsLightboxOpen(false);
+                   setSelectedAlbum(null);
+               }} 
+             />
+
+             {/* Stats Summary Modal Dashboard */}
+             <StatsModal 
+               isOpen={isStatsOpen} 
+               onClose={() => setIsStatsOpen(false)} 
+               theme={theme} 
+             />
+        </section>
+    );
 };
 
 const LegacyMapPage = ({ theme }) => {
-  return (
-    <section className="min-h-screen pt-24 pb-24 bg-transparent relative z-10">
-      <div className="max-w-7xl mx-auto px-6">
-        <SectionTitle theme={theme} title="Presidential Map" subtitle="The leadership eras of Solution Developers." />
-        <LeadershipTimeline theme={theme} />
-
-        {/* Journey Timeline under Presidential Map */}
-        <div className="mt-16 animate-[fade-in_0.5s_ease-out]">
-          <div className="text-center mb-12">
-            <span className={`text-xs font-mono font-bold tracking-widest uppercase ${theme === 'bot' ? 'text-green-500' : 'text-amber-500'}`}>
-                      // OUR CHRONOLOGY
-            </span>
-            <h3 className={`text-3xl font-extrabold mt-2 ${theme === 'bot' ? 'text-white' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>
-              Journey Timeline
-            </h3>
-          </div>
-          <JourneyTimeline theme={theme} />
-        </div>
-      </div>
-    </section>
-  );
+    return (
+        <section className="min-h-screen pt-24 pb-24 bg-transparent relative z-10">
+            <div className="max-w-7xl mx-auto px-6">
+                <SectionTitle theme={theme} title="Presidential Map" subtitle="The leadership eras of Solution Developers." />
+                <LeadershipTimeline theme={theme} />
+            </div>
+        </section>
+    );
 };
 
 const EVENTS_DATA = [
@@ -3785,14 +3262,16 @@ const EventsPage = ({ theme }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {EVENTS_DATA.map((evt) => (
             <RevealOnScroll key={evt.id}>
-              <div className={`group h-full flex flex-col overflow-hidden transition-all duration-300 backdrop-blur-md border ${theme === 'bot'
-                  ? 'bg-black/80 border-green-900 hover:border-green-500 rounded-none hover:shadow-[0_0_20px_rgba(34,197,94,0.1)]'
+              <div className={`group h-full flex flex-col overflow-hidden transition-all duration-300 backdrop-blur-md border ${
+                theme === 'bot' 
+                  ? 'bg-black/80 border-green-900 hover:border-green-500 rounded-none hover:shadow-[0_0_20px_rgba(34,197,94,0.1)]' 
                   : (theme === 'light' ? 'bg-white/80 rounded-2xl border-slate-200 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-500/10' : 'bg-slate-900/80 rounded-2xl border-slate-800 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-900/20')
-                }`}>
+              }`}>
                 <div className="h-48 relative overflow-hidden bg-slate-800">
                   <img src={evt.image} alt={evt.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                  <span className={`absolute top-4 right-4 text-xs font-mono px-2.5 py-1 border uppercase tracking-wider ${theme === 'bot' ? 'bg-black border-green-700 text-green-400 rounded-none' : 'bg-slate-900/90 border-slate-800 text-amber-400 rounded-full'
-                    }`}>
+                  <span className={`absolute top-4 right-4 text-xs font-mono px-2.5 py-1 border uppercase tracking-wider ${
+                    theme === 'bot' ? 'bg-black border-green-700 text-green-400 rounded-none' : 'bg-slate-900/90 border-slate-800 text-amber-400 rounded-full'
+                  }`}>
                     {evt.tag}
                   </span>
                 </div>
@@ -3828,15 +3307,16 @@ const AuthPage = ({ theme }) => {
 
   return (
     <section className="min-h-screen pt-32 pb-24 flex items-center justify-center bg-transparent relative z-10 px-6">
-      <div className={`w-full max-w-md p-8 backdrop-blur-md border transition-all duration-500 ${theme === 'bot'
-          ? 'bg-black/90 border-green-900 rounded-none shadow-[0_0_30px_rgba(34,197,94,0.15)]'
+      <div className={`w-full max-w-md p-8 backdrop-blur-md border transition-all duration-500 ${
+        theme === 'bot' 
+          ? 'bg-black/90 border-green-900 rounded-none shadow-[0_0_30px_rgba(34,197,94,0.15)]' 
           : (theme === 'light' ? 'bg-white/95 rounded-3xl border-slate-200 shadow-2xl' : 'bg-slate-900/95 rounded-3xl border-slate-800 shadow-2xl')
-        }`}>
+      }`}>
         <div className="text-center mb-8">
-          <img
-            src="/my-logo.png"
-            alt="Solution Developers"
-            className="w-16 h-16 object-contain mx-auto mb-4"
+          <img 
+            src="/my-logo.png" 
+            alt="Solution Developers" 
+            className="w-16 h-16 object-contain mx-auto mb-4" 
           />
           <h2 className={`text-2xl font-bold uppercase tracking-wider ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>
             {isLogin ? "Soluper Portal" : "Join the Syndicate"}
@@ -3850,29 +3330,31 @@ const AuthPage = ({ theme }) => {
           {!isLogin && (
             <div>
               <label className={`block text-xs uppercase tracking-widest font-bold mb-2 ${theme === 'bot' ? 'text-green-700' : 'text-slate-400'}`}>Full Name</label>
-              <input
-                type="text"
+              <input 
+                type="text" 
                 required
-                className={`w-full px-4 py-3 text-sm focus:outline-none transition-colors bg-transparent border ${theme === 'bot'
-                    ? 'border-green-800 text-green-400 rounded-none focus:border-green-500 font-mono'
+                className={`w-full px-4 py-3 text-sm focus:outline-none transition-colors bg-transparent border ${
+                  theme === 'bot' 
+                    ? 'border-green-800 text-green-400 rounded-none focus:border-green-500 font-mono' 
                     : (theme === 'light' ? 'border-slate-200 text-slate-900 rounded-xl focus:border-amber-500' : 'border-slate-800 text-white rounded-xl focus:border-amber-500')
-                  }`}
+                }`}
                 placeholder="Enter full name..."
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               />
             </div>
           )}
-
+          
           <div>
             <label className={`block text-xs uppercase tracking-widest font-bold mb-2 ${theme === 'bot' ? 'text-green-700' : 'text-slate-400'}`}>Soluper Email</label>
-            <input
-              type="email"
+            <input 
+              type="email" 
               required
-              className={`w-full px-4 py-3 text-sm focus:outline-none transition-colors bg-transparent border ${theme === 'bot'
-                  ? 'border-green-800 text-green-400 rounded-none focus:border-green-500 font-mono'
+              className={`w-full px-4 py-3 text-sm focus:outline-none transition-colors bg-transparent border ${
+                theme === 'bot' 
+                  ? 'border-green-800 text-green-400 rounded-none focus:border-green-500 font-mono' 
                   : (theme === 'light' ? 'border-slate-200 text-slate-900 rounded-xl focus:border-amber-500' : 'border-slate-800 text-white rounded-xl focus:border-amber-500')
-                }`}
+              }`}
               placeholder="name@solutiondevelopers.org"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -3881,13 +3363,14 @@ const AuthPage = ({ theme }) => {
 
           <div>
             <label className={`block text-xs uppercase tracking-widest font-bold mb-2 ${theme === 'bot' ? 'text-green-700' : 'text-slate-400'}`}>Security Key</label>
-            <input
-              type="password"
+            <input 
+              type="password" 
               required
-              className={`w-full px-4 py-3 text-sm focus:outline-none transition-colors bg-transparent border ${theme === 'bot'
-                  ? 'border-green-800 text-green-400 rounded-none focus:border-green-500 font-mono'
+              className={`w-full px-4 py-3 text-sm focus:outline-none transition-colors bg-transparent border ${
+                theme === 'bot' 
+                  ? 'border-green-800 text-green-400 rounded-none focus:border-green-500 font-mono' 
                   : (theme === 'light' ? 'border-slate-200 text-slate-900 rounded-xl focus:border-amber-500' : 'border-slate-800 text-white rounded-xl focus:border-amber-500')
-                }`}
+              }`}
               placeholder="••••••••"
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -3897,12 +3380,13 @@ const AuthPage = ({ theme }) => {
           {!isLogin && (
             <div>
               <label className={`block text-xs uppercase tracking-widest font-bold mb-2 ${theme === 'bot' ? 'text-green-700' : 'text-slate-400'}`}>Syndicate Role Invitation Code</label>
-              <input
-                type="text"
-                className={`w-full px-4 py-3 text-sm focus:outline-none transition-colors bg-transparent border ${theme === 'bot'
-                    ? 'border-green-800 text-green-400 rounded-none focus:border-green-500 font-mono'
+              <input 
+                type="text" 
+                className={`w-full px-4 py-3 text-sm focus:outline-none transition-colors bg-transparent border ${
+                  theme === 'bot' 
+                    ? 'border-green-800 text-green-400 rounded-none focus:border-green-500 font-mono' 
                     : (theme === 'light' ? 'border-slate-200 text-slate-900 rounded-xl focus:border-amber-500' : 'border-slate-800 text-white rounded-xl focus:border-amber-500')
-                  }`}
+                }`}
                 placeholder="INV-XXXX-2025"
                 value={formData.roleCode}
                 onChange={(e) => setFormData({ ...formData, roleCode: e.target.value })}
@@ -3910,22 +3394,24 @@ const AuthPage = ({ theme }) => {
             </div>
           )}
 
-          <button
-            type="submit"
-            className={`w-full py-3.5 mt-2 text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:scale-[1.02] active:scale-95 ${theme === 'bot'
-                ? 'bg-green-500 text-black font-mono border-none hover:shadow-[0_0_15px_rgba(34,197,94,0.4)]'
+          <button 
+            type="submit" 
+            className={`w-full py-3.5 mt-2 text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:scale-[1.02] active:scale-95 ${
+              theme === 'bot' 
+                ? 'bg-green-500 text-black font-mono border-none hover:shadow-[0_0_15px_rgba(34,197,94,0.4)]' 
                 : 'bg-amber-600 hover:bg-amber-500 text-white rounded-xl shadow-lg shadow-amber-500/20'
-              }`}
+            }`}
           >
             {isLogin ? "Execute Protocol" : "Initialize Registry"}
           </button>
         </form>
 
         <div className="mt-6 text-center border-t border-slate-800/20 pt-4">
-          <button
-            onClick={() => setIsLogin(!isLogin)}
-            className={`text-xs underline hover:text-amber-500 transition-colors ${theme === 'bot' ? 'text-green-700 hover:text-green-400 font-mono' : 'text-slate-400'
-              }`}
+          <button 
+            onClick={() => setIsLogin(!isLogin)} 
+            className={`text-xs underline hover:text-amber-500 transition-colors ${
+              theme === 'bot' ? 'text-green-700 hover:text-green-400 font-mono' : 'text-slate-400'
+            }`}
           >
             {isLogin ? "Request Membership Protocol (Sign Up)" : "Access Existing Portal (Sign In)"}
           </button>
@@ -3936,128 +3422,126 @@ const AuthPage = ({ theme }) => {
 };
 
 const CollaborationsPage = ({ theme }) => {
-  // Helper to get color classes based on the 'color' prop in mock data
-  const getColorClasses = (color) => {
-    if (theme === 'bot') return {
-      bg: 'bg-green-900/20',
-      text: 'text-green-500',
-      border: 'border-green-800'
+    // Helper to get color classes based on the 'color' prop in mock data
+    const getColorClasses = (color) => {
+        if (theme === 'bot') return {
+            bg: 'bg-green-900/20',
+            text: 'text-green-500', 
+            border: 'border-green-800'
+        };
+        const colors = {
+            blue: 'text-amber-500 bg-amber-500/10 border-amber-500/20',
+            green: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
+            purple: 'text-purple-500 bg-purple-500/10 border-purple-500/20',
+            cyan: 'text-cyan-500 bg-cyan-500/10 border-cyan-500/20'
+        };
+        return {
+            bg: colors[color].split(' ')[1],
+            text: colors[color].split(' ')[0],
+            border: colors[color].split(' ')[2]
+        };
     };
-    const colors = {
-      blue: 'text-amber-500 bg-amber-500/10 border-amber-500/20',
-      green: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
-      purple: 'text-purple-500 bg-purple-500/10 border-purple-500/20',
-      cyan: 'text-cyan-500 bg-cyan-500/10 border-cyan-500/20'
-    };
-    return {
-      bg: colors[color].split(' ')[1],
-      text: colors[color].split(' ')[0],
-      border: colors[color].split(' ')[2]
-    };
-  };
 
-  return (
+    return (
     <section className="px-6 pb-24 min-h-screen pt-24 bg-transparent relative z-10 overflow-hidden">
-      {/* Abstract Background Network Graphic */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
-        <div className={`absolute top-1/4 -right-20 w-96 h-96 rounded-full blur-[100px] ${theme === 'bot' ? 'bg-green-900' : 'bg-amber-500'}`} />
-        <div className={`absolute bottom-0 -left-20 w-80 h-80 rounded-full blur-[80px] ${theme === 'bot' ? 'bg-green-900' : 'bg-purple-500'}`} />
-
-        {/* Simple Mesh Grid SVG */}
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke={theme === 'bot' ? '#22c55e' : (theme === 'light' ? '#cbd5e1' : '#334155')} strokeWidth="0.5" opacity="0.3" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col items-center mb-16">
-          <div className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6 flex items-center gap-2 border ${theme === 'bot' ? 'bg-green-900/20 text-green-500 border-green-800' : (theme === 'light' ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-amber-900/20 text-amber-400 border-amber-800')}`}>
-            <Network className="w-4 h-4" /> Global Network Status: Online
-          </div>
-          <SectionTitle theme={theme} title="Strategic Alliances" subtitle="Expanding our capabilities through global partnerships." />
+        {/* Abstract Background Network Graphic */}
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
+             <div className={`absolute top-1/4 -right-20 w-96 h-96 rounded-full blur-[100px] ${theme === 'bot' ? 'bg-green-900' : 'bg-amber-500'}`} />
+             <div className={`absolute bottom-0 -left-20 w-80 h-80 rounded-full blur-[80px] ${theme === 'bot' ? 'bg-green-900' : 'bg-purple-500'}`} />
+             
+             {/* Simple Mesh Grid SVG */}
+             <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                 <defs>
+                     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                         <path d="M 40 0 L 0 0 0 40" fill="none" stroke={theme === 'bot' ? '#22c55e' : (theme === 'light' ? '#cbd5e1' : '#334155')} strokeWidth="0.5" opacity="0.3"/>
+                     </pattern>
+                 </defs>
+                 <rect width="100%" height="100%" fill="url(#grid)" />
+             </svg>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {COLLABORATIONS.map((collab, idx) => {
-            const colors = getColorClasses(collab.color);
-            const Icon = collab.icon;
+        <div className="max-w-7xl mx-auto relative z-10">
+             <div className="flex flex-col items-center mb-16">
+                 <div className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6 flex items-center gap-2 border ${theme === 'bot' ? 'bg-green-900/20 text-green-500 border-green-800' : (theme === 'light' ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-amber-900/20 text-amber-400 border-amber-800')}`}>
+                    <Network className="w-4 h-4" /> Global Network Status: Online
+                 </div>
+                 <SectionTitle theme={theme} title="Strategic Alliances" subtitle="Expanding our capabilities through global partnerships." />
+             </div>
 
-            return (
-              <div key={idx} className={`group relative p-1 rounded-3xl transition-all duration-500 hover:-translate-y-2 ${theme === 'bot' ? 'bg-gradient-to-br from-green-900 via-black to-black' : 'bg-gradient-to-br from-slate-800 via-transparent to-transparent'}`}>
-
-                {/* Card Content */}
-                <div className={`h-full p-8 rounded-[22px] border relative overflow-hidden backdrop-blur-md flex flex-col justify-between transition-all duration-300
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 {COLLABORATIONS.map((collab, idx) => {
+                     const colors = getColorClasses(collab.color);
+                     const Icon = collab.icon;
+                     
+                     return (
+                     <div key={idx} className={`group relative p-1 rounded-3xl transition-all duration-500 hover:-translate-y-2 ${theme === 'bot' ? 'bg-gradient-to-br from-green-900 via-black to-black' : 'bg-gradient-to-br from-slate-800 via-transparent to-transparent'}`}>
+                         
+                         {/* Card Content */}
+                         <div className={`h-full p-8 rounded-[22px] border relative overflow-hidden backdrop-blur-md flex flex-col justify-between transition-all duration-300
                             ${theme === 'bot' ? 'bg-black border-green-900 hover:border-green-500' : (theme === 'light' ? 'bg-white/80 border-slate-200 hover:shadow-xl hover:border-amber-200' : 'bg-slate-900/80 border-slate-800 hover:bg-slate-800 hover:border-slate-600')}
                          `}>
-                  {/* Hover Glow Effect */}
-                  <div className={`absolute -right-20 -top-20 w-40 h-40 rounded-full blur-[50px] transition-opacity duration-500 opacity-0 group-hover:opacity-30 ${theme === 'bot' ? 'bg-green-500' : 'bg-amber-500'}`} />
+                             {/* Hover Glow Effect */}
+                             <div className={`absolute -right-20 -top-20 w-40 h-40 rounded-full blur-[50px] transition-opacity duration-500 opacity-0 group-hover:opacity-30 ${theme === 'bot' ? 'bg-green-500' : 'bg-amber-500'}`} />
 
-                  <div className="flex justify-between items-start mb-6 relative z-10">
-                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border ${colors.bg} ${colors.text} ${colors.border}`}>
-                      <Icon className="w-8 h-8" />
-                    </div>
-                    <div className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide border flex items-center gap-1.5
+                             <div className="flex justify-between items-start mb-6 relative z-10">
+                                 <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border ${colors.bg} ${colors.text} ${colors.border}`}>
+                                     <Icon className="w-8 h-8" />
+                                 </div>
+                                 <div className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide border flex items-center gap-1.5
                                      ${theme === 'bot' ? 'bg-green-900/20 text-green-500 border-green-800' : (theme === 'light' ? 'bg-slate-100 text-slate-600 border-slate-200' : 'bg-slate-800 text-slate-300 border-slate-700')}
                                  `}>
-                      <div className={`w-1.5 h-1.5 rounded-full ${theme === 'bot' ? 'bg-green-500 animate-pulse' : 'bg-green-500'}`} />
-                      {collab.status}
-                    </div>
-                  </div>
+                                     <div className={`w-1.5 h-1.5 rounded-full ${theme === 'bot' ? 'bg-green-500 animate-pulse' : 'bg-green-500'}`} />
+                                     {collab.status}
+                                 </div>
+                             </div>
 
-                  <div className="relative z-10 mb-8">
-                    <h3 className={`text-2xl font-bold mb-2 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>
-                      {collab.name}
-                    </h3>
-                    <p className={`text-sm leading-relaxed ${theme === 'bot' ? 'text-green-800 font-mono' : (theme === 'light' ? 'text-slate-600' : 'text-slate-400')}`}>
-                      {collab.desc}
-                    </p>
-                  </div>
+                             <div className="relative z-10 mb-8">
+                                 <h3 className={`text-2xl font-bold mb-2 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>
+                                     {collab.name}
+                                 </h3>
+                                 <p className={`text-sm leading-relaxed ${theme === 'bot' ? 'text-green-800 font-mono' : (theme === 'light' ? 'text-slate-600' : 'text-slate-400')}`}>
+                                     {collab.desc}
+                                 </p>
+                             </div>
 
-                  {/* Bottom Stats / Footer */}
-                  <div className={`pt-6 mt-auto border-t flex items-center justify-between ${theme === 'bot' ? 'border-green-900' : 'border-slate-200/10'}`}>
-                    <div className="flex items-center gap-2">
-                      <Activity className={`w-4 h-4 ${theme === 'bot' ? 'text-green-600' : 'text-slate-400'}`} />
-                      <span className={`text-sm font-semibold ${theme === 'bot' ? 'text-green-500 font-mono' : (theme === 'light' ? 'text-slate-700' : 'text-slate-200')}`}>
-                        {collab.stats}
-                      </span>
-                    </div>
-                    <div className={`transform translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 ${theme === 'bot' ? 'text-green-500' : 'text-amber-500'}`}>
-                      <ArrowRight className="w-5 h-5" />
-                    </div>
-                  </div>
+                             {/* Bottom Stats / Footer */}
+                             <div className={`pt-6 mt-auto border-t flex items-center justify-between ${theme === 'bot' ? 'border-green-900' : 'border-slate-200/10'}`}>
+                                 <div className="flex items-center gap-2">
+                                     <Activity className={`w-4 h-4 ${theme === 'bot' ? 'text-green-600' : 'text-slate-400'}`} />
+                                     <span className={`text-sm font-semibold ${theme === 'bot' ? 'text-green-500 font-mono' : (theme === 'light' ? 'text-slate-700' : 'text-slate-200')}`}>
+                                         {collab.stats}
+                                     </span>
+                                 </div>
+                                 <div className={`transform translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 ${theme === 'bot' ? 'text-green-500' : 'text-amber-500'}`}>
+                                     <ArrowRight className="w-5 h-5" />
+                                 </div>
+                             </div>
 
-                </div>
-              </div>
-            )
-          })}
+                         </div>
+                     </div>
+                 )})}
+             </div>
+
+             {/* Bottom Call to Action */}
+             <div className={`mt-20 p-8 rounded-3xl text-center border relative overflow-hidden ${theme === 'bot' ? 'bg-green-900/10 border-green-800' : (theme === 'light' ? 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-100' : 'bg-slate-900 border-slate-800')}`}>
+                 <div className={`inline-block p-4 rounded-full mb-4 ${theme === 'bot' ? 'bg-green-900/20 text-green-500' : 'bg-amber-100 text-amber-600'}`}>
+                    <Handshake className="w-8 h-8" />
+                 </div>
+                 <h3 className={`text-2xl font-bold mb-3 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>Become a Partner</h3>
+                 <p className={`max-w-xl mx-auto mb-8 ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-500'}`}>
+                    We are always looking for organizations that share our vision for the future of technology.
+                 </p>
+                 <Button theme={theme} variant="primary" icon={Mail}>Initiate Protocol</Button>
+             </div>
         </div>
-
-        {/* Bottom Call to Action */}
-        <div className={`mt-20 p-8 rounded-3xl text-center border relative overflow-hidden ${theme === 'bot' ? 'bg-green-900/10 border-green-800' : (theme === 'light' ? 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-100' : 'bg-slate-900 border-slate-800')}`}>
-          <div className={`inline-block p-4 rounded-full mb-4 ${theme === 'bot' ? 'bg-green-900/20 text-green-500' : 'bg-amber-100 text-amber-600'}`}>
-            <Handshake className="w-8 h-8" />
-          </div>
-          <h3 className={`text-2xl font-bold mb-3 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>Become a Partner</h3>
-          <p className={`max-w-xl mx-auto mb-8 ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-500'}`}>
-            We are always looking for organizations that share our vision for the future of technology.
-          </p>
-          <Button theme={theme} variant="primary" icon={Mail}>Initiate Protocol</Button>
-        </div>
-      </div>
     </section>
-  )
-};
+)};
 
 const TeamPage = ({ theme, onSoluperClick }) => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeSubPage, setActiveSubPage] = useState("Lead");
-
+  const [activeSubPage, setActiveSubPage] = useState("Chief Lead");
+  
   const filteredSolupers = SOLUPERS_DATA.filter(soluper => {
     const matchesCategory = activeCategory === "All" || soluper.category === activeCategory;
     const matchesSearch = soluper.name.toLowerCase().includes(searchQuery.toLowerCase()) || soluper.role.toLowerCase().includes(searchQuery.toLowerCase());
@@ -4073,7 +3557,7 @@ const TeamPage = ({ theme, onSoluperClick }) => {
     <section className="px-6 pb-24 min-h-screen pt-24 bg-transparent relative z-10">
       <div className="max-w-7xl mx-auto">
         <SectionTitle theme={theme} title="The Syndicate" subtitle="Meet the minds behind the machine." />
-
+        
         {/* Sub-Page Navigation Buttons */}
         <div className="flex flex-wrap justify-center gap-4 mb-16 -mt-8 relative z-20">
           {[
@@ -4084,7 +3568,7 @@ const TeamPage = ({ theme, onSoluperClick }) => {
           ].map(page => {
             const Icon = page.icon;
             const isActive = activeSubPage === page.id;
-
+            
             let btnStyle = "px-6 py-2.5 rounded-full border text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center gap-2 hover:scale-105 active:scale-95 ";
             if (theme === 'bot') {
               btnStyle += "rounded-none font-mono " + (isActive ? "border-green-500 bg-green-900/30 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.3)]" : "border-green-900 text-green-700 bg-black hover:border-green-500");
@@ -4095,9 +3579,9 @@ const TeamPage = ({ theme, onSoluperClick }) => {
                 btnStyle += (theme === 'light' ? "bg-white border-slate-200 text-slate-700 hover:border-amber-400 hover:text-amber-600" : "bg-slate-900 border-slate-800 text-slate-300 hover:border-amber-500/50 hover:text-amber-400");
               }
             }
-
+            
             return (
-              <button
+              <button 
                 key={page.id}
                 onClick={() => setActiveSubPage(page.id)}
                 className={btnStyle}
@@ -4112,7 +3596,7 @@ const TeamPage = ({ theme, onSoluperClick }) => {
         <div className={`p-6 md:p-8 backdrop-blur-md ${theme === 'bot' ? 'bg-black/90 border border-green-900 rounded-none' : (theme === 'light' ? 'bg-white/90 rounded-3xl border border-slate-200 shadow-sm' : 'bg-slate-900/90 rounded-3xl border border-slate-800')}`}>
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
             <h3 className={`text-2xl font-bold flex items-center gap-2 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-slate-900' : 'text-white')}`}>
-              <Database className={`w-6 h-6 ${theme === 'bot' ? 'text-green-500' : 'text-amber-400'}`} />
+              <Database className={`w-6 h-6 ${theme === 'bot' ? 'text-green-500' : 'text-amber-400'}`} /> 
               {activeSubPage === "Chief Lead" && "Chief Lead Solupers"}
               {activeSubPage === "Lead" && "Lead Solupers"}
               {activeSubPage === "Jr." && "Jr. Solupers"}
@@ -4128,7 +3612,7 @@ const TeamPage = ({ theme, onSoluperClick }) => {
               </select>
             </div>
           </div>
-
+          
           <div className="animate-fade-in">
             {activeSubPage === "Chief Lead" && (
               chiefLeads.length > 0 ? (
@@ -4190,7 +3674,7 @@ const ProjectsPage = ({ theme }) => (
           <RevealOnScroll key={idx} className={`delay-[${idx * 200}ms]`}>
             <div className={`group h-full flex flex-col overflow-hidden transition-all duration-300 backdrop-blur-md ${theme === 'bot' ? 'bg-black/80 border border-green-900 hover:border-green-500 rounded-none hover:shadow-[0_0_20px_rgba(34,197,94,0.1)]' : (theme === 'light' ? 'bg-white/80 rounded-2xl border border-slate-200 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-500/10' : 'bg-slate-900/80 rounded-2xl border border-slate-800 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-900/20')}`}>
               <div className={`h-48 relative overflow-hidden flex items-center justify-center ${theme === 'bot' ? 'bg-green-900/10' : (theme === 'light' ? 'bg-slate-50/50' : 'bg-slate-800/50')}`}>
-                <div className={`p-4 rounded-xl ${theme === 'bot' ? 'bg-black border border-green-700 text-green-500' : (theme === 'light' ? 'bg-white border border-slate-200 text-amber-500 shadow-sm' : 'bg-slate-950 border border-slate-700 text-white')}`}>{React.cloneElement(proj.icon, { className: "w-8 h-8" })}</div>
+                 <div className={`p-4 rounded-xl ${theme === 'bot' ? 'bg-black border border-green-700 text-green-500' : (theme === 'light' ? 'bg-white border border-slate-200 text-amber-500 shadow-sm' : 'bg-slate-950 border border-slate-700 text-white')}`}>{React.cloneElement(proj.icon, { className: "w-8 h-8" })}</div>
               </div>
               <div className="p-6 flex-1 flex flex-col">
                 <div className="flex justify-between items-start mb-4">
@@ -4211,35 +3695,6 @@ const ProjectsPage = ({ theme }) => (
   </section>
 );
 
-const AchievementsGallery = ({ soluper, theme, textClass, subTextClass, profDesign }) => {
-  const achievements = soluper.personalAchievements || [];
-
-  if (achievements.length === 0) {
-    return (
-      <div className={`p-12 text-center rounded-2xl border border-dashed ${theme === 'bot' ? 'border-green-800 text-green-700' : 'border-slate-700 text-slate-500'}`}>
-        <Trophy className="w-12 h-12 mx-auto mb-4 opacity-50" />
-        <p>No specific achievements listed yet for this Soluper.</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in">
-      {achievements.map((ach, idx) => (
-        <div key={idx} className={`group relative overflow-hidden rounded-2xl border transition-all hover:-translate-y-1 ${theme === 'bot' ? 'border-green-900' : (theme === 'light' ? 'border-slate-200' : profDesign.accentBorder)}`}>
-          <div className="aspect-video w-full overflow-hidden bg-slate-800">
-            <img src={ach.image} alt={ach.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-          <div className={`p-6 ${theme === 'bot' ? 'bg-black' : (theme === 'light' ? 'bg-white' : 'bg-slate-900')}`}>
-            <h4 className={`text-lg font-bold mb-2 ${textClass}`}>{ach.title}</h4>
-            <p className={`text-sm ${subTextClass}`}>{ach.desc}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
 const SoluperProfile = ({ soluper, theme, onBack }) => {
   const [view, setView] = useState('overview'); // 'overview' or 'achievements'
 
@@ -4247,7 +3702,7 @@ const SoluperProfile = ({ soluper, theme, onBack }) => {
     const role = soluper.role.toLowerCase();
     const isPast = soluper.status === 'Past';
     const isLight = theme === 'light';
-
+    
     if (isPast) {
       return {
         headerGradient: 'from-zinc-950 via-zinc-900 to-black',
@@ -4278,13 +3733,13 @@ const SoluperProfile = ({ soluper, theme, onBack }) => {
         accentColor: isArchitect ? 'border-yellow-400/70' : 'border-amber-400/70',
         innerBorder: isArchitect ? 'border-yellow-500/20' : 'border-amber-500/20',
         glowColor: isArchitect ? 'rgba(234, 179, 8, 0.25)' : 'rgba(245, 158, 11, 0.25)',
-        cardClass: isArchitect
+        cardClass: isArchitect 
           ? 'bg-orange-955/10 border border-orange-900/25 backdrop-blur-md shadow-2xl'
           : 'bg-red-955/10 border border-red-900/25 backdrop-blur-md shadow-2xl',
         chipClass: 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/20',
         competencyClass: 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/25',
-        roleColor: isLight
-          ? (isArchitect ? 'text-amber-800' : 'text-red-800')
+        roleColor: isLight 
+          ? (isArchitect ? 'text-amber-800' : 'text-red-800') 
           : (isArchitect ? 'text-yellow-400' : 'text-[#f5ebd5]/95')
       };
     }
@@ -4421,11 +3876,41 @@ const SoluperProfile = ({ soluper, theme, onBack }) => {
   const subTextClass = theme === 'bot' ? 'text-green-700 font-mono' : (theme === 'light' ? 'text-slate-500' : 'text-slate-400');
   const cardClass = theme === 'bot' ? 'bg-black/80 border border-green-800 backdrop-blur-md font-mono' : profDesign.cardClass;
 
+  // Achievements View Component
+  const renderAchievementsGallery = () => {
+    const achievements = soluper.personalAchievements || [];
+    
+    if (achievements.length === 0) {
+        return (
+            <div className={`p-12 text-center rounded-2xl border border-dashed ${theme === 'bot' ? 'border-green-800 text-green-700' : 'border-slate-700 text-slate-500'}`}>
+                <Trophy className="w-12 h-12 mx-auto mb-4 opacity-50"/>
+                <p>No specific achievements listed yet for this Soluper.</p>
+            </div>
+        );
+    }
+
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in">
+            {achievements.map((ach, idx) => (
+                <div key={idx} className={`group relative overflow-hidden rounded-2xl border transition-all hover:-translate-y-1 ${theme === 'bot' ? 'border-green-900' : (theme === 'light' ? 'border-slate-200' : profDesign.accentBorder)}`}>
+                    <div className="aspect-video w-full overflow-hidden bg-slate-800">
+                        <img src={ach.image} alt={ach.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    </div>
+                    <div className={`p-6 ${theme === 'bot' ? 'bg-black' : (theme === 'light' ? 'bg-white' : 'bg-slate-900')}`}>
+                        <h4 className={`text-lg font-bold mb-2 ${textClass}`}>{ach.title}</h4>
+                        <p className={`text-sm ${subTextClass}`}>{ach.desc}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+  };
+
   return (
     <div className="min-h-screen pt-24 pb-12 px-6 relative z-10 animate-[fade-in_0.6s_ease-out]">
       <div className="max-w-5xl mx-auto">
         <button onClick={onBack} className={`mb-8 flex items-center gap-2 ${subTextClass} hover:${theme === 'bot' ? 'text-green-300' : (theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]')} transition-colors bg-transparent font-bold`}><ArrowLeft className="w-5 h-5" /> Back to Team</button>
-
+        
         <div className={`rounded-3xl overflow-hidden border ${theme === 'bot' ? 'border-green-900 rounded-none' : 'border-slate-800'} ${bgClass} backdrop-blur-xl shadow-2xl`}>
           {/* Header Banner */}
           <div className={`h-56 w-full bg-gradient-to-r ${theme === 'bot' ? 'from-black to-black' : profDesign.headerGradient} relative overflow-hidden`}>
@@ -4443,22 +3928,23 @@ const SoluperProfile = ({ soluper, theme, onBack }) => {
               </>
             )}
             {(soluper.status === 'Past' || soluper.status === 'Alumni') && (
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                <span className="text-4xl font-black uppercase tracking-widest text-white/20 -rotate-12 border-4 border-white/20 p-4">Past Soluper</span>
-              </div>
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <span className="text-4xl font-black uppercase tracking-widest text-white/20 -rotate-12 border-4 border-white/20 p-4">Past Soluper</span>
+                </div>
             )}
           </div>
-
+          
           <div className="px-8 pb-8">
             <div className="flex flex-col md:flex-row gap-8 -mt-20 md:-mt-24 relative z-10 items-center md:items-end text-center md:text-left">
               {/* Profile image with matching frame */}
-              <div className={`w-36 h-36 overflow-hidden relative flex-shrink-0 flex items-center justify-center ${theme === 'bot'
-                  ? 'border-2 border-green-500 rounded-none grayscale'
+              <div className={`w-36 h-36 overflow-hidden relative flex-shrink-0 flex items-center justify-center ${
+                theme === 'bot' 
+                  ? 'border-2 border-green-500 rounded-none grayscale' 
                   : `rounded-full border-[4px] ${profDesign.accentColor} shadow-[0_0_25px_rgba(255,255,255,0.15)] bg-slate-800`
-                } ${soluper.status === 'Past' || soluper.status === 'Alumni' ? 'grayscale' : ''}`}>
+              } ${soluper.status === 'Past' || soluper.status === 'Alumni' ? 'grayscale' : ''}`}>
                 <img src={soluper.image} alt={soluper.name} className="w-full h-full object-cover" />
               </div>
-
+              
               <div className="flex-1 pb-4 w-full">
                 <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 w-full">
                   <div className="flex flex-col items-center md:items-start relative">
@@ -4471,44 +3957,48 @@ const SoluperProfile = ({ soluper, theme, onBack }) => {
                     <div className={`inline-flex items-center gap-1 px-3 py-0.5 mb-3 rounded-full border text-[10px] font-bold uppercase tracking-wider ${theme === 'bot' ? 'border-green-800 text-green-500 font-mono rounded-none' : (theme === 'light' ? 'bg-[#8a6500]/10 border-[#8a6500]/30 text-[#8a6500]' : profDesign.badgeColor)}`}>
                       {profDesign.badgeText}
                     </div>
-
+                    
                     {/* Name */}
-                    <h1 className={`text-3xl md:text-4xl font-black tracking-tight mt-1.5 transition-colors ${theme === 'bot'
-                        ? 'text-green-400 font-mono'
+                    <h1 className={`text-3xl md:text-4xl font-black tracking-tight mt-1.5 transition-colors ${
+                      theme === 'bot' 
+                        ? 'text-green-400 font-mono' 
                         : 'text-[#D4AF37] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)]'
-                      }`}>
+                    }`}>
                       {soluper.name}
                     </h1>
-
+                    
                     {/* Role */}
-                    <p className={`text-md md:text-lg font-bold tracking-wider mt-2.5 transition-colors ${theme === 'bot'
-                        ? 'text-green-700 font-mono'
+                    <p className={`text-md md:text-lg font-bold tracking-wider mt-2.5 transition-colors ${
+                      theme === 'bot' 
+                        ? 'text-green-700 font-mono' 
                         : `${profDesign.roleColor} drop-shadow-[0_1px_1.5px_rgba(0,0,0,0.35)]`
-                      }`}>{soluper.role}</p>
+                    }`}>{soluper.role}</p>
                   </div>
-
+                  
                   {/* Buttons */}
                   <div className="flex gap-3 flex-shrink-0">
-                    <button
-                      className={`px-5 py-2.5 rounded-full font-black text-xs uppercase tracking-wider transition-all duration-355 hover:scale-105 active:scale-95 flex items-center gap-2 shadow-md ${theme === 'bot'
-                          ? 'bg-black border border-green-500 text-green-400 font-mono rounded-none'
+                    <button 
+                      className={`px-5 py-2.5 rounded-full font-black text-xs uppercase tracking-wider transition-all duration-355 hover:scale-105 active:scale-95 flex items-center gap-2 shadow-md ${
+                        theme === 'bot' 
+                          ? 'bg-black border border-green-500 text-green-400 font-mono rounded-none' 
                           : (theme === 'light'
-                            ? 'bg-[#8a6500] hover:bg-[#705200] text-white border-[#8a6500] hover:shadow-[0_0_15px_rgba(138,101,0,0.4)]'
-                            : 'bg-[#D4AF37] hover:bg-[#c59f2e] text-black border-[#D4AF37] hover:shadow-[0_0_15px_rgba(212,175,55,0.4)]')
-                        }`}
+                              ? 'bg-[#8a6500] hover:bg-[#705200] text-white border-[#8a6500] hover:shadow-[0_0_15px_rgba(138,101,0,0.4)]'
+                              : 'bg-[#D4AF37] hover:bg-[#c59f2e] text-black border-[#D4AF37] hover:shadow-[0_0_15px_rgba(212,175,55,0.4)]')
+                      }`}
                     >
                       <Mail className="w-4 h-4" />
                       Contact
                     </button>
-
-                    <button
+                    
+                    <button 
                       onClick={() => setView(view === 'overview' ? 'achievements' : 'overview')}
-                      className={`px-5 py-2.5 rounded-full font-black text-xs uppercase tracking-wider transition-all duration-355 hover:scale-105 active:scale-95 flex items-center gap-2 border shadow-sm ${theme === 'bot'
-                          ? 'bg-black border border-green-500 text-green-400 font-mono rounded-none'
-                          : (view === 'achievements'
-                            ? (theme === 'light' ? 'bg-[#8a6500] hover:bg-[#705200] text-white border-[#8a6500] hover:shadow-[0_0_15px_rgba(138,101,0,0.25)]' : 'bg-[#D4AF37] hover:bg-[#c59f2e] text-black border-[#D4AF37] hover:shadow-[0_0_15px_rgba(212,175,55,0.25)]')
-                            : (theme === 'light' ? 'bg-transparent hover:bg-[#8a6500]/10 text-[#8a6500] border-[#8a6500]/50' : 'bg-transparent hover:bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/50'))
-                        }`}
+                      className={`px-5 py-2.5 rounded-full font-black text-xs uppercase tracking-wider transition-all duration-355 hover:scale-105 active:scale-95 flex items-center gap-2 border shadow-sm ${
+                        theme === 'bot' 
+                          ? 'bg-black border border-green-500 text-green-400 font-mono rounded-none' 
+                          : (view === 'achievements' 
+                              ? (theme === 'light' ? 'bg-[#8a6500] hover:bg-[#705200] text-white border-[#8a6500] hover:shadow-[0_0_15px_rgba(138,101,0,0.25)]' : 'bg-[#D4AF37] hover:bg-[#c59f2e] text-black border-[#D4AF37] hover:shadow-[0_0_15px_rgba(212,175,55,0.25)]') 
+                              : (theme === 'light' ? 'bg-transparent hover:bg-[#8a6500]/10 text-[#8a6500] border-[#8a6500]/50' : 'bg-transparent hover:bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/50'))
+                      }`}
                     >
                       <Trophy className="w-4 h-4" />
                       {view === 'overview' ? 'Achievements' : 'Overview'}
@@ -4519,157 +4009,106 @@ const SoluperProfile = ({ soluper, theme, onBack }) => {
             </div>
 
             <div className="mt-12">
-              {view === 'overview' ? (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-[fade-in_0.5s_ease-out]">
-                  {/* Left Column */}
-                  <div className="space-y-6">
-                    <div className={`p-6 rounded-2xl ${cardClass}`}>
-                      <h3 className={`font-extrabold mb-4 flex items-center gap-2.5 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-[#8a6500] tracking-wide text-lg' : 'text-[#D4AF37] tracking-wide text-lg')
-                        }`}>
-                        <Cpu className={`w-5 h-5 ${theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]'}`} /> Skills
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {soluper.skills.map((skill, i) => (
-                          <span key={i} className={`text-xs px-2.5 py-1 rounded-md font-bold border ${theme === 'bot' ? 'border-green-800 bg-green-900/20 text-green-500 font-mono rounded-none' : (theme === 'light' ? 'bg-slate-100 text-slate-700 border-slate-200' : profDesign.chipClass)}`}>
-                            {skill.name}
-                          </span>
-                        ))}
-                      </div>
+                {view === 'overview' ? (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-[fade-in_0.5s_ease-out]">
+                        {/* Left Column */}
+                        <div className="space-y-6">
+                            <div className={`p-6 rounded-2xl ${cardClass}`}>
+                            <h3 className={`font-extrabold mb-4 flex items-center gap-2.5 ${
+                              theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-[#8a6500] tracking-wide text-lg' : 'text-[#D4AF37] tracking-wide text-lg')
+                            }`}>
+                              <Cpu className={`w-5 h-5 ${theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]'}`} /> Skills
+                            </h3>
+                            <div className="flex flex-wrap gap-2">
+                                {soluper.skills.map((skill, i) => (
+                                  <span key={i} className={`text-xs px-2.5 py-1 rounded-md font-bold border ${theme === 'bot' ? 'border-green-800 bg-green-900/20 text-green-500 font-mono rounded-none' : (theme === 'light' ? 'bg-slate-100 text-slate-700 border-slate-200' : profDesign.chipClass)}`}>
+                                      {skill.name}
+                                  </span>
+                                ))}
+                            </div>
+                            </div>
+
+                            <div className={`p-6 rounded-2xl ${cardClass}`}>
+                            <h3 className={`font-extrabold mb-4 flex items-center gap-2.5 ${
+                              theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-[#8a6500] tracking-wide text-lg' : 'text-[#D4AF37] tracking-wide text-lg')
+                            }`}>
+                              <Activity className={`w-5 h-5 ${theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]'}`} /> Activity
+                            </h3>
+                            <div className="space-y-4 text-sm font-medium">
+                                <div className="flex justify-between"><span className={theme === 'light' ? 'text-slate-500 font-bold' : subTextClass}>Commits</span><span className={textClass}>{soluper.commits}</span></div>
+                                <div className="flex justify-between"><span className={theme === 'light' ? 'text-slate-500 font-bold' : subTextClass}>Projects</span><span className={textClass}>{soluper.projects}</span></div>
+                            </div>
+                            </div>
+                        </div>
+
+                        {/* Right Column: RICH ABOUT SECTION */}
+                        <div className="md:col-span-2 space-y-6">
+                            <div className={`p-6 rounded-2xl ${cardClass}`}>
+                                <div className="flex justify-between items-start mb-4">
+                                    <h3 className={`font-extrabold flex items-center gap-2.5 ${
+                                      theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-[#8a6500] tracking-wide text-lg' : 'text-[#D4AF37] tracking-wide text-lg')
+                                    }`}>
+                                      <User className={`w-5 h-5 ${theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]'}`} /> About
+                                    </h3>
+                                    <span className={`px-3 py-1 rounded-full text-xs font-bold border flex items-center gap-2 ${
+                                        soluper.status === 'Active' 
+                                            ? (theme === 'bot' ? 'border-green-500 text-green-500' : (theme === 'light' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/30'))
+                                            : (theme === 'bot' ? 'border-gray-500 text-gray-500' : (theme === 'light' ? 'bg-gray-50 text-gray-700 border-gray-200' : 'bg-gray-100/10 text-gray-400 border-gray-500/20'))
+                                    }`}>
+                                        <div className={`w-2 h-2 rounded-full ${soluper.status === 'Active' ? 'bg-green-500' : 'bg-gray-400'}`}></div>
+                                        {soluper.status}
+                                    </span>
+                                </div>
+                                
+                                <p className={`leading-relaxed text-[15.5px] md:text-[16.5px] mb-6 ${
+                                  theme === 'bot' ? 'text-green-700 font-mono' : (theme === 'light' ? 'text-slate-700 font-medium' : 'text-slate-200/90 font-medium tracking-wide')
+                                }`}>{soluper.bio}</p>
+
+                                {/* Elegant divider line */}
+                                {theme !== 'bot' && (
+                                  <div className={`w-full h-[1.5px] mb-6 ${theme === 'light' ? 'bg-slate-200' : 'bg-[#D4AF37]/10'}`} />
+                                )}
+
+                                {/* Info Grid */}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                                    <div className={`p-4 rounded-xl border ${theme === 'bot' ? 'border-green-900 bg-green-900/10' : (theme === 'light' ? 'bg-slate-50 border-slate-250 border-slate-200' : 'bg-slate-800/40 border-slate-700/40')}`}>
+                                        <div className={`text-xs uppercase tracking-wider mb-1 ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-400/95 font-bold'}`}>Location</div>
+                                        <div className={`font-semibold flex items-center gap-2 ${textClass}`}><MapPin className={`w-4 h-4 ${theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]'}`} /> {soluper.location}</div>
+                                    </div>
+                                    <div className={`p-4 rounded-xl border ${theme === 'bot' ? 'border-green-900 bg-green-900/10' : (theme === 'light' ? 'bg-slate-50 border-slate-250 border-slate-200' : 'bg-slate-800/40 border-slate-700/40')}`}>
+                                        <div className={`text-xs uppercase tracking-wider mb-1 ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-400/95 font-bold'}`}>Department</div>
+                                        <div className={`font-semibold flex items-center gap-2 ${textClass}`}><Briefcase className={`w-4 h-4 ${theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]'}`} /> {soluper.category}</div>
+                                    </div>
+                                    <div className={`p-4 rounded-xl border ${theme === 'bot' ? 'border-green-900 bg-green-900/10' : (theme === 'light' ? 'bg-slate-50 border-slate-250 border-slate-200' : 'bg-slate-800/40 border-slate-700/40')}`}>
+                                        <div className={`text-xs uppercase tracking-wider mb-1 ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-400/95 font-bold'}`}>Join Date</div>
+                                        <div className={`font-semibold flex items-center gap-2 ${textClass}`}><Calendar className={`w-4 h-4 ${theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]'}`} /> {soluper.joined}</div>
+                                    </div>
+                                    <div className={`p-4 rounded-xl border ${theme === 'bot' ? 'border-green-900 bg-green-900/10' : (theme === 'light' ? 'bg-slate-50 border-slate-250 border-slate-200' : 'bg-slate-800/40 border-slate-700/40')}`}>
+                                        <div className={`text-xs uppercase tracking-wider mb-1 ${theme === 'bot' ? 'text-green-700' : 'text-slate-450 font-bold'}`}>Status</div>
+                                        <div className={`font-semibold flex items-center gap-2 ${textClass}`}>
+                                            {soluper.status === 'Active' ? <UserCheck className="w-4 h-4 text-green-500" /> : <UserMinus className="w-4 h-4 text-gray-500" />} 
+                                            {soluper.status === 'Active' ? 'Active Soluper' : 'Past Soluper'}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Tags / "Superpowers" */}
+                                <div>
+                                    <div className={`text-xs uppercase tracking-wider mb-3 ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-400/95 font-bold'}`}>Core Competencies</div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {["System Architecture", "Agile", "Problem Solving", "Team Leadership"].map((tag, i) => (
+                                            <span key={i} className={`px-3 py-1.5 rounded-lg text-sm font-bold border ${theme === 'bot' ? 'border-green-500 text-green-500 bg-transparent font-mono' : (theme === 'light' ? 'bg-amber-50 text-amber-800 border-amber-200' : profDesign.competencyClass)}`}>
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div className={`p-6 rounded-2xl ${cardClass}`}>
-                      <h3 className={`font-extrabold mb-4 flex items-center gap-2.5 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-[#8a6500] tracking-wide text-lg' : 'text-[#D4AF37] tracking-wide text-lg')
-                        }`}>
-                        <Activity className={`w-5 h-5 ${theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]'}`} /> Activity
-                      </h3>
-                      <div className="space-y-4 text-sm font-medium">
-                        <div className="flex justify-between"><span className={theme === 'light' ? 'text-slate-500 font-bold' : subTextClass}>Commits</span><span className={textClass}>{soluper.commits}</span></div>
-                        <div className="flex justify-between"><span className={theme === 'light' ? 'text-slate-500 font-bold' : subTextClass}>Projects</span><span className={textClass}>{soluper.projects}</span></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right Column: RICH ABOUT SECTION */}
-                  <div className="md:col-span-2 space-y-6">
-                    <div className={`p-6 rounded-2xl ${cardClass}`}>
-                      <div className="flex justify-between items-start mb-4">
-                        <h3 className={`font-extrabold flex items-center gap-2.5 ${theme === 'bot' ? 'text-green-400 font-mono' : (theme === 'light' ? 'text-[#8a6500] tracking-wide text-lg' : 'text-[#D4AF37] tracking-wide text-lg')
-                          }`}>
-                          <User className={`w-5 h-5 ${theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]'}`} /> About
-                        </h3>
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold border flex items-center gap-2 ${soluper.status === 'Active'
-                            ? (theme === 'bot' ? 'border-green-500 text-green-500' : (theme === 'light' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/30'))
-                            : (theme === 'bot' ? 'border-gray-500 text-gray-500' : (theme === 'light' ? 'bg-gray-50 text-gray-700 border-gray-200' : 'bg-gray-100/10 text-gray-400 border-gray-500/20'))
-                          }`}>
-                          <div className={`w-2 h-2 rounded-full ${soluper.status === 'Active' ? 'bg-green-500' : 'bg-gray-400'}`}></div>
-                          {soluper.status}
-                        </span>
-                      </div>
-
-                      <p className={`leading-relaxed text-[15.5px] md:text-[16.5px] mb-6 ${theme === 'bot' ? 'text-green-700 font-mono' : (theme === 'light' ? 'text-slate-700 font-medium' : 'text-slate-200/90 font-medium tracking-wide')
-                        }`}>{soluper.bio}</p>
-
-                      {/* Elegant divider line */}
-                      {theme !== 'bot' && (
-                        <div className={`w-full h-[1.5px] mb-6 ${theme === 'light' ? 'bg-slate-200' : 'bg-[#D4AF37]/10'}`} />
-                      )}
-
-                      {/* Info Grid */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                        <div className={`p-4 rounded-xl border ${theme === 'bot' ? 'border-green-900 bg-green-900/10' : (theme === 'light' ? 'bg-slate-50 border-slate-250 border-slate-200' : 'bg-slate-800/40 border-slate-700/40')}`}>
-                          <div className={`text-xs uppercase tracking-wider mb-1 ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-400/95 font-bold'}`}>Location</div>
-                          <div className={`font-semibold flex items-center gap-2 ${textClass}`}><MapPin className={`w-4 h-4 ${theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]'}`} /> {soluper.location}</div>
-                        </div>
-                        <div className={`p-4 rounded-xl border ${theme === 'bot' ? 'border-green-900 bg-green-900/10' : (theme === 'light' ? 'bg-slate-50 border-slate-250 border-slate-200' : 'bg-slate-800/40 border-slate-700/40')}`}>
-                          <div className={`text-xs uppercase tracking-wider mb-1 ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-400/95 font-bold'}`}>Department</div>
-                          <div className={`font-semibold flex items-center gap-2 ${textClass}`}><Briefcase className={`w-4 h-4 ${theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]'}`} /> {soluper.category}</div>
-                        </div>
-                        <div className={`p-4 rounded-xl border ${theme === 'bot' ? 'border-green-900 bg-green-900/10' : (theme === 'light' ? 'bg-slate-50 border-slate-250 border-slate-200' : 'bg-slate-800/40 border-slate-700/40')}`}>
-                          <div className={`text-xs uppercase tracking-wider mb-1 ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-400/95 font-bold'}`}>Join Date</div>
-                          <div className={`font-semibold flex items-center gap-2 ${textClass}`}><Calendar className={`w-4 h-4 ${theme === 'light' ? 'text-[#8a6500]' : 'text-[#D4AF37]'}`} /> {soluper.joined}</div>
-                        </div>
-                        <div className={`p-4 rounded-xl border ${theme === 'bot' ? 'border-green-900 bg-green-900/10' : (theme === 'light' ? 'bg-slate-50 border-slate-250 border-slate-200' : 'bg-slate-800/40 border-slate-700/40')}`}>
-                          <div className={`text-xs uppercase tracking-wider mb-1 ${theme === 'bot' ? 'text-green-700' : 'text-slate-450 font-bold'}`}>Status</div>
-                          <div className={`font-semibold flex items-center gap-2 ${textClass}`}>
-                            {soluper.status === 'Active' ? <UserCheck className="w-4 h-4 text-green-500" /> : <UserMinus className="w-4 h-4 text-gray-500" />}
-                            {soluper.status === 'Active' ? 'Active Soluper' : 'Past Soluper'}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Social Links / Options */}
-                      <div className="mb-6">
-                        <div className={`text-xs uppercase tracking-wider mb-2.5 ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-400/95 font-bold'}`}>Social Profiles</div>
-                        <div className="flex flex-wrap gap-3">
-                          <a
-                            href={soluper.social?.linkedin || '#'}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`px-4 py-2 rounded-xl border text-xs font-bold flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 ${theme === 'bot'
-                                ? 'border-green-700 bg-green-900/20 text-green-400 hover:bg-green-900/40'
-                                : (theme === 'light' ? 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-800 hover:border-blue-400' : 'bg-slate-800/60 hover:bg-slate-700/80 border-slate-700 text-white hover:border-blue-400')
-                              }`}
-                          >
-                            <Linkedin className="w-4 h-4 text-blue-500" />
-                            <span>LinkedIn Profile</span>
-                            <ExternalLink className="w-3.5 h-3.5 opacity-60 ml-1" />
-                          </a>
-
-                          <a
-                            href={soluper.social?.github || '#'}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`px-4 py-2 rounded-xl border text-xs font-bold flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 ${theme === 'bot'
-                                ? 'border-green-700 bg-green-900/20 text-green-400 hover:bg-green-900/40'
-                                : (theme === 'light' ? 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-800 hover:border-amber-400' : 'bg-slate-800/60 hover:bg-slate-700/80 border-slate-700 text-white hover:border-amber-400')
-                              }`}
-                          >
-                            <Github className={`w-4 h-4 ${theme === 'light' ? 'text-slate-900' : 'text-white'}`} />
-                            <span>GitHub Profile</span>
-                            <ExternalLink className="w-3.5 h-3.5 opacity-60 ml-1" />
-                          </a>
-
-                          {soluper.social?.twitter && soluper.social.twitter !== '#' && (
-                            <a
-                              href={soluper.social.twitter}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`px-4 py-2 rounded-xl border text-xs font-bold flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 ${theme === 'bot'
-                                  ? 'border-green-700 bg-green-900/20 text-green-400 hover:bg-green-900/40'
-                                  : (theme === 'light' ? 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-800 hover:border-sky-400' : 'bg-slate-800/60 hover:bg-slate-700/80 border-slate-700 text-white hover:border-sky-400')
-                                }`}
-                            >
-                              <Twitter className="w-4 h-4 text-sky-400" />
-                              <span>Twitter / X</span>
-                              <ExternalLink className="w-3.5 h-3.5 opacity-60 ml-1" />
-                            </a>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Tags / "Superpowers" */}
-                      <div>
-                        <div className={`text-xs uppercase tracking-wider mb-3 ${theme === 'bot' ? 'text-green-700 font-mono' : 'text-slate-400/95 font-bold'}`}>Core Competencies</div>
-                        <div className="flex flex-wrap gap-2">
-                          {["System Architecture", "Agile", "Problem Solving", "Team Leadership"].map((tag, i) => (
-                            <span key={i} className={`px-3 py-1.5 rounded-lg text-sm font-bold border ${theme === 'bot' ? 'border-green-500 text-green-500 bg-transparent font-mono' : (theme === 'light' ? 'bg-amber-50 text-amber-800 border-amber-200' : profDesign.competencyClass)}`}>
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <AchievementsGallery
-                  soluper={soluper}
-                  theme={theme}
-                  textClass={textClass}
-                  subTextClass={subTextClass}
-                  profDesign={profDesign}
-                />
-              )}
+                ) : (
+                    renderAchievementsGallery()
+                )}
             </div>
           </div>
         </div>
@@ -4682,14 +4121,14 @@ const Footer = ({ theme }) => (
   <footer className={`bg-transparent relative z-10`}>
     <ContactSection theme={theme} />
     <div className={`py-8 text-center text-sm border-t ${theme === 'bot' ? 'border-green-900 text-green-800 font-mono bg-black' : (theme === 'light' ? 'border-slate-200 text-slate-500 bg-white' : 'border-slate-800 text-slate-500 bg-slate-950')}`}>
-      <p>&copy; 2025 SOLUTION DEVELOPERS. System Operational.</p>
+        <p>&copy; 2025 SOLUTION DEVELOPERS. System Operational.</p>
     </div>
   </footer>
 );
 
 export default function App() {
   const { theme, toggleTheme } = useTheme();
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState('home'); 
   const [selectedSoluper, setSelectedSoluper] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -4700,7 +4139,7 @@ export default function App() {
         const allTriggers = ScrollTrigger.getAll();
         allTriggers.forEach(t => {
           // Passing true to kill() forces ScrollTrigger to revert its DOM changes (like pin-spacers)
-          t.kill(true);
+          t.kill(true); 
         });
       }
     } catch (e) {
@@ -4709,7 +4148,7 @@ export default function App() {
 
     // 2. Change the route state
     setCurrentPage(page);
-
+    
     // 3. Reset body lock styles immediately to restore scrollability
     try {
       if (typeof document !== 'undefined') {
@@ -4744,7 +4183,7 @@ export default function App() {
   return (
     <div className={`min-h-screen transition-colors duration-500 overflow-x-hidden ${theme === 'bot' ? 'bg-black selection:bg-green-500/30' : (theme === 'light' ? 'bg-slate-50 selection:bg-amber-500/30' : 'bg-slate-950 selection:bg-amber-500/30')}`}>
       <GlobalStyles theme={theme} />
-      <Background3D theme={theme} />
+      <Background3D theme={theme} /> 
       {loading && <LoadingScreen theme={theme} onComplete={() => setLoading(false)} toggleTheme={toggleTheme} />}
       {!loading && (
         <>
@@ -4767,5 +4206,4 @@ export default function App() {
     </div>
   );
 }
-
 
