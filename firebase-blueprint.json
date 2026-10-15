@@ -1,0 +1,173 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information including role and basic details.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique identifier for the user." },
+        "email": { "type": "string", "format": "email", "description": "User's email address." },
+        "displayName": { "type": "string", "description": "User's full name." },
+        "photoURL": { "type": "string", "format": "uri", "description": "URL to user's profile picture." },
+        "role": { "type": "string", "enum": ["farmer", "expert", "trader", "guest"], "description": "User's role in the platform." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the user account was created." }
+      },
+      "required": ["uid", "email", "role", "createdAt"]
+    },
+    "Post": {
+      "title": "Post",
+      "description": "A community post shared by a user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the post." },
+        "authorUid": { "type": "string", "description": "UID of the user who created the post." },
+        "authorName": { "type": "string", "description": "Display name of the author." },
+        "content": { "type": "string", "description": "The text content of the post." },
+        "category": { "type": "string", "description": "Category of the post (e.g., General, Pests, Market)." },
+        "likesCount": { "type": "number", "description": "Number of likes the post has received." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the post was created." }
+      },
+      "required": ["id", "authorUid", "authorName", "content", "createdAt"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "A comment on a community post.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the comment." },
+        "postId": { "type": "string", "description": "ID of the post this comment belongs to." },
+        "authorUid": { "type": "string", "description": "UID of the user who created the comment." },
+        "authorName": { "type": "string", "description": "Display name of the author." },
+        "content": { "type": "string", "description": "The text content of the comment." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the comment was created." }
+      },
+      "required": ["id", "postId", "authorUid", "authorName", "content", "createdAt"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "An order for a product or service in AgriMart.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "UID of the user who placed the order." },
+        "item": { "type": "string", "description": "Name of the item ordered." },
+        "type": { "type": "string", "enum": ["Buy", "Sell", "Rent", "Hire"], "description": "Type of transaction." },
+        "status": { "type": "string", "enum": ["pending", "active", "completed", "cancelled", "Paid"], "description": "Current status of the order." },
+        "amount": { "type": "string", "description": "Cost of the order." },
+        "paymentStatus": { "type": "string", "enum": ["awaiting", "paid"] },
+        "paidAt": { "type": "string", "format": "date-time" },
+        "productId": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the order was placed." }
+      },
+      "required": ["uid", "item", "type", "status", "amount", "createdAt"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "A financial transaction in the user's wallet.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "UID of the user." },
+        "type": { "type": "string", "enum": ["in", "out"], "description": "Direction of money flow." },
+        "label": { "type": "string", "description": "Description of the transaction." },
+        "amount": { "type": "string", "description": "Amount of money involved." },
+        "orderId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp of the transaction." }
+      },
+      "required": ["uid", "type", "label", "amount", "createdAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "A notification for the user.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "UID of the user receiving the notification." },
+        "title": { "type": "string", "description": "Title of the notification." },
+        "message": { "type": "string", "description": "Detailed message." },
+        "unread": { "type": "boolean", "description": "Whether the notification is unread." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the notification was sent." }
+      },
+      "required": ["uid", "title", "message", "unread", "createdAt"]
+    },
+    "Diagnosis": {
+      "title": "Diagnosis",
+      "description": "A crop disease diagnosis result.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the diagnosis." },
+        "uid": { "type": "string", "description": "UID of the user." },
+        "disease": { "type": "string", "description": "Name of the disease." },
+        "severity": { "type": "string", "enum": ["Low", "Medium", "High"], "description": "Severity of the disease." },
+        "confidence": { "type": "string", "description": "AI confidence score." },
+        "treatment": {
+          "type": "object",
+          "properties": {
+            "organic": { "type": "string" },
+            "chemical": { "type": "string" }
+          }
+        },
+        "prevention": { "type": "string" },
+        "imageUrl": { "type": "string", "format": "uri" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "uid", "disease", "severity", "createdAt"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "A product listed in AgriMart.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "UID of the user who listed the product." },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "subCategory": { "type": "string" },
+        "price": { "type": "string" },
+        "unit": { "type": "string" },
+        "stock": { "type": "string" },
+        "location": { "type": "string" },
+        "image": { "type": "string", "format": "uri" },
+        "farmer": { "type": "string" },
+        "rating": { "type": "number" },
+        "type": { "type": "string", "enum": ["buy", "rent"] },
+        "scientificName": { "type": "string" },
+        "growthTime": { "type": "string" },
+        "waterNeed": { "type": "string" },
+        "isBestSeller": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "name", "category", "price", "stock", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "Collection of user profiles."
+    },
+    "/posts/{postId}": {
+      "schema": "Post",
+      "description": "Collection of community posts."
+    },
+    "/posts/{postId}/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Subcollection of comments for a specific post."
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Collection of AgriMart orders."
+    },
+    "/transactions/{txnId}": {
+      "schema": "Transaction",
+      "description": "Collection of wallet transactions."
+    },
+    "/notifications/{notifId}": {
+      "schema": "Notification",
+      "description": "Collection of user notifications."
+    },
+    "/diagnoses/{diagId}": {
+      "schema": "Diagnosis",
+      "description": "Collection of crop diagnoses."
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Collection of AgriMart products."
+    }
+  }
+}

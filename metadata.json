@@ -1,0 +1,8 @@
+{
+  "name": "AgroDhan",
+  "description": "Next-generation AI-powered agriculture ecosystem providing smart finance, crop health diagnostics, 3D mapping, and market intelligence for modern farmers.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}

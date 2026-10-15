@@ -1,0 +1,10 @@
+{
+  "projectId": "carrier-advisory",
+  "appId": "1:715098744957:web:b19662b3fb5827fccd6914",
+  "apiKey": "AIzaSyBi3861DjgDJkdPF8z4k36uyEP5MiK5Jkc",
+  "authDomain": "carrier-advisory.firebaseapp.com",
+  "firestoreDatabaseId": "ai-studio-7ed8218a-0a2b-41fd-90ae-d5cc96f7a1a6",
+  "storageBucket": "carrier-advisory.firebasestorage.app",
+  "messagingSenderId": "715098744957",
+  "measurementId": ""
+}
